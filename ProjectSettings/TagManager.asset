@@ -4,7 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Wall
+  - Trunk
   layers:
   - Default
   - TransparentFX
@@ -13,7 +13,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Trunk
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3176366351
+    locked: 0
+  - name: Trunk
+    uniqueID: 1815349675
     locked: 0
   m_RenderingLayers:
   - Default
