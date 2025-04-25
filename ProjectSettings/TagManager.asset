@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Trunk
+  - test
+  - HiddenBox
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - Player
   - Trunk
-  - 
+  - test
   - 
   - 
   - 
@@ -42,11 +44,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Trunk
+    uniqueID: 1815349675
+    locked: 0
+  - name: Ground
+    uniqueID: 2419331163
+    locked: 0
   - name: Player
     uniqueID: 3176366351
     locked: 0
-  - name: Trunk
-    uniqueID: 1815349675
+  - name: Enemy
+    uniqueID: 3804621195
     locked: 0
   m_RenderingLayers:
   - Default
