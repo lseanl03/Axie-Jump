@@ -8,8 +8,11 @@ public class EnemyManager : Singleton<EnemyManager>
     protected override void Awake()
     {
         base.Awake();
-        enemyHolder = transform.GetChild(0).gameObject;
-        enemyData = Resources.Load<EnemyData>("SOData/EnemyData");
+
+        if(!enemyHolder)
+            enemyHolder = transform.GetChild(0).gameObject;
+        if(!enemyData)
+            enemyData = Resources.Load<EnemyData>("SOData/EnemyData");
     }
 
     /// <summary>

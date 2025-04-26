@@ -41,4 +41,12 @@ public class EventManager
     {
         onGameOver?.Invoke();
     }
+
+    public delegate void OnCollectItem(Rate itemRate);
+    public static event OnCollectItem onCollectItem;
+
+    public static void CollectItemAction(Rate itemRate)
+    {
+        onCollectItem?.Invoke(itemRate);
+    }
 }

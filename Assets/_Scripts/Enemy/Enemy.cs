@@ -12,7 +12,8 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        anim = GetComponentInChildren<SkeletonAnimation>();
+        if (!anim)
+            anim = GetComponentInChildren<SkeletonAnimation>();
     }
     public EnemyType EnemyType
     {

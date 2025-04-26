@@ -236,6 +236,15 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+        else if (collision.CompareTag("Item"))
+        {
+            Item item = collision.GetComponent<Item>();
+            if (item != null)
+            {
+                EventManager.CollectItemAction(item.Rate);
+                item.gameObject.SetActive(false);
+            }
+        }
     }
     #endregion
 

@@ -9,9 +9,7 @@ public class BackgroundController : MonoBehaviour
     private void Start()
     {
         if (material == null)
-        {
             material = GetComponentInChildren<Renderer>().material;
-        }
     }
 
     private void OnEnable()

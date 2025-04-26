@@ -2,12 +2,23 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private bool gameOver = false;
+    [SerializeField] private int points;
+    [SerializeField] private int primogems;
+
+    //[SerializeField] private bool gameOver = false;
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private TrunkManager trunkManager;
 
     #region Get Set
 
+    public int Points
+    {
+        get { return points; }
+    }
+    public int Primogems
+    {
+        get { return primogems; }
+    }
     public TrunkManager TrunkManager
     {
         get { return trunkManager; }
@@ -22,17 +33,28 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        EventManager.onGameOver += OnGameOver;
+        EventManager.onCollectItem += OnCollectItem;
     }
 
     private void OnDisable()
     {
-        EventManager.onGameOver -= OnGameOver;
+        EventManager.onCollectItem -= OnCollectItem;
     }
 
-    private void OnGameOver()
+    private void OnCollectItem(Rate rate)
     {
-        gameOver = true;
-        //Time.timeScale = 0;
+        switch (rate)
+        {
+            case Rate.Normal:
+                points += GameConfig.normalItemPoint;
+                break;
+            case Rate.Rare:
+                points += GameConfig.rareItemPoint;
+                break;
+            case Rate.Special:
+                primogems += GameConfig.specialItemPoint;
+                break;
+        }
     }
+
 }

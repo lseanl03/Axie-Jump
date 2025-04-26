@@ -7,7 +7,7 @@ public class TrunkManager : MonoBehaviour
     #region Properties
     [SerializeField] float lastPosY = 0;
 
-    private Trunk lastTrunk;
+    private TrunkController lastTrunk;
     private GameObject trunkHolder;
     private TrunkData InitialTrunkSpawnData;
     private TrunkData RandomTrunkSpawnData;
@@ -15,10 +15,12 @@ public class TrunkManager : MonoBehaviour
 
     private void Awake()
     {
-        trunkHolder = transform.GetChild(0).gameObject;
-
-        InitialTrunkSpawnData = Resources.Load<TrunkData>("SOData/InitialTrunkData");
-        RandomTrunkSpawnData = Resources.Load<TrunkData>("SOData/RandomTrunkData");
+        if(!trunkHolder)
+            trunkHolder = transform.GetChild(0).gameObject;
+        if(!InitialTrunkSpawnData)
+            InitialTrunkSpawnData = Resources.Load<TrunkData>("SOData/InitialTrunkData");
+        if (!RandomTrunkSpawnData)
+            RandomTrunkSpawnData = Resources.Load<TrunkData>("SOData/RandomTrunkData");
     }
     private void Start()
     {
@@ -54,9 +56,9 @@ public class TrunkManager : MonoBehaviour
     /// Khởi tạo gỗ ban đầu
     /// </summary>
     /// <param name="trunk"></param>
-    public void SpawnTrunkInitital(Trunk trunk)
+    public void SpawnTrunkInitital(TrunkController trunk)
     {
-        Trunk trunkPrefab = Instantiate(trunk, trunkHolder.transform);
+        TrunkController trunkPrefab = Instantiate(trunk, trunkHolder.transform);
         trunkPrefab.transform.position = new Vector2(0, lastPosY);
         lastTrunk = trunkPrefab;
         lastPosY += GameConfig.distanceTrunkSpawn;
@@ -66,12 +68,20 @@ public class TrunkManager : MonoBehaviour
     /// Spawn gỗ
     /// </summary>
     /// <param name="trunk"></param>
-    public void SpawnTrunk(Trunk trunk)
+    public void SpawnTrunk(TrunkController trunk)
     {
-        Trunk trunkPrefab = Instantiate(trunk, trunkHolder.transform);
+        TrunkController trunkPrefab = Instantiate(trunk, trunkHolder.transform);
         trunkPrefab.transform.position = new Vector2(0, lastPosY);
-        lastPosY = lastTrunk.transform.position.y + GameConfig.distanceTrunkSpawn;
+        lastPosY = Mathf.RoundToInt(lastTrunk.transform.position.y) + 
+            GameConfig.distanceTrunkSpawn;
         lastTrunk = trunkPrefab;
+
+        SpawnItemFromTrunk(lastTrunk);
+    }
+    public void SpawnItemFromTrunk(TrunkController trunkController)
+    {
+        Trunk trunk = trunkController.GetTrunkRandom();
+        ItemManager.Instance.SpawnItem(trunk.transform);
     }
 
     /// <summary>
@@ -177,7 +187,7 @@ public class TrunkManager : MonoBehaviour
     /// </summary>
     /// <param name="trunkType"></param>
     /// <returns></returns>
-    private Trunk GetTrunkWithTrunkType(TrunkType trunkType)
+    private TrunkController GetTrunkWithTrunkType(TrunkType trunkType)
     {
         foreach (var trunk in RandomTrunkSpawnData.trunkPrefabs)
         {

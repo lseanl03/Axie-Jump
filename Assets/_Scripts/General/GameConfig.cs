@@ -27,4 +27,13 @@ public class GameConfig
     [Header("Game")]
     public static float closeOverlay = 1f;
     public static float openOverlay = 1f;
+
+    [Header("Item")]
+    public static int normalItemRate = 70;
+    public static int rareItemRate = 20;
+    public static int specialItemRate = 10;
+    public static int normalItemPoint= 10;
+    public static int rareItemPoint = 20;
+    public static int specialItemPoint = 100;
+    public static float itemSpawnPosInTrunk = 1.5f;
 }

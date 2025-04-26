@@ -1,13 +1,15 @@
-using DG.Tweening;
+﻿using DG.Tweening;
 using System.Collections;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static EventManager;
 
 public class GameCanvas : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI pointText;
+    [SerializeField] private TextMeshProUGUI primogemText;
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private Button restartButton;
     private Coroutine transitionCoroutine;
@@ -15,14 +17,32 @@ public class GameCanvas : MonoBehaviour
     private void OnEnable()
     {
         EventManager.onGameOver += OnGameOver;
+        EventManager.onCollectItem += OnCollectItem;
     }
     private void OnDisable()
     {
         EventManager.onGameOver -= OnGameOver;
+        EventManager.onCollectItem -= OnCollectItem;
     }
     private void OnGameOver()
     {
         restartButton.gameObject.SetActive(true);
+    }
+
+    private void OnCollectItem(Rate rate)
+    {
+        switch(rate)
+        {
+            case Rate.Normal:
+                SetPointText(GameManager.Instance.Points);
+                break;
+            case Rate.Rare:
+                SetPointText(GameManager.Instance.Points);
+                break;
+            case Rate.Special:
+                SetPrimogemText(GameManager.Instance.Primogems);
+                break;
+        }
     }
 
     public void TransitionLevel()
@@ -45,5 +65,15 @@ public class GameCanvas : MonoBehaviour
         
         levelTransiton.TransitionState(false);
         levelTransiton.gameObject.SetActive(false);
+    }
+
+    private void SetPointText(int point)
+    {
+        pointText.text = $"Điểm: {point}";
+    }
+
+    private void SetPrimogemText(int primogem)
+    {
+        primogemText.text = $"Nguyên thạch: {primogem}";
     }
 }

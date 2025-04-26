@@ -7,6 +7,7 @@ public class UIManager : Singleton<UIManager>
     protected override void Awake()
     {
         base.Awake();
-        gameCanvas = GetComponentInChildren<GameCanvas>();
+        if (!gameCanvas)
+            gameCanvas = GetComponentInChildren<GameCanvas>();
     }
 }

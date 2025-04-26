@@ -7,6 +7,7 @@ TagManager:
   - Trunk
   - test
   - HiddenBox
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -55,6 +56,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 3804621195
+    locked: 0
+  - name: Item
+    uniqueID: 1125072161
     locked: 0
   m_RenderingLayers:
   - Default
