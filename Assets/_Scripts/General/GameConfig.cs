@@ -23,4 +23,8 @@ public class GameConfig
     [Header("BG")]
     public static float bgTransitionDistance = 0.02f;
     public static float bgTransitionTime= 0.4f;
+
+    [Header("Game")]
+    public static float closeOverlay = 1f;
+    public static float openOverlay = 1f;
 }

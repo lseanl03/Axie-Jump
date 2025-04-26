@@ -1,7 +1,6 @@
 ﻿using System;
+using System.Collections;
 using DG.Tweening;
-using Spine.Unity;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -17,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private PlayerAnim playerAnim;
     private Tween jumpTween;
     private BoxCollider2D boxCollider2D;
+    private Coroutine diedCoroutine;
     #endregion
 
     private void Awake()
@@ -123,6 +123,9 @@ public class PlayerController : MonoBehaviour
 
         jumpTween.Kill();
         playerAnim.Die();
+
+        if (diedCoroutine != null) StopCoroutine(diedCoroutine);
+        diedCoroutine = StartCoroutine(DiedCoroutine());
     }
     #endregion
 
@@ -233,6 +236,14 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+    }
+    #endregion
+
+    #region Coroutine
+    private IEnumerator DiedCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        EventManager.GameOverAction();
     }
     #endregion
 }

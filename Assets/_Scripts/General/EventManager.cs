@@ -33,4 +33,12 @@ public class EventManager
     {
         onNormalJump?.Invoke();
     }
+
+    public delegate void OnGameOver();
+    public static event OnGameOver onGameOver;
+
+    public static void GameOverAction()
+    {
+        onGameOver?.Invoke();
+    }
 }

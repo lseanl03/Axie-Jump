@@ -78,7 +78,7 @@ namespace Spine.Unity.Examples {
 			if (hit.collider != null)
 				skeletonPoint = hit.point;
 
-			ragdoll.RootRigidbody.isKinematic = true;
+			ragdoll.RootRigidbody.useFullKinematicContacts = true;
 			ragdoll.SetSkeletonPosition(skeletonPoint);
 
 			yield return ragdoll.SmoothMix(0, restoreDuration);

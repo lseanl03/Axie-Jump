@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private bool gameOver = false;
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private TrunkManager trunkManager;
 
@@ -18,4 +19,20 @@ public class GameManager : Singleton<GameManager>
         set { gameStarted = value; }
     }
     #endregion
+
+    private void OnEnable()
+    {
+        EventManager.onGameOver += OnGameOver;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.onGameOver -= OnGameOver;
+    }
+
+    private void OnGameOver()
+    {
+        gameOver = true;
+        //Time.timeScale = 0;
+    }
 }
