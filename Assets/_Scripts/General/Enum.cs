@@ -10,7 +10,15 @@ public enum TrunkType
 
 public enum EnemyType
 {
-    UFO
+    UFO,
+    Treant_Flowering,
+    Treant_Fighter,
+    Slime,
+    Slime_Forest_B,
+    Dryad_Mage,
+    Dryad_Fighter,
+    Bear_Mom,
+    Bear_Dad,
 }
 
 public enum ItemType

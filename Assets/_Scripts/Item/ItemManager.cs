@@ -13,8 +13,6 @@ public class ItemManager : Singleton<ItemManager>
             itemData = Resources.Load<ItemData>("SOData/ItemData");
         if (!itemPrefab)
             itemPrefab = Resources.Load<Item>("Prefabs/Item");
-        if (!itemHolder)
-            itemHolder = transform.GetChild(0).gameObject;
     }
 
     /// <summary>
@@ -80,5 +78,18 @@ public class ItemManager : Singleton<ItemManager>
             item.SetSprite(itemConfig.sprite);
         }
 
+    }
+
+    /// <summary>
+    /// Spawn item từ gỗ
+    /// </summary>
+    /// <param name="trunkController"></param>
+    public void SpawnItemsFromTrunk(TrunkController trunkController)
+    {
+        Trunk[] trunks = trunkController.GetTrunkRandom();
+        foreach (var trunk in trunks)
+        {
+            SpawnItem(trunk.transform);
+        }
     }
 }

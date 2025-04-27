@@ -2,20 +2,22 @@
 using UnityEngine;
 using static Unity.Collections.Unicode;
 
-public class TrunkManager : MonoBehaviour
+public class TrunkManager : Singleton<TrunkManager>
 {
     #region Properties
     [SerializeField] float lastPosY = 0;
 
+    private TrunkController beforeTrunk;
     private TrunkController lastTrunk;
     private GameObject trunkHolder;
     private TrunkData InitialTrunkSpawnData;
     private TrunkData RandomTrunkSpawnData;
     #endregion
 
-    private void Awake()
+    protected override void Awake()
     {
-        if(!trunkHolder)
+        base.Awake();
+        if (!trunkHolder)
             trunkHolder = transform.GetChild(0).gameObject;
         if(!InitialTrunkSpawnData)
             InitialTrunkSpawnData = Resources.Load<TrunkData>("SOData/InitialTrunkData");
@@ -39,6 +41,16 @@ public class TrunkManager : MonoBehaviour
         EventManager.onTransitionTrunk -= TransitionTrunkDown;
         EventManager.onTransitionTrunk -= SpawnNextTrunk;
         EventManager.onNormalJump -= TransitionTrunk;
+    }
+
+    public TrunkController LastTrunk
+    {
+        get { return lastTrunk; }
+    }
+
+    public TrunkController BeforeTrunk
+    {
+        get { return beforeTrunk; }
     }
 
     /// <summary>
@@ -74,14 +86,11 @@ public class TrunkManager : MonoBehaviour
         trunkPrefab.transform.position = new Vector2(0, lastPosY);
         lastPosY = Mathf.RoundToInt(lastTrunk.transform.position.y) + 
             GameConfig.distanceTrunkSpawn;
+
+        if(lastTrunk != null) beforeTrunk = lastTrunk;
         lastTrunk = trunkPrefab;
 
-        SpawnItemFromTrunk(lastTrunk);
-    }
-    public void SpawnItemFromTrunk(TrunkController trunkController)
-    {
-        Trunk trunk = trunkController.GetTrunkRandom();
-        ItemManager.Instance.SpawnItem(trunk.transform);
+
     }
 
     /// <summary>
@@ -144,6 +153,7 @@ public class TrunkManager : MonoBehaviour
                 {
                     TrunkType._1TrunkLeft,
                     TrunkType._1TrunkRight,
+                    TrunkType._2TrunkBothSides,
                 };
                 break;
             case TrunkType._2TrunkLeft:

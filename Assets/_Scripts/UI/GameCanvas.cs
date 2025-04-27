@@ -14,6 +14,11 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private Button restartButton;
     private Coroutine transitionCoroutine;
 
+    private void Start()
+    {
+        SetPointText(GameManager.Instance.Points);
+        SetPrimogemText(GameManager.Instance.Primogems);
+    }
     private void OnEnable()
     {
         EventManager.onGameOver += OnGameOver;

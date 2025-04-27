@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
         jumpTween.OnComplete(() => {
             isJumping = false;
-            playerAnim.Idle();
+                playerAnim.Idle();
         });
 
         if (jumpForce != GameConfig.highJumpForce)

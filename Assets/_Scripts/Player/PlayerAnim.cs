@@ -8,7 +8,7 @@ public class PlayerAnim : MonoBehaviour
     [SerializeField] private AnimationReferenceAsset idle;
     [SerializeField] private AnimationReferenceAsset jump;
     [SerializeField] private AnimationReferenceAsset die;
-    [SerializeField] private AnimationReferenceAsset takeFood;
+    [SerializeField] private AnimationReferenceAsset collectItem;
     [SerializeField] private AnimationReferenceAsset[] randomIdles;
 
     private SkeletonAnimation anim;
@@ -46,6 +46,10 @@ public class PlayerAnim : MonoBehaviour
 
         if (dieCoroutine != null) StopCoroutine(dieCoroutine);
         dieCoroutine = StartCoroutine(DieCoroutine());
+    }
+    public void CollectItem()
+    {
+        anim.state.SetAnimation(0, collectItem, false);
     }
 
     private void RandomIdles()
