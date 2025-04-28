@@ -23,8 +23,8 @@ public class EnemyManager : Singleton<EnemyManager>
         var enemy = GetEnemyWithType(enemyType);
         if (enemy != null)
         {
-            var enemyPrefab = Instantiate(enemy, transform);
-            enemyPrefab.transform.position = transform.position;
+            PoolManager.Instance.GetObjFromTrunk(
+                enemy.PoolType, transform.position, transform);
         }
     }
 
@@ -45,6 +45,10 @@ public class EnemyManager : Singleton<EnemyManager>
         return null;
     }
 
+    /// <summary>
+    /// Spawn enemy từ trunk
+    /// </summary>
+    /// <param name="trunkController"></param>
     public void SpawnEnemiesFromTrunk(TrunkController trunkController)
     {
         Trunk[] trunks = trunkController.GetTrunkRandom();
@@ -53,10 +57,15 @@ public class EnemyManager : Singleton<EnemyManager>
         SpawnEnemy(GetRandomEnemy().EnemyType, trunks[randomIndex].transform);
     }
 
+    /// <summary>
+    /// Lấy enemy ngẫu nhiên từ enemyData
+    /// </summary>
+    /// <returns></returns>
     public Enemy GetRandomEnemy()
     {
         int randomIndex = Random.Range(0, enemyData.enemyPrefabs.Length);
         Enemy enemy = enemyData.enemyPrefabs[randomIndex];
+        Debug.Log($"Enemy: {enemy.EnemyType}");
         return enemy;
     }
 }

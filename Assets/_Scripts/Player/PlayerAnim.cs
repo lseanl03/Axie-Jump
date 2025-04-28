@@ -8,6 +8,7 @@ public class PlayerAnim : MonoBehaviour
     [SerializeField] private AnimationReferenceAsset idle;
     [SerializeField] private AnimationReferenceAsset jump;
     [SerializeField] private AnimationReferenceAsset die;
+    [SerializeField] private AnimationReferenceAsset hurt;
     [SerializeField] private AnimationReferenceAsset collectItem;
     [SerializeField] private AnimationReferenceAsset[] randomIdles;
 
@@ -40,6 +41,11 @@ public class PlayerAnim : MonoBehaviour
     {
         anim.state.SetAnimation(0, jump, false);
     }
+    public void Hurt()
+    {
+        anim.state.SetAnimation(0, hurt, false);
+        anim.state.AddAnimation(0, idle, true, 0);
+    }
     public void Die()
     {
         anim.state.SetAnimation(0, die, false);
@@ -50,6 +56,7 @@ public class PlayerAnim : MonoBehaviour
     public void CollectItem()
     {
         anim.state.SetAnimation(0, collectItem, false);
+        anim.state.AddAnimation(0, idle, true, 0);
     }
 
     private void RandomIdles()

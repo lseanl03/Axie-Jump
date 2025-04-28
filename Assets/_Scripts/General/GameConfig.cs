@@ -36,4 +36,8 @@ public class GameConfig
     public static int rareItemPoint = 20;
     public static int specialItemPoint = 100;
     public static float itemSpawnPosInTrunk = 1.5f;
+    public static int itemSpawnRate = 20;
+
+    [Header("Enemy")]
+    public static int enemySpawnRate = 80;
 }

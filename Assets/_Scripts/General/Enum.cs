@@ -50,3 +50,27 @@ public enum Rate
     Rare,
     Special
 }
+
+public enum PoolType
+{
+    _1TrunkBetween,
+    _1TrunkLeft,
+    _1TrunkRight,
+    _2TrunkBothSides,
+    _2TrunkLeft,
+    _2TrunkRight,
+    
+    TreantFighterLazer,
+
+    Enemy_UFO,
+    Enemy_TreantFlowering,
+    Enemy_TreantFighter,
+    Enemy_Slime,
+    Enemy_Slime_Forest_B,
+    Enemy_Dryad_Mage,
+    Enemy_Dryad_Fighter,
+    Enemy_Bear_Mom,
+    Enemy_Bear_Dad,
+
+    Item,
+}

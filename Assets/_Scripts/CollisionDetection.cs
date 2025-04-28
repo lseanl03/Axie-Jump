@@ -4,7 +4,12 @@ public class CollisionDetection : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Trunk") || collision.CompareTag("Player"))
+        if (collision.CompareTag("Trunk"))
+        {
+            TrunkController trunk = collision.gameObject.GetComponent<TrunkController>();
+            if(trunk) PoolManager.Instance.ReturnTrunkObj(trunk.gameObject, trunk.PoolType);
+        }
+        else if (collision.CompareTag("Player"))
         {
             collision.gameObject.SetActive(false);
         }

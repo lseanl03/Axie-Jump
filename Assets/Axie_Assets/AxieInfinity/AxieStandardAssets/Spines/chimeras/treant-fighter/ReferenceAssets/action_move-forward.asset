@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d2840dfe1c64944af56fea1d0bc654, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: 6e3e95a05e4c9774397eeeb7bdee8ccb, type: 3}
+  m_Name: action_move-forward
   m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 8333515939131102328, guid: e66162fa1c5aecd4191c30e115a100b3, type: 3}
-  - {fileID: 6505591552111120671, guid: c031681ef0bda2542a0cf665b924e25f, type: 3}
+  skeletonDataAsset: {fileID: 11400000, guid: 0582495aee66544beb50eee83d08eccc, type: 2}
+  animationName: action/move-forward

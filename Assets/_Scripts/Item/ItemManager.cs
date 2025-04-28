@@ -4,7 +4,6 @@ public class ItemManager : Singleton<ItemManager>
 {
     private Item itemPrefab;
     private ItemData itemData;
-    private GameObject itemHolder;
 
     protected override void Awake()
     {
@@ -68,12 +67,13 @@ public class ItemManager : Singleton<ItemManager>
         var itemConfig = GetItemConfig();
         if (itemConfig != null)
         {
-            var item = Instantiate(itemPrefab, transform);
+            var prefab = PoolManager.Instance.GetObjFromTrunk(
+                PoolType.Item, transform.position, transform);
+            var item = prefab.GetComponent<Item>();
 
             var pos = new Vector2(transform.position.x,
                 transform.position.y + GameConfig.itemSpawnPosInTrunk);
             item.transform.position = pos;
-            item.ItemType = itemConfig.itemType;
             item.Rate = itemConfig.rate;
             item.SetSprite(itemConfig.sprite);
         }

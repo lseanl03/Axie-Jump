@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     #region Properties
     [SerializeField] private float jumpForce = GameConfig.normalJumpForce;
+    [SerializeField] private bool collidedDuringJump = false;
 
     [Header("State")]
     [SerializeField] private bool canJump = false;
@@ -59,14 +60,20 @@ public class PlayerController : MonoBehaviour
         Flip(isLeftDir);
 
         jumpTween.OnComplete(() => {
-            isJumping = false;
-                playerAnim.Idle();
+            HandleAfterJump();
         });
 
         if (jumpForce != GameConfig.highJumpForce)
         {
             EventManager.NormalJumpAction();
         }
+    }
+
+    private void HandleAfterJump()
+    {
+        isJumping = false;
+        if(collidedDuringJump) collidedDuringJump = false;
+        else playerAnim.Idle();
     }
 
     private void HandleState()
@@ -116,7 +123,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Trạng thái chết
     /// </summary>
-    private void Die()
+    public void Die()
     {
         isDied = true;
         boxCollider2D.enabled = false;
@@ -126,6 +133,15 @@ public class PlayerController : MonoBehaviour
 
         if (diedCoroutine != null) StopCoroutine(diedCoroutine);
         diedCoroutine = StartCoroutine(DiedCoroutine());
+    }
+
+    /// <summary>
+    /// Trạng thái bị thương
+    /// </summary>
+    public void Hurt()
+    {
+        collidedDuringJump = true;
+        playerAnim.Hurt();
     }
     #endregion
 
@@ -241,8 +257,11 @@ public class PlayerController : MonoBehaviour
             Item item = collision.GetComponent<Item>();
             if (item != null)
             {
+                collidedDuringJump = true;
+                playerAnim.CollectItem();
                 EventManager.CollectItemAction(item.Rate);
-                item.gameObject.SetActive(false);
+                PoolManager.Instance.ReturnObjFromTrunk(
+                    item.gameObject, PoolType.Item);
             }
         }
     }

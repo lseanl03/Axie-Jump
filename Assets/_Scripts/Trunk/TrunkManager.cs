@@ -43,6 +43,10 @@ public class TrunkManager : Singleton<TrunkManager>
         EventManager.onNormalJump -= TransitionTrunk;
     }
 
+    public GameObject TrunkHolder
+    {
+        get { return trunkHolder; }
+    }
     public TrunkController LastTrunk
     {
         get { return lastTrunk; }
@@ -70,10 +74,14 @@ public class TrunkManager : Singleton<TrunkManager>
     /// <param name="trunk"></param>
     public void SpawnTrunkInitital(TrunkController trunk)
     {
-        TrunkController trunkPrefab = Instantiate(trunk, trunkHolder.transform);
-        trunkPrefab.transform.position = new Vector2(0, lastPosY);
-        lastTrunk = trunkPrefab;
+        var pos = new Vector2(0, lastPosY);
+        TrunkController trunkPrefab = PoolManager.Instance.GetTrunk(trunk.PoolType, pos);
         lastPosY += GameConfig.distanceTrunkSpawn;
+
+        if (lastTrunk != null) beforeTrunk = lastTrunk;
+        lastTrunk = trunkPrefab;
+
+        trunkPrefab.TrunkMoveLoop();
     }
 
     /// <summary>
@@ -82,15 +90,17 @@ public class TrunkManager : Singleton<TrunkManager>
     /// <param name="trunk"></param>
     public void SpawnTrunk(TrunkController trunk)
     {
-        TrunkController trunkPrefab = Instantiate(trunk, trunkHolder.transform);
-        trunkPrefab.transform.position = new Vector2(0, lastPosY);
+        var pos = new Vector2(0, lastPosY);
+        TrunkController trunkPrefab = PoolManager.Instance.GetTrunk(trunk.PoolType, pos);
+
         lastPosY = Mathf.RoundToInt(lastTrunk.transform.position.y) + 
             GameConfig.distanceTrunkSpawn;
 
-        if(lastTrunk != null) beforeTrunk = lastTrunk;
+        if (lastTrunk != null) beforeTrunk = lastTrunk;
         lastTrunk = trunkPrefab;
 
-
+        trunkPrefab.SpawnFromTrunk();
+        trunkPrefab.TrunkMoveLoop();
     }
 
     /// <summary>
