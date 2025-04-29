@@ -51,6 +51,7 @@ MonoBehaviour:
   poolType: 5
   trunkType: 5
   trunks: []
+  hiddenBoxes: []
 --- !u!61 &5549364581201536862
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -379,7 +380,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.4245653, y: 0.73111045}
+  m_Size: {x: 3, y: 0.73111045}
   m_EdgeRadius: 0
 --- !u!251 &4358307230513649436
 PlatformEffector2D:
@@ -546,7 +547,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 5.4245653, y: 0.73111045}
+  m_Size: {x: 3, y: 0.73111045}
   m_EdgeRadius: 0
 --- !u!251 &1071180946597621758
 PlatformEffector2D:

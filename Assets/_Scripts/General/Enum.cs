@@ -15,8 +15,6 @@ public enum EnemyType
     Treant_Fighter,
     Slime,
     Slime_Forest_B,
-    Dryad_Mage,
-    Dryad_Fighter,
     Bear_Mom,
     Bear_Dad,
 }
@@ -67,10 +65,18 @@ public enum PoolType
     Enemy_TreantFighter,
     Enemy_Slime,
     Enemy_Slime_Forest_B,
-    Enemy_Dryad_Mage,
-    Enemy_Dryad_Fighter,
     Enemy_Bear_Mom,
     Enemy_Bear_Dad,
 
     Item,
+}
+
+public enum BuffType
+{
+    None,
+    Speed,
+    Time,
+    Shield,
+    Point,
+    Primogem,
 }

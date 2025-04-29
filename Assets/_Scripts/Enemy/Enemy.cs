@@ -19,8 +19,6 @@ public class Enemy : MonoBehaviour
     }
     protected virtual void OnEnable()
     {
-        SetInitialDir();
-        SetInitialPos();
         anim.AnimationState.SetAnimation(0, idleAnim, true);
     }
 
@@ -37,7 +35,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Set hướng nhìn ban đầu của enemy
     /// </summary>
-    private void SetInitialDir()
+    public void SetInitialDir()
     {
         if(transform.position.x < 0) Flip(false);
         else if (transform.position.x > 0) Flip(true);
@@ -46,7 +44,7 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Set vị trí ban đầu của enemy
     /// </summary>
-    protected virtual void SetInitialPos()
+    public void SetInitialPosY()
     {
         transform.position = new Vector2(transform.position.x, 
             transform.position.y + initialPosY);

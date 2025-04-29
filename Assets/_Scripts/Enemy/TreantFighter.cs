@@ -16,6 +16,7 @@ public class TreantFighter : Enemy
         if (!treantFighterLazer)
             treantFighterLazer = Resources.Load<TreantFighterLazer>(
                 "Prefabs/Enemy/TreantFighterLazer");
+        initialPosY = 0.4f;
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -50,8 +51,10 @@ public class TreantFighter : Enemy
             anim.AnimationState.SetAnimation(0, shoot, false);
             anim.AnimationState.AddAnimation(0, idleAnim, true, 0);
             yield return new WaitForSeconds(0.4f);
-            var lazer = PoolManager.Instance.GetObj<TreantFighterLazer>(PoolType.TreantFighterLazer, bulletPoint.position);
-            lazer.MoveBullet();
+            var lazerPrefab = PoolManager.Instance.GetObjFromTrunk(
+                PoolType.TreantFighterLazer, bulletPoint.position, transform);
+            var lazer = lazerPrefab.GetComponent<TreantFighterLazer>();
+            lazer.MoveBullet(transform.localScale.x == 1);
         }
     }
 

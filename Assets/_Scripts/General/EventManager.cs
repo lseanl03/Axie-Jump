@@ -49,4 +49,12 @@ public class EventManager
     {
         onCollectItem?.Invoke(itemRate);
     }
+
+    public delegate void OnOpenRequest();
+    public static event OnOpenRequest onOpenRequest;
+
+    public static void OpenRequestAction()
+    {
+        onOpenRequest?.Invoke();
+    }
 }

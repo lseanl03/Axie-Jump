@@ -27,8 +27,6 @@ public class TreantFlowering : Enemy
             player.Hurt();
         }
     }
-
-    protected
     private void Hurt()
     {
         if (hurtCoroutine != null) StopCoroutine(hurtCoroutine);

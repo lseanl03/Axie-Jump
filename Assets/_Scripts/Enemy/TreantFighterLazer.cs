@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -11,19 +12,18 @@ public class TreantFighterLazer : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    public void MoveBullet()
+    public void MoveBullet(bool isLeft)
     {
-
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);
-        moveCoroutine = StartCoroutine(MoveBulletCoroutine());
+        moveCoroutine = StartCoroutine(MoveBulletCoroutine(isLeft));
     }
 
-    private IEnumerator MoveBulletCoroutine()
+    private IEnumerator MoveBulletCoroutine(bool isLeft)
     {
-        Vector3 direction = -transform.right;
+        Vector3 direction = isLeft ? -transform.right : transform.right;
         float distance = speed * Time.deltaTime;
         rb2d.linearVelocity = direction * speed;
         yield return new WaitForSeconds(3);
-        PoolManager.Instance.ReturnObj(gameObject, PoolType.TreantFighterLazer);
+        PoolManager.Instance.ReturnObjFromTrunk(gameObject, PoolType.TreantFighterLazer);
     }
 }

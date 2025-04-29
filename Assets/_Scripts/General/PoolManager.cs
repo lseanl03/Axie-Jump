@@ -13,7 +13,6 @@ public class Pool
 
 public class PoolManager : Singleton<PoolManager>
 {
-    [SerializeField] private List<Pool> pools;
     [SerializeField] private List<Pool> trunkPools;
     [SerializeField] private List<Pool> objFromTrunkPools;
     private Dictionary<PoolType, List<GameObject>> poolDictionary;
@@ -32,62 +31,10 @@ public class PoolManager : Singleton<PoolManager>
         prefabDictionary = new Dictionary<PoolType, GameObject>();
         poolParents = new Dictionary<PoolType, Transform>();
 
-        InitialPools();
         InitialTrunkPools();
         InitialObjFromTrunkPools();
     }
 
-    #region Obj General
-    private void InitialPools()
-    {
-        foreach (Pool pool in pools)
-        {
-            GameObject poolParent = new GameObject($"Pool_{pool.poolType}");
-            poolParent.transform.SetParent(transform);
-            poolParents[pool.poolType] = poolParent.transform;
-
-            prefabDictionary[pool.poolType] = pool.prefab;
-
-            List<GameObject> objectPool = new List<GameObject>();
-            poolDictionary[pool.poolType] = objectPool;
-
-            for (int i = 0; i < pool.initialSize; i++)
-            {
-                CreateObjectInPool(pool.poolType);
-            }
-        }
-    }
-    private GameObject CreateObjectInPool(PoolType type)
-    {
-        GameObject obj = Instantiate(prefabDictionary[type], poolParents[type]);
-        obj.SetActive(false);
-        poolDictionary[type].Add(obj);
-        return obj;
-    }
-
-
-    public T GetObj<T>(PoolType poolType, Vector2 pos) where T : Component
-    {
-        List<GameObject> pool = poolDictionary[poolType];
-        GameObject obj = pool.Find(o => !o.activeInHierarchy);
-
-        if (obj != null) pool.Remove(obj);
-        else obj = CreateObjectInPool(poolType);
-        if (obj == null) obj = CreateObjectInPool(poolType);
-
-        obj.transform.position = pos;
-        obj.SetActive(true);
-
-        return obj.GetComponent<T>();
-    }
-
-    public void ReturnObj(GameObject obj, PoolType type)
-    {
-        obj.SetActive(false);
-        obj.transform.SetParent(poolParents[type]);
-        poolDictionary[type].Add(obj);
-    }
-    #endregion
 
     #region Trunk
     private void InitialTrunkPools()

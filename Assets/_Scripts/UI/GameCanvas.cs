@@ -12,6 +12,7 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private TextMeshProUGUI primogemText;
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private Image requestPanel;
     private Coroutine transitionCoroutine;
 
     private void Start()

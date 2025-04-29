@@ -20,11 +20,15 @@ public class EnemyManager : Singleton<EnemyManager>
     /// <param name="pos"></param>
     public void SpawnEnemy(EnemyType enemyType, Transform transform)
     {
-        var enemy = GetEnemyWithType(enemyType);
-        if (enemy != null)
+        var enemyPrefab = GetEnemyWithType(enemyType);
+        if (enemyPrefab != null)
         {
-            PoolManager.Instance.GetObjFromTrunk(
-                enemy.PoolType, transform.position, transform);
+            var prefab = PoolManager.Instance.GetObjFromTrunk(
+                enemyPrefab.PoolType, transform.position, transform);
+            var enemy = prefab.GetComponent<Enemy>();
+            enemy.SetInitialDir();
+            enemy.SetInitialPosY();
+
         }
     }
 

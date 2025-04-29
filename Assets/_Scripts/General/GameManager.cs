@@ -4,6 +4,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private int points;
     [SerializeField] private int primogems;
+    [SerializeField] private int playTime;
 
     //[SerializeField] private bool gameOver = false;
     [SerializeField] private bool gameStarted = false;
@@ -22,6 +23,12 @@ public class GameManager : Singleton<GameManager>
     public TrunkManager TrunkManager
     {
         get { return trunkManager; }
+    }
+
+    public int PlayTime
+    {
+        get { return playTime; }
+        set { playTime = value; } 
     }
 
     public bool GameStarted
