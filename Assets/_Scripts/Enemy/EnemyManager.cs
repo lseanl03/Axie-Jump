@@ -23,9 +23,9 @@ public class EnemyManager : Singleton<EnemyManager>
         var enemyPrefab = GetEnemyWithType(enemyType);
         if (enemyPrefab != null)
         {
-            var prefab = PoolManager.Instance.GetObjFromTrunk(
-                enemyPrefab.PoolType, transform.position, transform);
-            var enemy = prefab.GetComponent<Enemy>();
+            var enemy = PoolManager.Instance.GetObjFromTrunk(
+                enemyPrefab.PoolType, transform.position, transform)
+                .GetComponent<Enemy>();
             enemy.SetInitialDir();
             enemy.SetInitialPosY();
 

@@ -37,12 +37,19 @@ public class TrunkController : MonoBehaviour
                     PoolManager.Instance.ReturnObjFromTrunk(
                         item.gameObject, PoolType.Item);
                 }
-                else
+                else if(trunk.transform.GetComponentInChildren<Enemy>())
                 {
                     var enemy = trunk.transform.GetComponentInChildren<Enemy>();
                     if (!enemy) return;
                     PoolManager.Instance.ReturnObjFromTrunk(
                         enemy.gameObject, enemy.PoolType);
+                }
+                else if(trunk.transform.GetComponentInChildren<Buff>())
+                {
+                    var buff = trunk.transform.GetComponentInChildren<Buff>();
+                    if (!buff) return;
+                    PoolManager.Instance.ReturnObjFromTrunk(
+                        buff.gameObject, buff.PoolType);
                 }
             }
         }
@@ -121,13 +128,18 @@ public class TrunkController : MonoBehaviour
             {
                 var lastTrunkType = TrunkManager.Instance.LastTrunk.TrunkType;
                 var beforeTrunkType = TrunkManager.Instance.BeforeTrunk.TrunkType;
-                if (beforeTrunkType == TrunkType._1TrunkBetween && lastTrunkType == TrunkType._2TrunkBothSides)
+                if (beforeTrunkType == TrunkType._1TrunkBetween && 
+                    lastTrunkType == TrunkType._2TrunkBothSides)
                 {
                     EnemyManager.Instance.SpawnEnemiesFromTrunk(this);
                 }
                 else ItemManager.Instance.SpawnItemsFromTrunk(this);
             }
             else ItemManager.Instance.SpawnItemsFromTrunk(this);
+        }
+        else
+        {
+            BuffManager.Instance.SpawnBuffFromTrunk(this);
         }
     }
 }

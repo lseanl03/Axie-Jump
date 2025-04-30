@@ -6,6 +6,7 @@ public class TrunkManager : Singleton<TrunkManager>
 {
     #region Properties
     [SerializeField] float lastPosY = 0;
+    [SerializeField] float transitionTime = GameConfig.trunkTransitionTime;
 
     private TrunkController beforeTrunk;
     private TrunkController lastTrunk;
@@ -55,6 +56,12 @@ public class TrunkManager : Singleton<TrunkManager>
     public TrunkController BeforeTrunk
     {
         get { return beforeTrunk; }
+    }
+
+    public float TransitionTime
+    {
+        get { return transitionTime; }
+        set { transitionTime = value; }
     }
 
     /// <summary>
@@ -118,8 +125,7 @@ public class TrunkManager : Singleton<TrunkManager>
     private void TransitionTrunkDown()
     {
         trunkHolder.transform.DOMoveY(
-            trunkHolder.transform.position.y - 5,
-            GameConfig.trunkTransitionTime);
+            trunkHolder.transform.position.y - 5, transitionTime);
     }
     /// <summary>
    /// Spawn gỗ kế tiếp dựa vào gỗ cuối cùng

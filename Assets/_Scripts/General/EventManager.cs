@@ -57,4 +57,20 @@ public class EventManager
     {
         onOpenRequest?.Invoke();
     }
+
+    public delegate void OnApplyBuff(Buff buff);
+    public static event OnApplyBuff onApplyBuff;
+
+    public static void ApplyBuffAction(Buff buff)
+    {
+        onApplyBuff?.Invoke(buff);
+    }
+
+    public delegate void OnRemoveBuff();
+    public static event OnRemoveBuff onRemoveBuff;
+
+    public static void RemoveBuffAction()
+    {
+        onRemoveBuff?.Invoke();
+    }
 }

@@ -9,7 +9,7 @@ public class GameConfig
     public static float normalJumpForce = 0.5f;
     public static float highJumpForce = 5f;
     public static float jumpTime = 0.4f;
-    public static float jumpPosStartGame = 0.5f;
+    public static float jumpPosStartGame = -2.5f;
 
     [Header("Trunk")]
     public static float distanceTrunkSpawn = 5f;
@@ -36,8 +36,11 @@ public class GameConfig
     public static int rareItemPoint = 20;
     public static int specialItemPoint = 100;
     public static float itemSpawnPosInTrunk = 1.5f;
-    public static int itemSpawnRate = 20;
+    public static int itemSpawnRate = 10;
 
     [Header("Enemy")]
-    public static int enemySpawnRate = 80;
+    public static int enemySpawnRate = 90;
+
+    [Header("Game")]
+    public static float initialPlayTime = 60f;
 }

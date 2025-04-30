@@ -6,10 +6,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Properties
+    [SerializeField] private float jumpTime = GameConfig.jumpTime;
+    [SerializeField] private float jumpDistance = GameConfig.jumpXDistance;
     [SerializeField] private float jumpForce = GameConfig.normalJumpForce;
-    [SerializeField] private bool collidedDuringJump = false;
 
     [Header("State")]
+    [SerializeField] private bool collidedDuringJump = false;
     [SerializeField] private bool canJump = false;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isDied = false;
@@ -24,6 +26,12 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim = GetComponent<PlayerAnim>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+    }
+
+    public float JumpTime
+    {
+        get { return jumpTime; }
+        set { jumpTime = value; }
     }
     private void OnEnable()
     {
@@ -43,7 +51,6 @@ public class PlayerController : MonoBehaviour
             HandleState();
             HandleInput();
         }
-        
     }
 
     private void OnJumpInput(bool isLeftDir)
@@ -110,14 +117,12 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim.Jump();
 
-        float posX = isLeftDir ? -GameConfig.jumpXDistance : 
-            GameConfig.jumpXDistance;
+        float posX = isLeftDir ? -jumpDistance : jumpDistance;
         if (CantMoveForward(isLeftDir)) posX = 0;
 
         jumpTween = transform.DOMove(new Vector2(
             transform.position.x + posX, transform.position.y + jumpForce),
-            GameConfig.jumpTime
-        ).SetEase(Ease.InOutQuad);
+            jumpTime).SetEase(Ease.InOutQuad);
     }
 
     /// <summary>
@@ -160,7 +165,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpToStartGame()
     {
-        transform.DOMoveY(GameConfig.jumpPosStartGame, GameConfig.jumpTime)
+        transform.DOMoveY(GameConfig.jumpPosStartGame, jumpTime)
             .SetEase(Ease.InOutQuad);
     }
 
@@ -262,6 +267,8 @@ public class PlayerController : MonoBehaviour
                 EventManager.CollectItemAction(item.Rate);
                 PoolManager.Instance.ReturnObjFromTrunk(
                     item.gameObject, PoolType.Item);
+
+                UIManager.Instance.GameCanvas.SetUpdateTimeText(1);
             }
         }
     }

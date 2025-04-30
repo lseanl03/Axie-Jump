@@ -27,7 +27,7 @@ public class SlimeForestB : Enemy
             rb2d = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected override void OnEnable()
     {
         Run();
     }
@@ -68,7 +68,7 @@ public class SlimeForestB : Enemy
     private void MoveToTarget(bool isLeft)
     {
         var newPosX = isLeft ? GameConfig.minPos : GameConfig.maxPos;
-        runTween = transform.DOMoveX(newPosX, runTime).SetEase(Ease.OutSine);
+        runTween = transform.DOMoveX(newPosX, runTime).SetEase(Ease.Linear);
     }
 
     private void Die()

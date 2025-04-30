@@ -4,7 +4,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BuffData", menuName = "ScriptableObjects/BuffData", order = 1)]
 public class BuffData : ScriptableObject
 {
-    public BuffConfig[] buffs;
+    public BuffConfig buffs;
 }
 
 [Serializable]
@@ -15,4 +15,5 @@ public class BuffConfig
     public float valueEffect;
     public float duration;
     public BuffType buffType;
+    public Sprite sprite;
 }

@@ -69,6 +69,12 @@ public enum PoolType
     Enemy_Bear_Dad,
 
     Item,
+
+    Buff_Speed,
+    Buff_Time,
+    Buff_Shield,
+    Buff_Point,
+    Buff_Primogem,
 }
 
 public enum BuffType

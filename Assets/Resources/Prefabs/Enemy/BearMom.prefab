@@ -267,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3871d018b52b740bf25637db1a28b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
-  poolType: 0
+  enemyType: 5
+  poolType: 12
   idleAnim: {fileID: 11400000, guid: 7738a6359c09f704aa09923d3ad3da53, type: 2}
   getBuff: {fileID: 11400000, guid: 7d7f973ca51a4f34d94f787b182679c3, type: 2}

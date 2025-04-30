@@ -4,11 +4,10 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private int points;
     [SerializeField] private int primogems;
-    [SerializeField] private int playTime;
-
-    //[SerializeField] private bool gameOver = false;
+    [SerializeField] private float playTime = GameConfig.initialPlayTime;
+    [SerializeField] private bool gameGameOver = false;
     [SerializeField] private bool gameStarted = false;
-    [SerializeField] private TrunkManager trunkManager;
+    [SerializeField] private PlayerController player;
 
     #region Get Set
 
@@ -20,12 +19,13 @@ public class GameManager : Singleton<GameManager>
     {
         get { return primogems; }
     }
-    public TrunkManager TrunkManager
+
+    public PlayerController Player
     {
-        get { return trunkManager; }
+        get { return player; }
     }
 
-    public int PlayTime
+    public float PlayTime
     {
         get { return playTime; }
         set { playTime = value; } 
@@ -37,7 +37,10 @@ public class GameManager : Singleton<GameManager>
         set { gameStarted = value; }
     }
     #endregion
-
+    private void Update()
+    {
+        ProcessPlayTime();
+    }
     private void OnEnable()
     {
         EventManager.onCollectItem += OnCollectItem;
@@ -64,4 +67,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void ProcessPlayTime()
+    {
+        if (!gameGameOver)
+        {
+            playTime -= Time.deltaTime;
+            if(playTime <= 0)
+            {
+                playTime = 0;
+                gameGameOver = true;
+            }
+            UIManager.Instance.GameCanvas.SetPlayTime(playTime);
+        }
+    }
 }

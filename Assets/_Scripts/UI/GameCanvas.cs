@@ -13,6 +13,8 @@ public class GameCanvas : MonoBehaviour
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private Button restartButton;
     [SerializeField] private Image requestPanel;
+    [SerializeField] private TextMeshProUGUI playTimeText;
+    [SerializeField] private TextMeshProUGUI updateTimeText;
     private Coroutine transitionCoroutine;
 
     private void Start()
@@ -75,11 +77,32 @@ public class GameCanvas : MonoBehaviour
 
     private void SetPointText(int point)
     {
-        pointText.text = $"Điểm: {point}";
+        pointText.text = $"{point}";
     }
 
     private void SetPrimogemText(int primogem)
     {
-        primogemText.text = $"Nguyên thạch: {primogem}";
+        primogemText.text = $"{primogem}";
+    }
+
+    public void SetPlayTime(float time)
+    {
+        playTimeText.text = $"{Mathf.Ceil(time)}s";
+    }
+
+    public void SetUpdateTimeText(float time)
+    {
+        updateTimeText.gameObject.SetActive(true);
+        updateTimeText.text = $"+{Mathf.Ceil(time)}s";
+        updateTimeText.rectTransform.position = new Vector2(0, 0);
+
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(updateTimeText.rectTransform.DOLocalMoveX(170, 0.5f));
+        sequence.Join(updateTimeText.DOFade(1, 0.5f));
+        sequence.AppendInterval(0.5f);
+        sequence.OnComplete(() =>
+        {
+            updateTimeText.gameObject.SetActive(false);
+        });
     }
 }
