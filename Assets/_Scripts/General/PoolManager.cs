@@ -168,7 +168,7 @@ public class PoolManager : Singleton<PoolManager>
         if (obj == null) obj = CreateNewObj(poolType);
 
         obj.SetActive(true);
-        obj.transform.SetParent(poolParents[poolType]);
+        obj.transform.SetParent(transform);
         obj.transform.position = pos;
 
         return obj;

@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
         float posX = isLeftDir ? -jumpDistance : jumpDistance;
         if (CantMoveForward(isLeftDir)) posX = 0;
 
-        jumpTween = transform.DOMove(new Vector2(
+        jumpTween = transform.DOMove(new Vector3(
             transform.position.x + posX, transform.position.y + jumpForce),
             jumpTime).SetEase(Ease.InOutQuad);
     }
@@ -130,12 +130,6 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Die()
     {
-        isDied = true;
-        boxCollider2D.enabled = false;
-
-        jumpTween.Kill();
-        playerAnim.Die();
-
         if (diedCoroutine != null) StopCoroutine(diedCoroutine);
         diedCoroutine = StartCoroutine(DiedCoroutine());
     }
@@ -157,7 +151,7 @@ public class PlayerController : MonoBehaviour
     public void Flip(bool isLeftDirection)
     {
         float scaleX = isLeftDirection ? 1 : -1;
-        transform.localScale = new Vector2(scaleX, 1);
+        transform.localScale = new Vector3(scaleX, 1, 1);
     }
 
     /// <summary>
@@ -275,6 +269,10 @@ public class PlayerController : MonoBehaviour
     #region Coroutine
     private IEnumerator DiedCoroutine()
     {
+        isDied = true;
+        boxCollider2D.enabled = false;
+        jumpTween.Kill();
+        playerAnim.Die();
         yield return new WaitForSeconds(1);
         EventManager.GameOverAction();
     }

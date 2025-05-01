@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5384860996193691778}
   - component: {fileID: 1543299200845082628}
   - component: {fileID: 6111720153686064185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4923,7 +4923,7 @@ GameObject:
   - component: {fileID: 3006649791919736465}
   - component: {fileID: 3262368017975354035}
   - component: {fileID: 1259321012301007161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spiral1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9845,7 +9845,7 @@ GameObject:
   - component: {fileID: 8804511181696638118}
   - component: {fileID: 2517194948136321442}
   - component: {fileID: 9185781269194464896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: circles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14749,7 +14749,7 @@ GameObject:
   - component: {fileID: 8846105227325138000}
   - component: {fileID: 157110720539146728}
   - component: {fileID: -2765681835294869323}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpeedEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19671,7 +19671,7 @@ GameObject:
   - component: {fileID: 6186522654245392592}
   - component: {fileID: 1871872340813090806}
   - component: {fileID: 8205328092858417686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spiral2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24593,7 +24593,7 @@ GameObject:
   - component: {fileID: 5427967208358578321}
   - component: {fileID: 8780387114336592834}
   - component: {fileID: 3987713674743896078}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'glow_vertical '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29496,7 +29496,7 @@ GameObject:
   - component: {fileID: 9207305984315255735}
   - component: {fileID: 7208489148980568451}
   - component: {fileID: 2040396690369485844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: points
   m_TagString: Untagged
   m_Icon: {fileID: 0}
