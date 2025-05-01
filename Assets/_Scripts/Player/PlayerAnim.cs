@@ -33,6 +33,11 @@ public class PlayerAnim : MonoBehaviour
         return anim;
     }
 
+    private void OnEnable()
+    {
+        if(dieCoroutine != null) StopCoroutine(dieCoroutine);
+    }
+
     public void Idle()
     {
         anim.state.SetAnimation(0, idle, true);

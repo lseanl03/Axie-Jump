@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool canJump = false;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isDied = false;
+    [SerializeField] private bool canDie = true;
+    [SerializeField] private bool canHurt = false;
 
+    private Shield shield;
     private PlayerAnim playerAnim;
     private Tween jumpTween;
     private BoxCollider2D boxCollider2D;
@@ -33,6 +36,22 @@ public class PlayerController : MonoBehaviour
         get { return jumpTime; }
         set { jumpTime = value; }
     }
+    public bool CanDie
+    {
+        get { return canDie; }
+        set { canDie = value; }
+    }
+    public bool CanHurt
+    {
+        get { return canHurt; }
+        set { canHurt = value; }
+    }
+
+    public Shield Shield
+    {
+        get { return shield; }
+        set { shield = value; }
+    }
     private void OnEnable()
     {
         EventManager.onClickJump += OnJumpInput;
@@ -43,6 +62,8 @@ public class PlayerController : MonoBehaviour
     {
         EventManager.onClickJump -= OnJumpInput;
         EventManager.onGameStart -= JumpToStartGame;
+
+        if(diedCoroutine != null) StopCoroutine(diedCoroutine);
     }
     private void Update()
     {
@@ -79,7 +100,8 @@ public class PlayerController : MonoBehaviour
     private void HandleAfterJump()
     {
         isJumping = false;
-        if(collidedDuringJump) collidedDuringJump = false;
+        if(collidedDuringJump) 
+            collidedDuringJump = false;
         else playerAnim.Idle();
     }
 
@@ -130,6 +152,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Die()
     {
+        if (!canDie) return;
         if (diedCoroutine != null) StopCoroutine(diedCoroutine);
         diedCoroutine = StartCoroutine(DiedCoroutine());
     }
@@ -139,6 +162,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Hurt()
     {
+        if (!canHurt) return;
         collidedDuringJump = true;
         playerAnim.Hurt();
     }
@@ -249,6 +273,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.CompareTag("HiddenBox"))
         {
+            canDie = true;
             Die();
         }
         else if (collision.CompareTag("Item"))

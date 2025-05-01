@@ -18,6 +18,12 @@ public class TreantFlowering : Enemy
         initialPosY = 0.4f;
     }
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        if(hurtCoroutine != null) StopCoroutine(hurtCoroutine);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

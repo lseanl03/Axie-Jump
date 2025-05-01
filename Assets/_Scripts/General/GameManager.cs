@@ -20,6 +20,8 @@ public class GameManager : Singleton<GameManager>
         get { return primogems; }
     }
 
+
+
     public PlayerController Player
     {
         get { return player; }
@@ -79,7 +81,7 @@ public class GameManager : Singleton<GameManager>
                 playTime = 0;
                 gameGameOver = true;
             }
-            UIManager.Instance.GameCanvas.SetPlayTime(playTime);
+            GamePlayUIManager.Instance.GameCanvas.SetPlayTime(playTime);
         }
     }
 }

@@ -29,7 +29,6 @@ public class SlimeForestB : Enemy
 
     protected override void OnEnable()
     {
-        SetInitialDir();
         Run();
     }
     private void OnDisable()
@@ -56,11 +55,13 @@ public class SlimeForestB : Enemy
     {
         while(gameObject.activeSelf)
         {
+            SetInitialDir();
+            anim.AnimationState.SetAnimation(0, idleAnim, true);
+            yield return new WaitForSeconds(0.5f);
             anim.AnimationState.SetAnimation(0, run, true);
             MoveToTarget(transform.localScale.x == 1);
             yield return new WaitForSeconds(runTime);
             anim.AnimationState.SetAnimation(0, idleAnim, true);
-            SetInitialDir();
             yield return new WaitForSeconds(waitTime);
         }
 

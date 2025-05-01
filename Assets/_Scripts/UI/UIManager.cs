@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    private GameCanvas gameCanvas;
+    private UICanvas uICanvas;
 
-    public GameCanvas GameCanvas
+    public UICanvas UICanvas
     {
-        get { return gameCanvas; }
+        get { return uICanvas; }
     }
 
     protected override void Awake()
     {
         base.Awake();
-        if (!gameCanvas)
-            gameCanvas = GetComponentInChildren<GameCanvas>();
+        if (!uICanvas)
+            uICanvas = GetComponentInChildren<UICanvas>();
     }
 }

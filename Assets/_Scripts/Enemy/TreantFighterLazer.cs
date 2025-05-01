@@ -12,6 +12,11 @@ public class TreantFighterLazer : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+    private void OnDisable()
+    {
+        if (moveCoroutine != null) StopCoroutine(moveCoroutine);
+    }
+
     public void MoveBullet(bool isLeft)
     {
         if (moveCoroutine != null) StopCoroutine(moveCoroutine);

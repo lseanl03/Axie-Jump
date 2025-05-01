@@ -81,6 +81,8 @@ public enum PoolType
     Effect_ShieldBuff,
     Effect_PointBuff,
     Effect_PrimogemBuff,
+
+    Shield,
 }
 
 public enum BuffType

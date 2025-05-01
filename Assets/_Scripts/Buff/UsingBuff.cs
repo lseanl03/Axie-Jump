@@ -25,6 +25,7 @@ public class UsingBuff : MonoBehaviour
     private void OnDisable()
     {
         EventManager.onApplyBuff -= OnApplyBuff;
+        if (applyBuffCoroutine != null) StopCoroutine(applyBuffCoroutine);
     }
     private void OnApplyBuff(Buff buff)
     {

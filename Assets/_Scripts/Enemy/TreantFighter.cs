@@ -7,14 +7,15 @@ public class TreantFighter : Enemy
     private float cooldownTime = 2f;
     [SerializeField] private AnimationReferenceAsset shoot;
     [SerializeField] private Transform bulletPoint;
+    private TreantFighterLazer treantFighterLazerPrefab;
     private TreantFighterLazer treantFighterLazer;
     private Coroutine shootLazerCoroutine;
 
     protected override void Awake()
     {
         base.Awake();
-        if (!treantFighterLazer)
-            treantFighterLazer = Resources.Load<TreantFighterLazer>(
+        if (!treantFighterLazerPrefab)
+            treantFighterLazerPrefab = Resources.Load<TreantFighterLazer>(
                 "Prefabs/Enemy/TreantFighterLazer");
         initialPosY = 0.4f;
     }
@@ -30,6 +31,13 @@ public class TreantFighter : Enemy
     private void OnDisable()
     {
         if (shootLazerCoroutine != null) StopCoroutine(shootLazerCoroutine);
+
+        if (treantFighterLazer != null)
+        {
+            PoolManager.Instance.ReturnObjFromTrunk(treantFighterLazer.gameObject,
+                PoolType.TreantFighterLazer);
+            treantFighterLazer = null;
+        }
     }
 
     protected override void OnEnable()
@@ -51,10 +59,10 @@ public class TreantFighter : Enemy
             anim.AnimationState.SetAnimation(0, shoot, false);
             anim.AnimationState.AddAnimation(0, idleAnim, true, 0);
             yield return new WaitForSeconds(0.4f);
-            var lazerPrefab = PoolManager.Instance.GetObjFromTrunk(
-                PoolType.TreantFighterLazer, bulletPoint.position, transform);
-            var lazer = lazerPrefab.GetComponent<TreantFighterLazer>();
-            lazer.MoveBullet(transform.localScale.x == 1);
+            var prefab = PoolManager.Instance.GetObjFromTrunk(
+                PoolType.TreantFighterLazer, bulletPoint.position, bulletPoint.transform);
+            treantFighterLazer = prefab.GetComponent<TreantFighterLazer>();
+            treantFighterLazer.MoveBullet(transform.localScale.x == 1);
         }
     }
 
