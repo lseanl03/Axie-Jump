@@ -11,8 +11,6 @@ public class BuffManager : Singleton<BuffManager>
     private bool isUsingShieldBuff = false;
     private bool isUsingTimeBuff = false;
 
-
-    [SerializeField] private GameObject buffHolder;
     private BuffListData buffListData;
 
     protected override void Awake()

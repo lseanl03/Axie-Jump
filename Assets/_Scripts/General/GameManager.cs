@@ -57,9 +57,11 @@ public class GameManager : Singleton<GameManager>
         {
             case Rate.Normal:
                 points += GameConfig.normalItemPoint;
+                playTime += 1;
                 break;
             case Rate.Rare:
                 points += GameConfig.rareItemPoint;
+                playTime += 2;
                 break;
             case Rate.Special:
                 primogems += GameConfig.specialItemPoint;

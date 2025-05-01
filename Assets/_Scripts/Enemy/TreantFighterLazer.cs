@@ -26,4 +26,14 @@ public class TreantFighterLazer : MonoBehaviour
         yield return new WaitForSeconds(3);
         PoolManager.Instance.ReturnObjFromTrunk(gameObject, PoolType.TreantFighterLazer);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            var player = collision.GetComponent<PlayerController>();
+            player.Die();
+            PoolManager.Instance.ReturnObjFromTrunk(gameObject, PoolType.TreantFighterLazer);
+        }
+    }
 }

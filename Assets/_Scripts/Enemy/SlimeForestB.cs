@@ -29,6 +29,7 @@ public class SlimeForestB : Enemy
 
     protected override void OnEnable()
     {
+        SetInitialDir();
         Run();
     }
     private void OnDisable()

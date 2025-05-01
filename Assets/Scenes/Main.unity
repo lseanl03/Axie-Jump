@@ -3254,6 +3254,22 @@ MonoBehaviour:
   - poolType: 19
     prefab: {fileID: 6852169259881622767, guid: ce1feb80e5336064cbcbd2d420beaf66, type: 3}
     initialSize: 1
+  objPools:
+  - poolType: 23
+    prefab: {fileID: 3037580841214240511, guid: ed2bb8cff959cb042aa18105c65a370e, type: 3}
+    initialSize: 1
+  - poolType: 24
+    prefab: {fileID: 4648365162538081008, guid: 35107549fea348f40832729320e29cfb, type: 3}
+    initialSize: 1
+  - poolType: 22
+    prefab: {fileID: 885277520714506639, guid: 6039d13035d801d4986175cfbd323fd6, type: 3}
+    initialSize: 1
+  - poolType: 20
+    prefab: {fileID: 4683732328908367658, guid: 25e85c91a1d508b41907a11c0d8dfd24, type: 3}
+    initialSize: 1
+  - poolType: 21
+    prefab: {fileID: 3178612516286564629, guid: f3e00b1e3f592a5448e126384cdc32ff, type: 3}
+    initialSize: 1
 --- !u!4 &1194797361
 Transform:
   m_ObjectHideFlags: 0
@@ -3470,6 +3486,7 @@ GameObject:
   - component: {fileID: 1264026717}
   - component: {fileID: 1264026716}
   - component: {fileID: 1264026715}
+  - component: {fileID: 1264026718}
   m_Layer: 5
   m_Name: UpdateTimeText
   m_TagString: Untagged
@@ -3493,7 +3510,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 132, y: 0}
+  m_AnchoredPosition: {x: 34, y: 0}
   m_SizeDelta: {x: 0, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1264026715
@@ -3609,6 +3626,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264026713}
   m_CullTransparentMesh: 1
+--- !u!95 &1264026718
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264026713}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8f165300ed9dc64e9cc356184e2063b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1322009343
 GameObject:
   m_ObjectHideFlags: 0
@@ -5535,7 +5574,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDontDestroy: 0
-  buffHolder: {fileID: 0}
 --- !u!4 &2097714935
 Transform:
   m_ObjectHideFlags: 0

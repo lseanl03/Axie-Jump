@@ -12,6 +12,7 @@ public class Buff : MonoBehaviour
 
     protected Coroutine applyBuffCoroutine;
     protected BuffData buffData;
+    protected Collider2D collider2d;
 
     [SerializeField] protected PoolType poolType;
 
@@ -67,12 +68,23 @@ public class Buff : MonoBehaviour
             transform.position.y + initialPosY);
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        CheckCollider(collision);
+    }
+
+    private void CheckCollider(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            collider2d = collision;
+            var player = collision.GetComponent<PlayerController>();
+            if (player == null) return;
+
             ActionBuff();
+            ApplyEffect();
             PoolManager.Instance.ReturnObjFromTrunk(gameObject, poolType);
         }
     }
+
 }

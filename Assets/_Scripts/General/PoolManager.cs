@@ -15,6 +15,7 @@ public class PoolManager : Singleton<PoolManager>
 {
     [SerializeField] private List<Pool> trunkPools;
     [SerializeField] private List<Pool> objFromTrunkPools;
+    [SerializeField] private List<Pool> objPools;
     private Dictionary<PoolType, List<GameObject>> poolDictionary;
     private Dictionary<PoolType, GameObject> prefabDictionary;
     private Dictionary<PoolType, Transform> poolParents;
@@ -33,6 +34,7 @@ public class PoolManager : Singleton<PoolManager>
 
         InitialTrunkPools();
         InitialObjFromTrunkPools();
+        InitialObjPools();
     }
 
 
@@ -130,6 +132,57 @@ public class PoolManager : Singleton<PoolManager>
     }
 
     public void ReturnObjFromTrunk(GameObject obj, PoolType type)
+    {
+        obj.SetActive(false);
+        obj.transform.SetParent(poolParents[type]);
+        poolDictionary[type].Add(obj);
+    }
+    #endregion
+
+    #region Obj
+    private void InitialObjPools()
+    {
+        foreach (Pool pool in objPools)
+        {
+            GameObject poolParent = new GameObject($"Pool_{pool.poolType}");
+            poolParent.transform.SetParent(transform);
+            poolParents[pool.poolType] = poolParent.transform;
+            prefabDictionary[pool.poolType] = pool.prefab;
+
+            List<GameObject> objectPool = new List<GameObject>();
+            poolDictionary[pool.poolType] = objectPool;
+
+            for (int i = 0; i < pool.initialSize; i++)
+            {
+                CreateNewObj(pool.poolType);
+            }
+        }
+    }
+    public GameObject GetObj(PoolType poolType, Vector2 pos, Transform transform)
+    {
+        List<GameObject> pool = poolDictionary[poolType];
+        GameObject obj = pool.Find(o => !o.activeInHierarchy);
+
+        if (obj != null) pool.Remove(obj);
+        else obj = CreateNewObj(poolType);
+        if (obj == null) obj = CreateNewObj(poolType);
+
+        obj.SetActive(true);
+        obj.transform.SetParent(poolParents[poolType]);
+        obj.transform.position = pos;
+
+        return obj;
+    }
+
+    private GameObject CreateNewObj(PoolType type)
+    {
+        GameObject obj = Instantiate(prefabDictionary[type], poolParents[type]);
+        obj.SetActive(false);
+        poolDictionary[type].Add(obj);
+        return obj;
+    }
+
+    public void ReturnObj(GameObject obj, PoolType type)
     {
         obj.SetActive(false);
         obj.transform.SetParent(poolParents[type]);

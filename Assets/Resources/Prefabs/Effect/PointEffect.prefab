@@ -14748,6 +14748,7 @@ GameObject:
   - component: {fileID: 8138003968091856841}
   - component: {fileID: 7338700162170544688}
   - component: {fileID: 6403533397186579639}
+  - component: {fileID: 1310812764890310012}
   m_Layer: 0
   m_Name: PointEffect
   m_TagString: Untagged
@@ -19646,6 +19647,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &1310812764890310012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3037580841214240511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e83f022c96cda4c8054856974d5f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 23
 --- !u!1 &3726948577195300845
 GameObject:
   m_ObjectHideFlags: 0

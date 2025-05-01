@@ -31,20 +31,20 @@ public class TrunkController : MonoBehaviour
         {
             if (trunk.transform.childCount != 0)
             {
-                var item = trunk.transform.GetComponentInChildren<Item>();
-                if (item)
+                if (trunk.transform.GetComponentInChildren<Item>())
                 {
+                    var item = trunk.transform.GetComponentInChildren<Item>();
                     PoolManager.Instance.ReturnObjFromTrunk(
                         item.gameObject, PoolType.Item);
                 }
-                else if(trunk.transform.GetComponentInChildren<Enemy>())
+                if(trunk.transform.GetComponentInChildren<Enemy>())
                 {
                     var enemy = trunk.transform.GetComponentInChildren<Enemy>();
                     if (!enemy) return;
                     PoolManager.Instance.ReturnObjFromTrunk(
                         enemy.gameObject, enemy.PoolType);
                 }
-                else if(trunk.transform.GetComponentInChildren<Buff>())
+                if(trunk.transform.GetComponentInChildren<Buff>())
                 {
                     var buff = trunk.transform.GetComponentInChildren<Buff>();
                     if (!buff) return;
@@ -117,6 +117,7 @@ public class TrunkController : MonoBehaviour
     {
         int itemRate = GameConfig.itemSpawnRate;
         int enemyRate = GameConfig.enemySpawnRate;
+        int buffRate = GameConfig.buffSpawnRate;
         int randomRate = Random.Range(0, 100);
         if (randomRate <= itemRate)
         {
@@ -133,11 +134,10 @@ public class TrunkController : MonoBehaviour
                 {
                     EnemyManager.Instance.SpawnEnemiesFromTrunk(this);
                 }
-                else ItemManager.Instance.SpawnItemsFromTrunk(this);
             }
-            else ItemManager.Instance.SpawnItemsFromTrunk(this);
         }
-        else
+        else if(randomRate > itemRate + enemyRate &&
+                 randomRate <= itemRate + enemyRate + buffRate)
         {
             BuffManager.Instance.SpawnBuffFromTrunk(this);
         }

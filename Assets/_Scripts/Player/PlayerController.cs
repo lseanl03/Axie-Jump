@@ -267,8 +267,6 @@ public class PlayerController : MonoBehaviour
                 EventManager.CollectItemAction(item.Rate);
                 PoolManager.Instance.ReturnObjFromTrunk(
                     item.gameObject, PoolType.Item);
-
-                UIManager.Instance.GameCanvas.SetUpdateTimeText(1);
             }
         }
     }

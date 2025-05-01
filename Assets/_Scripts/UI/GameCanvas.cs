@@ -42,9 +42,11 @@ public class GameCanvas : MonoBehaviour
         switch(rate)
         {
             case Rate.Normal:
+                SetUpdateTimeText(1);
                 SetPointText(GameManager.Instance.Points);
                 break;
             case Rate.Rare:
+                SetUpdateTimeText(2);
                 SetPointText(GameManager.Instance.Points);
                 break;
             case Rate.Special:
@@ -82,7 +84,7 @@ public class GameCanvas : MonoBehaviour
 
     private void SetPrimogemText(int primogem)
     {
-        primogemText.text = $"{primogem}";
+        primogemText.text = $"{primogem.ToString("D4")}";
     }
 
     public void SetPlayTime(float time)
@@ -92,17 +94,7 @@ public class GameCanvas : MonoBehaviour
 
     public void SetUpdateTimeText(float time)
     {
-        updateTimeText.gameObject.SetActive(true);
+        updateTimeText.GetComponent<Animator>().SetTrigger("Show");
         updateTimeText.text = $"+{Mathf.Ceil(time)}s";
-        updateTimeText.rectTransform.position = new Vector2(0, 0);
-
-        Sequence sequence = DOTween.Sequence();
-        sequence.Append(updateTimeText.rectTransform.DOLocalMoveX(170, 0.5f));
-        sequence.Join(updateTimeText.DOFade(1, 0.5f));
-        sequence.AppendInterval(0.5f);
-        sequence.OnComplete(() =>
-        {
-            updateTimeText.gameObject.SetActive(false);
-        });
     }
 }

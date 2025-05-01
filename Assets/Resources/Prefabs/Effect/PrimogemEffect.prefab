@@ -9845,6 +9845,7 @@ GameObject:
   - component: {fileID: 540773411941895719}
   - component: {fileID: 4642800739007118795}
   - component: {fileID: 7335197719461594398}
+  - component: {fileID: -6810163463908204082}
   m_Layer: 0
   m_Name: PrimogemEffect
   m_TagString: Untagged
@@ -14743,6 +14744,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-6810163463908204082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4648365162538081008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97e83f022c96cda4c8054856974d5f14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolType: 24
 --- !u!1 &5989640354811633835
 GameObject:
   m_ObjectHideFlags: 0
