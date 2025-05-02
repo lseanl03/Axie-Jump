@@ -131,6 +131,15 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void UpdatePrimogem(int newPoint)
+    {
+        primogems += newPoint;
+        if (primogems < 0)
+        {
+            primogems = 0;
+        }
+    }
+
     private void ProcessPlayTime()
     {
         if (!gameGameOver)
@@ -191,7 +200,7 @@ public class GameManager : Singleton<GameManager>
         var state = false;
         if (currentRequest != null)
         {
-           state = requestData.AgreeRequestWithType(
+            state = requestData.AgreeRequestWithType(
                 currentRequest, currentRequestEnemy.transform);
             if (state)
             {

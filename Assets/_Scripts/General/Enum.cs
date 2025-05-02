@@ -103,6 +103,7 @@ public enum RequestType
     None,
     PrimogemsForFoods,
     FoodsForPrimogems,
-    BuffForFoods,
-    BuffForPrimogems,
+    SpeedBuffForFoods,
+    PointBuffForPrimogems,
+    PrimogemBuffForFoods,
 }

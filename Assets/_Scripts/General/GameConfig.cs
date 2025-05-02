@@ -48,7 +48,7 @@ public class GameConfig
     public static int primogemPoint = 100;
     public static int normalItemTime = 1;
     public static int rareItemTime = 2;
-    public static float waitContinueGameTime = 3f; 
+    public static float waitContinueGameTime = 3f;
 
-
+    //<color=#FFFF00>1 thuốc tăng nguyên thạch lấy x5 Ramen (100 điểm)</color>
 }
