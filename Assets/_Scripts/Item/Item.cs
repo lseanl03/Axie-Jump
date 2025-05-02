@@ -28,4 +28,9 @@ public class Item: MonoBehaviour
     {
         spriteRenderer.sprite = sprite;
     }
+
+    public void SetItemType(ItemType type)
+    {
+        itemType = type;
+    }
 }

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +11,16 @@ public class UICanvas : MonoBehaviour
 {
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private Button restartButton;
+    [SerializeField] private SettingPanel settingPanel;
+    [SerializeField] private Button settingButton;
     private Coroutine transitionCoroutine;
+
+    private void Awake()
+    {
+        restartButton.gameObject.SetActive(false);
+        levelTransiton.gameObject.SetActive(false);
+        settingButton.gameObject.SetActive(true);
+    }
 
     private void OnEnable()
     {
@@ -46,5 +56,10 @@ public class UICanvas : MonoBehaviour
 
         levelTransiton.TransitionState(false);
         levelTransiton.gameObject.SetActive(false);
+    }
+
+    public void OnClickSetting()
+    {
+        settingPanel.ShowSettingPanel();
     }
 }

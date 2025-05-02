@@ -42,20 +42,20 @@ public class EventManager
         onGameOver?.Invoke();
     }
 
-    public delegate void OnCollectItem(Rate itemRate);
+    public delegate void OnCollectItem(Item item);
     public static event OnCollectItem onCollectItem;
 
-    public static void CollectItemAction(Rate itemRate)
+    public static void CollectItemAction(Item item)
     {
-        onCollectItem?.Invoke(itemRate);
+        onCollectItem?.Invoke(item);
     }
 
-    public delegate void OnOpenRequest();
+    public delegate void OnOpenRequest(Request request);
     public static event OnOpenRequest onOpenRequest;
 
-    public static void OpenRequestAction()
+    public static void OpenRequestAction(Request request)
     {
-        onOpenRequest?.Invoke();
+        onOpenRequest?.Invoke(request);
     }
 
     public delegate void OnApplyBuff(Buff buff);

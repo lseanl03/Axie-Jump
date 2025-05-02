@@ -8,12 +8,17 @@ public class PointBuff : Buff
         if (buffManager.IsUsingPointBuff) return;
         else buffManager.IsUsingPointBuff = true;
 
+        gameManager.NormalItemPoint *= 2;
+        gameManager.RareItemPoint *= 2;
     }
 
     public override void RemoveBuff()
     {
         base.RemoveBuff();
         buffManager.IsUsingPointBuff = false;
+
+        gameManager.NormalItemPoint = GameConfig.normalItemPoint;
+        gameManager.RareItemPoint = GameConfig.rareItemPoint;
     }
     public override void ApplyEffect()
     {

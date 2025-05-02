@@ -7,6 +7,7 @@ public class LevelTransiton : MonoBehaviour
     private void Awake()
     {
         if(!animator) animator = GetComponent<Animator>();
+        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
     }
     public void TransitionState(bool isOpen)
     {

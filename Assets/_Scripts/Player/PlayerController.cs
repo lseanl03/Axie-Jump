@@ -12,9 +12,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("State")]
     [SerializeField] private bool collidedDuringJump = false;
-    [SerializeField] private bool canJump = false;
     [SerializeField] private bool isJumping = false;
     [SerializeField] private bool isDied = false;
+    [SerializeField] private bool canJump = false;
     [SerializeField] private bool canDie = true;
     [SerializeField] private bool canHurt = false;
 
@@ -183,8 +183,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     private void JumpToStartGame()
     {
-        transform.DOMoveY(GameConfig.jumpPosStartGame, jumpTime)
-            .SetEase(Ease.InOutQuad);
+        if (canJump)
+        {
+            canJump = isJumping = false;
+            transform.DOMoveY(GameConfig.jumpPosStartGame, jumpTime)
+                .SetEase(Ease.InOutQuad);
+        }
     }
 
     #region Bool Check
@@ -283,7 +287,7 @@ public class PlayerController : MonoBehaviour
             {
                 collidedDuringJump = true;
                 playerAnim.CollectItem();
-                EventManager.CollectItemAction(item.Rate);
+                EventManager.CollectItemAction(item);
                 PoolManager.Instance.ReturnObjFromTrunk(
                     item.gameObject, PoolType.Item);
             }

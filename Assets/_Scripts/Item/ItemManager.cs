@@ -76,6 +76,7 @@ public class ItemManager : Singleton<ItemManager>
             item.transform.position = pos;
             item.Rate = itemConfig.rate;
             item.SetSprite(itemConfig.sprite);
+            item.SetItemType(itemConfig.itemType);
         }
 
     }

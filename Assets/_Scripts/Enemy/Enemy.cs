@@ -54,4 +54,7 @@ public class Enemy : MonoBehaviour
         float scaleX = isLeftDirection ? 1 : -1;
         transform.localScale = new Vector2(scaleX, 1);
     }
+
+    public virtual void StartAction() { }
+    public virtual void EndAction() { }
 }

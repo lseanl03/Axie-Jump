@@ -32,19 +32,23 @@ public class GameConfig
     public static int normalItemRate = 70;
     public static int rareItemRate = 20;
     public static int specialItemRate = 10;
-    public static int normalItemPoint= 10;
-    public static int rareItemPoint = 20;
-    public static int specialItemPoint = 100;
     public static float itemSpawnPosInTrunk = 1.5f;
-    public static int itemSpawnRate = 0;
+    public static int itemSpawnRate = 50;
 
     [Header("Enemy")]
     public static int enemySpawnRate = 80;
 
     [Header("Buff")]
-    public static int buffSpawnRate = 20;
+    public static int buffSpawnRate = 0;
 
     [Header("Game")]
     public static float initialPlayTime = 60f;
+    public static int normalItemPoint = 10;
+    public static int rareItemPoint = 20;
+    public static int primogemPoint = 100;
+    public static int normalItemTime = 1;
+    public static int rareItemTime = 2;
+    public static float waitContinueGameTime = 3f; 
+
 
 }

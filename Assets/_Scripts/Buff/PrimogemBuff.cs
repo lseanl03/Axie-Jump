@@ -8,12 +8,15 @@ public class PrimogemBuff : Buff
         if (buffManager.IsUsingPrimogemBuff) return;
         else buffManager.IsUsingPrimogemBuff = true;
 
+        gameManager.PrimogemPoint *= 2;
     }
 
     public override void RemoveBuff()
     {
         base.RemoveBuff();
         buffManager.IsUsingPrimogemBuff = false;
+
+        gameManager.PrimogemPoint = GameConfig.primogemPoint;
     }
     public override void ApplyEffect()
     {

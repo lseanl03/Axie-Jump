@@ -37,6 +37,14 @@ public class PoolManager : Singleton<PoolManager>
         InitialObjPools();
     }
 
+    public Transform PoolParent(PoolType poolType)
+    {
+        if (poolParents.ContainsKey(poolType))
+            return poolParents[poolType];
+        else
+            return null;
+    }
+
 
     #region Trunk
     private void InitialTrunkPools()
@@ -158,7 +166,7 @@ public class PoolManager : Singleton<PoolManager>
             }
         }
     }
-    public GameObject GetObj(PoolType poolType, Vector2 pos, Transform transform)
+    public GameObject GetObj(PoolType poolType, Vector2 pos, Transform transform = null)
     {
         List<GameObject> pool = poolDictionary[poolType];
         GameObject obj = pool.Find(o => !o.activeInHierarchy);
@@ -168,7 +176,10 @@ public class PoolManager : Singleton<PoolManager>
         if (obj == null) obj = CreateNewObj(poolType);
 
         obj.SetActive(true);
-        obj.transform.SetParent(transform);
+        
+        if(!transform) obj.transform.SetParent(poolParents[poolType]);
+        else obj.transform.SetParent(transform);
+
         obj.transform.position = pos;
 
         return obj;

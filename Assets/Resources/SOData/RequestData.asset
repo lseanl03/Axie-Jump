@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c746df24df490946a019a835303bf53, type: 3}
+  m_Name: RequestData
+  m_EditorClassIdentifier: 
+  bearMomRequests:
+  - requestText: "\u0110\u1ED5i 200 nguy\xEAn th\u1EA1ch l\u1EA5y x10 t\xE1o v\xE0
+      x10 chu\u1ED1i (200 \u0111i\u1EC3m)"
+    requestType: 1
+    getValue: 200
+    lostValue: 200
+  - requestText: "\u0110\u1ED5i 300 nguy\xEAn th\u1EA1ch l\u1EA5y x20 Donut (400
+      \u0111i\u1EC3m)"
+    requestType: 1
+    getValue: 300
+    lostValue: 400
+  - requestText: "\u0110\u1ED5i 1000 nguy\xEAn th\u1EA1ch l\u1EA5y 100 Ramen "
+    requestType: 1
+    getValue: 1000
+    lostValue: 2000
+  bearDadRequests:
+  - requestText: 
+    requestType: 0
+    getValue: 0
+    lostValue: 0

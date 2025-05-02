@@ -10,14 +10,19 @@ public class GameCanvas : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI primogemText;
-    [SerializeField] private Image requestPanel;
     [SerializeField] private TextMeshProUGUI playTimeText;
     [SerializeField] private TextMeshProUGUI updateTimeText;
+    [SerializeField] private RequestPanel requestPanel;
 
     private void Start()
     {
         SetPointText(GameManager.Instance.Points);
         SetPrimogemText(GameManager.Instance.Primogems);
+    }
+
+    public RequestPanel RequestPanel
+    {
+        get { return requestPanel; }
     }
     private void OnEnable()
     {
@@ -27,30 +32,26 @@ public class GameCanvas : MonoBehaviour
     {
         EventManager.onCollectItem -= OnCollectItem;
     }
-    private void OnCollectItem(Rate rate)
+    private void OnCollectItem(Item item)
     {
-        switch(rate)
+        var gameManager = GameManager.Instance;
+        switch (item.Rate)
         {
             case Rate.Normal:
-                SetUpdateTimeText(1);
-                SetPointText(GameManager.Instance.Points);
+                SetUpdateTimeText(GameConfig.normalItemTime);
                 break;
             case Rate.Rare:
-                SetUpdateTimeText(2);
-                SetPointText(GameManager.Instance.Points);
-                break;
-            case Rate.Special:
-                SetPrimogemText(GameManager.Instance.Primogems);
+                SetUpdateTimeText(GameConfig.rareItemTime);
                 break;
         }
     }
 
-    private void SetPointText(int point)
+    public void SetPointText(int point)
     {
         pointText.text = $"{point}";
     }
 
-    private void SetPrimogemText(int primogem)
+    public void SetPrimogemText(int primogem)
     {
         primogemText.text = $"{primogem.ToString("D4")}";
     }

@@ -83,6 +83,9 @@ public enum PoolType
     Effect_PrimogemBuff,
 
     Shield,
+
+    GetPointPopup,
+    GetPrimogemPopup,
 }
 
 public enum BuffType
@@ -93,4 +96,13 @@ public enum BuffType
     Shield,
     Point,
     Primogem,
+}
+
+public enum RequestType
+{
+    None,
+    PrimogemsForFoods,
+    FoodsForPrimogems,
+    BuffForFoods,
+    BuffForPrimogems,
 }

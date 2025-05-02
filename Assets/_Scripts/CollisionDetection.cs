@@ -11,7 +11,12 @@ public class CollisionDetection : MonoBehaviour
         }
         else if (collision.CompareTag("Player"))
         {
-            collision.gameObject.SetActive(false);
+            var player = collision.GetComponent<PlayerController>();
+            if (player != null)
+            {
+                player.Die();
+                collision.gameObject.SetActive(false);
+            }
         }
     }
 }

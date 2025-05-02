@@ -8,6 +8,10 @@ public class TimeBuff : Buff
         if (buffManager.IsUsingTimeBuff) return;
         else buffManager.IsUsingTimeBuff = true;
 
+        var timeBuff = buffData.buffs.valueEffect;
+        gameManager.PlayTime += timeBuff;
+        GamePlayUIManager.Instance.GameCanvas.SetUpdateTimeText(timeBuff);
+
     }
 
     public override void RemoveBuff()
