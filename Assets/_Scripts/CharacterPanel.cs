@@ -26,14 +26,13 @@ public class CharacterPanel : MonoBehaviour
 
         CharacterManager.Instance.CharacterSelectedChange();
     }
-    public void HideSettingPanel()
+    public void HideCharacterPanel()
     {
         characterMenu.SetActive(false);
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
 
         CharacterManager.Instance.CharacterDisable();
-
     }
     public void SetName(Character character)
     {

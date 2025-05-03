@@ -8,6 +8,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private int points;
     [SerializeField] private int primogems;
+    [SerializeField] private int highScrore;
+    [SerializeField] private int primogemOwn;
     [SerializeField] private float playTime = GameConfig.initialPlayTime;
     [SerializeField] private int normalItemPoint = GameConfig.normalItemPoint;
     [SerializeField] private int rareItemPoint = GameConfig.rareItemPoint;
@@ -27,6 +29,16 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region Get Set
+    public int HighScore
+    {
+        get { return highScrore; }
+        set { highScrore = value; }
+    }
+    public int PrimogemOwn
+    {
+        get { return primogemOwn; }
+        set { primogemOwn = value; }
+    }
     public int Points
     {
         get { return points; }

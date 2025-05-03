@@ -8,11 +8,11 @@ public class CharacterManager : Singleton<CharacterManager>
     [SerializeField] private int currentIndex = 0;
     [SerializeField] private int selectedIndex = 0;
     [SerializeField] private GameObject characterListObj;
-    [SerializeField] private CharacterPanel characterPanel;
 
     private CharacterData charactersData;
     private Character currentCharacter;
     private List<Character> characterList = new List<Character>();
+    private UIManager uiManager => UIManager.Instance;
     protected override void Awake()
     {
         base.Awake();
@@ -25,12 +25,6 @@ public class CharacterManager : Singleton<CharacterManager>
         currentCharacter = characterList[0];
         SetPlayer();
     }
-
-    public CharacterPanel CharacterPanel
-    {
-        get { return characterPanel; }
-    }
-
     void GetCharacterListInit()
     {
         for (int i = 0; i < characterListObj.transform.childCount; i++)
@@ -60,6 +54,7 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public void CharacterViewChange()
     {
+        var characterPanel = uiManager.UICanvas.CharacterPanel;
         for (int i = 0; i < characterList.Count; i++)
         {
             if (i == currentIndex)
@@ -78,6 +73,7 @@ public class CharacterManager : Singleton<CharacterManager>
 
     public void CharacterSelectedChange()
     {
+        var characterPanel = uiManager.UICanvas.CharacterPanel;
         for (int i = 0; i < characterList.Count; i++)
         {
             if (i == selectedIndex)
@@ -142,6 +138,7 @@ public class CharacterManager : Singleton<CharacterManager>
             character.IsSelected = character == currentCharacter ? true : false;
         }
         selectedIndex = currentIndex;
-        characterPanel.SelectedButtonState(currentCharacter.IsSelected);
+        uiManager.UICanvas.CharacterPanel
+            .SelectedButtonState(currentCharacter.IsSelected);
     }
 }
