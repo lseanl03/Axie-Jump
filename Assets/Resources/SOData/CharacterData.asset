@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a06e007abaf7c640b6c96d987f51260, type: 3}
+  m_Name: CharacterData
+  m_EditorClassIdentifier: 
+  characterConfigs:
+  - characterType: 1
+    idle: {fileID: 11400000, guid: b572cd090d3369f40ba50c78bda5915f, type: 2}
+    jump: {fileID: 11400000, guid: b8c8fbdd89338a34e885d81cd2964b43, type: 2}
+    die: {fileID: 11400000, guid: c77d5269b9384fc4cab157ada0a2131b, type: 2}
+    collectItem: {fileID: 11400000, guid: 6221e9e27b1269e44a8df969d5d95366, type: 2}
+    randomIdles:
+    - {fileID: 11400000, guid: adf597b740798e74c97169b487034ee7, type: 2}
+    - {fileID: 11400000, guid: be0e57985e8408e4e9f0fb63e57afbe2, type: 2}
+    - {fileID: 11400000, guid: 57f0b7a850663b94ca1c14662b74ccfd, type: 2}
+    - {fileID: 11400000, guid: dba15dfbb24f1db4a8adc56527cb31b9, type: 2}
+    skeletonDataAsset: {fileID: 11400000, guid: b49379cb4c0ea41ad8687d360ccaa72b, type: 2}
+  - characterType: 2
+    idle: {fileID: 11400000, guid: cb8e8868da22d6e4e8b129f655324876, type: 2}
+    jump: {fileID: 11400000, guid: 69fd00c4b2d0c4a41b4ffb1099ff0688, type: 2}
+    die: {fileID: 11400000, guid: 3bae2fbb08c39ee47aa732d0fb013a6e, type: 2}
+    collectItem: {fileID: 11400000, guid: a5d48e4d5c52fe943a34fdd92f0ecb15, type: 2}
+    randomIdles:
+    - {fileID: 11400000, guid: 03caa27eb4697c042ba6027ec0045476, type: 2}
+    - {fileID: 11400000, guid: f784cde7c80579c49b6a6289e21a6503, type: 2}
+    - {fileID: 11400000, guid: 7a567b36113d5234daf336f7c95ee998, type: 2}
+    - {fileID: 11400000, guid: 40927a66662525c4e85babab70499f5d, type: 2}
+    skeletonDataAsset: {fileID: 11400000, guid: 7d1ef9104d38443a4b39cf8906cc277d, type: 2}
+  - characterType: 3
+    idle: {fileID: 11400000, guid: 69ef0443730f7b94fb5935a02311c9be, type: 2}
+    jump: {fileID: 11400000, guid: 41cfbeceee2bc304c820520b3871f8be, type: 2}
+    die: {fileID: 11400000, guid: 90da6c244ef1afb4286cb3e08ffd3d8f, type: 2}
+    collectItem: {fileID: 11400000, guid: 68deba9e06868004e9bf7ffbd97986bf, type: 2}
+    randomIdles:
+    - {fileID: 11400000, guid: e5f7a37369f55a94e8f53966a15601e9, type: 2}
+    - {fileID: 11400000, guid: 1a3a4b34d89633c45b87d470f205eeec, type: 2}
+    - {fileID: 11400000, guid: 2c6f44f8bff6a214e8f75ede8d454b69, type: 2}
+    - {fileID: 11400000, guid: b126e761b003e7b429231ce9f00acb03, type: 2}
+    - {fileID: 11400000, guid: 589491585d60363409475df367432d8b, type: 2}
+    skeletonDataAsset: {fileID: 11400000, guid: 17b8d394a4a3048c6b388872700353a8, type: 2}

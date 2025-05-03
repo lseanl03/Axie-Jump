@@ -13,6 +13,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private Button restartButton;
     [SerializeField] private SettingPanel settingPanel;
     [SerializeField] private Button settingButton;
+    [SerializeField] private Button characterButton;
     private Coroutine transitionCoroutine;
 
     private void Awake()
@@ -20,6 +21,7 @@ public class UICanvas : MonoBehaviour
         restartButton.gameObject.SetActive(false);
         levelTransiton.gameObject.SetActive(false);
         settingButton.gameObject.SetActive(true);
+        characterButton.gameObject.SetActive(true);
     }
 
     private void OnEnable()
@@ -58,8 +60,13 @@ public class UICanvas : MonoBehaviour
         levelTransiton.gameObject.SetActive(false);
     }
 
-    public void OnClickSetting()
+    public void OnSettingClick()
     {
         settingPanel.ShowSettingPanel();
+    }
+
+    public void OnCharacterClick()
+    {
+        CharacterManager.Instance.CharacterPanel.ShowCharacterPanel();
     }
 }

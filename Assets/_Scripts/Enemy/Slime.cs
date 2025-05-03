@@ -37,7 +37,7 @@ public class Slime : Enemy
         if (collision.CompareTag("Player"))
         {
             var player = collision.GetComponent<PlayerController>();
-            player.Hurt();
+            player.Die();
         }
     }
     public void Tele()

@@ -142,7 +142,7 @@ public class GameManager : Singleton<GameManager>
 
     private void ProcessPlayTime()
     {
-        if (!gameGameOver)
+        if (!gameGameOver || gameStarted)
         {
             playTime -= Time.deltaTime;
             if(playTime <= 0)

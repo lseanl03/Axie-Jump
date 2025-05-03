@@ -30,7 +30,7 @@ public class TreantFlowering : Enemy
         {
             Hurt();
             var player = collision.GetComponent<PlayerController>();
-            player.Hurt();
+            player.Die();
         }
     }
     private void Hurt()

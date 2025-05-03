@@ -107,3 +107,11 @@ public enum RequestType
     PointBuffForPrimogems,
     PrimogemBuffForFoods,
 }
+
+public enum  CharacterType
+{
+    None,
+    Buba,
+    Olek,
+    Puffy
+}

@@ -8,7 +8,6 @@ public class PlayerAnim : MonoBehaviour
     [SerializeField] private AnimationReferenceAsset idle;
     [SerializeField] private AnimationReferenceAsset jump;
     [SerializeField] private AnimationReferenceAsset die;
-    [SerializeField] private AnimationReferenceAsset hurt;
     [SerializeField] private AnimationReferenceAsset collectItem;
     [SerializeField] private AnimationReferenceAsset[] randomIdles;
 
@@ -27,17 +26,40 @@ public class PlayerAnim : MonoBehaviour
         if (anim == null) return;
         RandomIdles();
     }
-
-    public SkeletonAnimation GetSkeletionAnim()
+    public SkeletonAnimation Anim
     {
-        return anim;
+        get { return anim; }
+        set { anim = value; }
     }
-
     private void OnEnable()
     {
         if(dieCoroutine != null) StopCoroutine(dieCoroutine);
     }
-
+    public AnimationReferenceAsset[] RandomIdlesAnim
+    {
+        get { return randomIdles; }
+        set { randomIdles = value; }
+    }
+    public AnimationReferenceAsset IdleAnim
+    {
+        get { return idle; }
+        set { idle = value; }
+    }
+    public AnimationReferenceAsset JumpAnim
+    {
+        get { return jump; }
+        set { jump = value; }
+    }
+    public AnimationReferenceAsset DieAnim
+    {
+        get { return die; }
+        set { die = value; }
+    }
+    public AnimationReferenceAsset CollectItemAnim
+    {
+        get { return collectItem; }
+        set { collectItem = value; }
+    }
     public void Idle()
     {
         anim.state.SetAnimation(0, idle, true);
@@ -45,11 +67,6 @@ public class PlayerAnim : MonoBehaviour
     public void Jump()
     {
         anim.state.SetAnimation(0, jump, false);
-    }
-    public void Hurt()
-    {
-        anim.state.SetAnimation(0, hurt, false);
-        anim.state.AddAnimation(0, idle, true, 0);
     }
     public void Die()
     {
@@ -64,7 +81,7 @@ public class PlayerAnim : MonoBehaviour
         anim.state.AddAnimation(0, idle, true, 0);
     }
 
-    private void RandomIdles()
+    public void RandomIdles()
     {
         int randomIndex = Random.Range(0, randomIdles.Length);
         anim.state.SetAnimation(0, randomIdles[randomIndex], true);

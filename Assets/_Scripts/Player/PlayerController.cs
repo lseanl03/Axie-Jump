@@ -156,16 +156,6 @@ public class PlayerController : MonoBehaviour
         if (diedCoroutine != null) StopCoroutine(diedCoroutine);
         diedCoroutine = StartCoroutine(DiedCoroutine());
     }
-
-    /// <summary>
-    /// Trạng thái bị thương
-    /// </summary>
-    public void Hurt()
-    {
-        if (!canHurt) return;
-        collidedDuringJump = true;
-        playerAnim.Hurt();
-    }
     #endregion
 
     /// <summary>
@@ -186,6 +176,7 @@ public class PlayerController : MonoBehaviour
         if (canJump)
         {
             canJump = isJumping = false;
+            playerAnim.Idle();
             transform.DOMoveY(GameConfig.jumpPosStartGame, jumpTime)
                 .SetEase(Ease.InOutQuad);
         }
