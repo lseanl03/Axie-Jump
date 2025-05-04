@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int rareItemPoint = GameConfig.rareItemPoint;
     [SerializeField] private int primogemPoint = GameConfig.primogemPoint;
     [SerializeField] private PlayerController player;
+    [SerializeField] private SceneType sceneType;
 
     private Enemy currentRequestEnemy;
     private Request currentRequest;
@@ -29,6 +30,11 @@ public class GameManager : Singleton<GameManager>
     }
 
     #region Get Set
+    public SceneType SceneType
+    {
+        get { return sceneType; }
+        set { sceneType = value; }
+    }
     public int HighScore
     {
         get { return highScrore; }
@@ -52,6 +58,7 @@ public class GameManager : Singleton<GameManager>
     public PlayerController Player
     {
         get { return player; }
+        set { player = value; }
     }
     public float PlayTime
     {
@@ -154,7 +161,7 @@ public class GameManager : Singleton<GameManager>
 
     private void ProcessPlayTime()
     {
-        if (!gameGameOver || gameStarted)
+        if (!gameGameOver && gameStarted)
         {
             playTime -= Time.deltaTime;
             if(playTime <= 0)
@@ -162,7 +169,7 @@ public class GameManager : Singleton<GameManager>
                 playTime = 0;
                 OnGameOver();
             }
-            GamePlayUIManager.Instance.GameCanvas.SetPlayTime(playTime);
+            UIManager.Instance.UICanvas.GamePanel.SetPlayTime(playTime);
         }
     }
 
@@ -175,7 +182,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGetPoint(Transform transform, int point)
     {
-        GamePlayUIManager.Instance.GameCanvas.SetPointText(points);
+        UIManager.Instance.UICanvas.GamePanel.SetPointText(points);
         var prefab = PoolManager.Instance.GetObj(
             PoolType.GetPointPopup, transform.position, null);
         var popup = prefab.GetComponent<GetPointPopup>();
@@ -187,7 +194,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGetPrimogem(Transform transform, int primogem)
     {
-        GamePlayUIManager.Instance.GameCanvas.SetPrimogemText(primogems);
+        UIManager.Instance.UICanvas.GamePanel.SetPrimogemText(primogems);
         var prefab = PoolManager.Instance.GetObj(
             PoolType.GetPrimogemPopup, transform.position, null);
         var popup = prefab.GetComponent<GetPrimogemPopup>();

@@ -8,10 +8,13 @@ public class CharacterManager : Singleton<CharacterManager>
     [SerializeField] private int currentIndex = 0;
     [SerializeField] private int selectedIndex = 0;
     [SerializeField] private GameObject characterListObj;
+    [SerializeField] private GameObject characterInMainMenuObj;
 
     private CharacterData charactersData;
     private Character currentCharacter;
     private List<Character> characterList = new List<Character>();
+    private List<CharacterInMainMenu> characterInMainMenuList 
+        = new List<CharacterInMainMenu>();
     private UIManager uiManager => UIManager.Instance;
     protected override void Awake()
     {
@@ -20,9 +23,22 @@ public class CharacterManager : Singleton<CharacterManager>
     }
     private void Start()
     {
+        GetCharacterInMainMenuInit();
         GetCharacterListInit();
-        
         currentCharacter = characterList[0];
+        SetPlayer();
+    }
+    private void OnEnable()
+    {
+        EventManager.onSceneChanged += OnSceneChanged;
+    }
+    private void OnDisable()
+    {
+        EventManager.onSceneChanged -= OnSceneChanged;
+    }
+    public void OnSceneChanged(SceneType sceneType)
+    {
+        characterInMainMenuObj.SetActive(sceneType == SceneType.MainMenu);
         SetPlayer();
     }
     void GetCharacterListInit()
@@ -38,6 +54,22 @@ public class CharacterManager : Singleton<CharacterManager>
             }
         }
     }
+    void GetCharacterInMainMenuInit()
+    {
+        if(GameManager.Instance.SceneType != SceneType.MainMenu) return;
+        for (int i = 0; i < characterInMainMenuObj.transform.childCount; i++)
+        {
+            var obj = characterInMainMenuObj.transform.GetChild(i);
+            var character = obj.GetComponent<CharacterInMainMenu>();
+            if (character)
+            {
+                characterInMainMenuList.Add(character);
+                character.SetDataInit();
+                character.RandomIdles();
+            }
+        }
+    }
+
 
     public void OnBeforeArrowClick()
     {

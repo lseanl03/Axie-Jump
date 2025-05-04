@@ -74,4 +74,12 @@ public class EventManager
         onRemoveBuff?.Invoke();
     }
 
+    public delegate void OnSceneChanged(SceneType sceneType);
+    public static event OnSceneChanged onSceneChanged;
+
+    public static void SceneChangedAction(SceneType sceneType)
+    {
+        onSceneChanged?.Invoke(sceneType);
+    }
+
 }

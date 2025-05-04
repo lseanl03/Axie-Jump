@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,25 +10,59 @@ using static EventManager;
 
 public class UICanvas : MonoBehaviour
 {
-    [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private Button restartButton;
-    [SerializeField] private SettingPanel settingPanel;
-    [SerializeField] private CharacterPanel characterPanel;
-    [SerializeField] private UpgradePanel upgradePanel;
     [SerializeField] private Button settingButton;
     [SerializeField] private Button characterButton;
     [SerializeField] private Button upgradeButton;
-    private Coroutine transitionCoroutine;
+    [SerializeField] private Button pauseButton;
+    [SerializeField] private LevelTransiton levelTransiton;
+    [SerializeField] private SettingPanel settingPanel;
+    [SerializeField] private CharacterPanel characterPanel;
+    [SerializeField] private UpgradePanel upgradePanel;
+    [SerializeField] private MainMenuPanel mainMenuPanel;
+    [SerializeField] private GamePanel gamePanel;
+    [SerializeField] private RequestPanel requestPanel;
+    [SerializeField] private PausePanel pausePanel;
+    [SerializeField] private GameOverPanel gameOverPanel;
 
     private void Awake()
     {
         restartButton.gameObject.SetActive(false);
         levelTransiton.gameObject.SetActive(false);
+        pauseButton.gameObject.SetActive(false);
         settingButton.gameObject.SetActive(true);
         characterButton.gameObject.SetActive(true);
         upgradeButton.gameObject.SetActive(true);
     }
 
+    public GameOverPanel GameOverPanel
+    {
+        get { return gameOverPanel; }
+    }
+    public MainMenuPanel MainMenuPanel
+    {
+        get { return mainMenuPanel; }
+    }
+    public GamePanel GamePanel
+    {
+        get { return gamePanel; }
+    }
+    public RequestPanel RequestPanel
+    {
+        get { return requestPanel; }
+    }
+    public PausePanel PausePanel
+    {
+        get { return pausePanel; }
+    }
+    public Button RestartButton
+    {
+        get { return restartButton; }
+    }
+    public LevelTransiton LevelTransiton
+    {
+        get { return levelTransiton; }
+    }
     public SettingPanel SettingPanel
     {
         get { return settingPanel; }
@@ -45,38 +80,17 @@ public class UICanvas : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.onSceneChanged += OnSceneChanged;
         EventManager.onGameOver += OnGameOver;
     }
     private void OnDisable()
     {
+        EventManager.onSceneChanged -= OnSceneChanged;
         EventManager.onGameOver -= OnGameOver;
-        if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
     }
     private void OnGameOver()
     {
         restartButton.gameObject.SetActive(true);
-    }
-
-    public void TransitionLevel()
-    {
-        if (transitionCoroutine != null) StopCoroutine(transitionCoroutine);
-        transitionCoroutine = StartCoroutine(TransitionCoroutine());
-    }
-
-    private IEnumerator TransitionCoroutine()
-    {
-        levelTransiton.gameObject.SetActive(true);
-        yield return new WaitForSeconds(GameConfig.closeOverlay);
-
-        restartButton.gameObject.SetActive(false);
-        levelTransiton.TransitionState(true);
-        DOTween.KillAll();
-        var loadScene = SceneManager.LoadSceneAsync("Main");
-
-        yield return new WaitForSeconds(GameConfig.openOverlay);
-
-        levelTransiton.TransitionState(false);
-        levelTransiton.gameObject.SetActive(false);
     }
 
     public void OnSettingClick()
@@ -92,5 +106,13 @@ public class UICanvas : MonoBehaviour
     public void OnUpgradeClick()
     {
         upgradePanel.ShowUpgradePanel();
+    }
+
+    private void OnSceneChanged(SceneType sceneType)
+    {
+        settingButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        characterButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        upgradeButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
     }
 }

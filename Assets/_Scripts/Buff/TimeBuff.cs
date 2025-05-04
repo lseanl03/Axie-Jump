@@ -10,7 +10,7 @@ public class TimeBuff : Buff
 
         var timeBuff = buffData.buffs.valueEffect;
         gameManager.PlayTime += timeBuff;
-        GamePlayUIManager.Instance.GameCanvas.SetUpdateTimeText(timeBuff);
+        UIManager.Instance.UICanvas.GamePanel.SetUpdateTimeText(timeBuff);
 
     }
 

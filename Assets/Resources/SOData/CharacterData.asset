@@ -47,3 +47,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b126e761b003e7b429231ce9f00acb03, type: 2}
     - {fileID: 11400000, guid: 589491585d60363409475df367432d8b, type: 2}
     skeletonDataAsset: {fileID: 11400000, guid: 17b8d394a4a3048c6b388872700353a8, type: 2}
+  - characterType: 4
+    idle: {fileID: 11400000, guid: 975fa216d938fe045974a20c6ba47850, type: 2}
+    jump: {fileID: 11400000, guid: f0522c509dfea744fac6acceb085532f, type: 2}
+    die: {fileID: 11400000, guid: 9d706781365f8f84d950bc77fab0f174, type: 2}
+    collectItem: {fileID: 11400000, guid: bedb003e12cc0574e9718abe15bbc7f3, type: 2}
+    randomIdles:
+    - {fileID: 11400000, guid: 46143ff97a37a53499307f274ac46c46, type: 2}
+    - {fileID: 11400000, guid: cd6e6800b5deccf479f7b1f96fa5c21d, type: 2}
+    - {fileID: 11400000, guid: 113753aacd79e8f4bad25db6a148e058, type: 2}
+    - {fileID: 11400000, guid: 750888dfd30280e4e8c1a87c1b14a2d4, type: 2}
+    skeletonDataAsset: {fileID: 11400000, guid: a4c9aa158a024427288679692b1e4538, type: 2}

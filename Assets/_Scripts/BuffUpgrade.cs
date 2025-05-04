@@ -53,6 +53,8 @@ public class BuffUpgrade : MonoBehaviour
             SetPriceText(currentPrice);
             SetProgress();
             SetBuffTimeWithType();
+            UIManager.Instance.UICanvas.MainMenuPanel
+                .SetPrimogem(GameManager.Instance.PrimogemOwn);
         }
     }
 

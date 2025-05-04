@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         playerAnim = GetComponent<PlayerAnim>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        GameManager.Instance.Player = this;
     }
 
     public float JumpTime
@@ -295,6 +296,8 @@ public class PlayerController : MonoBehaviour
         playerAnim.Die();
         yield return new WaitForSeconds(1);
         EventManager.GameOverAction();
+        yield return new WaitForSeconds(1);
+        gameObject.SetActive(false);
     }
     #endregion
 }

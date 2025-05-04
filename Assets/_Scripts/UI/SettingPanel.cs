@@ -4,10 +4,6 @@ using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
-    [SerializeField] private Button continueButton;
-    [SerializeField] private Button restartButton;
-    [SerializeField] private Button soundButton;
-    [SerializeField] private Button quitButton;
     [SerializeField] private CanvasGroup bgCanvasGroup;
     [SerializeField] private GameObject settingMenu;
 
@@ -29,25 +25,4 @@ public class SettingPanel : MonoBehaviour
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
     }
-
-    public void OnClickContinue()
-    {
-        HideSettingPanel();
-        GameManager.Instance.ContinueGame();
-    }
-
-    public void OnClickRestart()
-    {
-        HideSettingPanel();
-        UIManager.Instance.UICanvas.TransitionLevel();
-    }
-
-    public void OnClickSound()
-    {
-    }
-
-    public void OnClickQuit()
-    {
-    }
-
 }

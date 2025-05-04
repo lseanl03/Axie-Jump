@@ -6,31 +6,27 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameCanvas : MonoBehaviour
+public class GamePanel : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI pointText;
     [SerializeField] private TextMeshProUGUI primogemText;
     [SerializeField] private TextMeshProUGUI playTimeText;
     [SerializeField] private TextMeshProUGUI updateTimeText;
-    [SerializeField] private RequestPanel requestPanel;
-
+    [SerializeField] private GameObject gameMenu;
     private void Start()
     {
         SetPointText(GameManager.Instance.Points);
         SetPrimogemText(GameManager.Instance.Primogems);
     }
-
-    public RequestPanel RequestPanel
-    {
-        get { return requestPanel; }
-    }
     private void OnEnable()
     {
         EventManager.onCollectItem += OnCollectItem;
+        EventManager.onSceneChanged += OnChangedScene;
     }
     private void OnDisable()
     {
         EventManager.onCollectItem -= OnCollectItem;
+        EventManager.onSceneChanged -= OnChangedScene;
     }
     private void OnCollectItem(Item item)
     {
@@ -65,5 +61,19 @@ public class GameCanvas : MonoBehaviour
     {
         updateTimeText.GetComponent<Animator>().SetTrigger("Show");
         updateTimeText.text = $"+{Mathf.Ceil(time)}s";
+    }
+
+    private void OnChangedScene(SceneType sceneType)
+    {
+        gameMenu.SetActive(sceneType == SceneType.Game);
+        pointText.gameObject.SetActive(sceneType == SceneType.Game);
+        primogemText.gameObject.SetActive(sceneType == SceneType.Game);
+        playTimeText.gameObject.SetActive(sceneType == SceneType.Game);
+        if (sceneType == SceneType.Game)
+        {
+            SetPlayTime(GameManager.Instance.PlayTime);
+            SetPointText(0);
+            SetPrimogemText(0);
+        }
     }
 }

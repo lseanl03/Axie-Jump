@@ -113,5 +113,13 @@ public enum  CharacterType
     None,
     Buba,
     Olek,
-    Puffy
+    Puffy,
+    Ena
+}
+
+public enum SceneType
+{
+    None,
+    MainMenu,
+    Game,
 }

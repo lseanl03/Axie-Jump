@@ -77,7 +77,7 @@ public class RequestData : ScriptableObject
 
         if (gameManager.Points < target)
         {
-            GamePlayUIManager.Instance.GameCanvas.RequestPanel
+            UIManager.Instance.UICanvas.RequestPanel
                 .ShowNotificationText("Không đủ điểm để đổi!");
             return true;
         }
@@ -89,7 +89,7 @@ public class RequestData : ScriptableObject
         var gameManager = GameManager.Instance;
         if (gameManager.Primogems < target)
         {
-            GamePlayUIManager.Instance.GameCanvas.RequestPanel
+            UIManager.Instance.UICanvas.RequestPanel
                 .ShowNotificationText("Không đủ nguyên thạch để đổi!");
             return true;
         }
