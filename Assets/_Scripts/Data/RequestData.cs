@@ -1,9 +1,7 @@
 ﻿using DG.Tweening.Core.Easing;
 using NUnit.Framework;
 using System;
-using UnityEditor.PackageManager.Requests;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 [CreateAssetMenu(fileName = "RequestData", menuName = "ScriptableObjects/RequestData", order = 1)]
 public class RequestData : ScriptableObject

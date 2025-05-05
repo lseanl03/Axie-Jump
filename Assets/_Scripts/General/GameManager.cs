@@ -113,11 +113,24 @@ public class GameManager : Singleton<GameManager>
     private void OnEnable()
     {
         EventManager.onCollectItem += OnCollectItem;
+        EventManager.onGameOver += OnGameOver;
+        EventManager.onSceneChanged += OnSceneChanged;
     }
 
     private void OnDisable()
     {
         EventManager.onCollectItem -= OnCollectItem;
+        EventManager.onGameOver -= OnGameOver;
+        EventManager.onSceneChanged -= OnSceneChanged;
+    }
+
+    private void OnSceneChanged(SceneType sceneType)
+    {
+        gameGameOver = false;
+        gameStarted = false;
+        points = 0;
+        primogems = 0;
+        playTime = GameConfig.initialPlayTime;
     }
 
     private void OnCollectItem(Item item)
@@ -158,6 +171,18 @@ public class GameManager : Singleton<GameManager>
             primogems = 0;
         }
     }
+    public void UpdateHighScore()
+    {
+        if(points > highScrore)
+        {
+            highScrore = points;
+            PlayFabManager.Instance.SubmitHighScore(highScrore);
+        }
+    }
+    public void UpdatePrimogemOwn()
+    {
+        primogemOwn += primogems;
+    }
 
     private void ProcessPlayTime()
     {
@@ -167,17 +192,22 @@ public class GameManager : Singleton<GameManager>
             if(playTime <= 0)
             {
                 playTime = 0;
-                OnGameOver();
+                EventManager.GameOverAction();
             }
             UIManager.Instance.UICanvas.GamePanel.SetPlayTime(playTime);
         }
     }
-
     public void OnGameOver()
     {
-        gameGameOver = true;
-        player.CanDie = true;
-        player.Die();
+        if (!gameGameOver)
+        {
+            gameGameOver = true;
+            player.CanDie = true;
+            player.Die();
+
+            UpdatePrimogemOwn();
+            UpdateHighScore();
+        }
     }
 
     public void OnGetPoint(Transform transform, int point)

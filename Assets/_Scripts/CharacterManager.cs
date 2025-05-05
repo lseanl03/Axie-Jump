@@ -23,6 +23,7 @@ public class CharacterManager : Singleton<CharacterManager>
     }
     private void Start()
     {
+        characterInMainMenuObj.SetActive(true);
         GetCharacterInMainMenuInit();
         GetCharacterListInit();
         currentCharacter = characterList[0];

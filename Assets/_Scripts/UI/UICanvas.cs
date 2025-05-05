@@ -15,6 +15,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private Button characterButton;
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button pauseButton;
+    [SerializeField] private Button leaderBoardButton;
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private SettingPanel settingPanel;
     [SerializeField] private CharacterPanel characterPanel;
@@ -24,6 +25,8 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private RequestPanel requestPanel;
     [SerializeField] private PausePanel pausePanel;
     [SerializeField] private GameOverPanel gameOverPanel;
+    [SerializeField] private LeaderboardPanel leaderboardPanel;
+    [SerializeField] private EnterUserNamePanel enterUserNamePanel;
 
     private void Awake()
     {
@@ -33,8 +36,17 @@ public class UICanvas : MonoBehaviour
         settingButton.gameObject.SetActive(true);
         characterButton.gameObject.SetActive(true);
         upgradeButton.gameObject.SetActive(true);
+        leaderBoardButton.gameObject.SetActive(true);
     }
 
+    public LeaderboardPanel LeaderboardPanel
+    {
+        get { return leaderboardPanel; }
+    }
+    public EnterUserNamePanel EnterUserNamePanel
+    {
+        get { return enterUserNamePanel; }
+    }
     public GameOverPanel GameOverPanel
     {
         get { return gameOverPanel; }
@@ -108,11 +120,17 @@ public class UICanvas : MonoBehaviour
         upgradePanel.ShowUpgradePanel();
     }
 
+    public void OnLeaderboardClick()
+    {
+        leaderboardPanel.ShowLeaderboardPanel();
+    }
+
     private void OnSceneChanged(SceneType sceneType)
     {
         settingButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         characterButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         upgradeButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
+        leaderBoardButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
     }
 }

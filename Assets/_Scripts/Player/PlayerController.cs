@@ -294,7 +294,6 @@ public class PlayerController : MonoBehaviour
         boxCollider2D.enabled = false;
         jumpTween.Kill();
         playerAnim.Die();
-        yield return new WaitForSeconds(1);
         EventManager.GameOverAction();
         yield return new WaitForSeconds(1);
         gameObject.SetActive(false);
