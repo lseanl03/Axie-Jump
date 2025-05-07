@@ -14,7 +14,6 @@ public class EnterUserNamePanel : MonoBehaviour
     }
     public void ShowEnterUserNamePanel()
     {
-        Debug.Log("ShowEnterUserNamePanel");
         enterUserNameMenu.SetActive(true);
         bgCanvasGroup.gameObject.SetActive(true);
         bgCanvasGroup.alpha = 0;
@@ -22,7 +21,6 @@ public class EnterUserNamePanel : MonoBehaviour
     }
     public void HideEnterUserNamePanel()
     {
-        Debug.Log("HideEnterUserNamePanel");
         enterUserNameMenu.SetActive(false);
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);

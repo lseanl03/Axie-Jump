@@ -21,6 +21,7 @@ public class BuffUpgrade : MonoBehaviour
         GetProgressListInit();
         SetProgressInit();
         currentPrice = buffUpgradeConfig.startPrice;
+        progressIndex = 1;
     }
 
     public BuffUpgradeConfig BuffUpgradeConfig
@@ -48,13 +49,16 @@ public class BuffUpgrade : MonoBehaviour
         if (GameManager.Instance.PrimogemOwn >= currentPrice)
         {
             GameManager.Instance.PrimogemOwn -= currentPrice;
+            UIManager.Instance.UICanvas.MainMenuPanel.SetPrimogem(GameManager.Instance.PrimogemOwn);
+            PlayFabManager.Instance.SubPrimogem(currentPrice);
+            SetBuffTimeWithType();
+
+            progressList[progressIndex].IsUnlock = true;
             progressIndex += 1;
             currentPrice += currentPrice;
             SetPriceText(currentPrice);
             SetProgress();
-            SetBuffTimeWithType();
-            UIManager.Instance.UICanvas.MainMenuPanel
-                .SetPrimogem(GameManager.Instance.PrimogemOwn);
+
         }
     }
 
@@ -76,14 +80,18 @@ public class BuffUpgrade : MonoBehaviour
             if(i == 0)
             {
                 progress.IsUnlock = true;
+                progress.SetCurrentProgressState(false);
+            }
+            else if(i == 1)
+            {
                 progress.SetCurrentProgressState(true);
                 SetCostProgressTextWithType(progress);
             }
             else
             {
                 progress.IsUnlock = false;
-                progress.SetCurrentProgressState(false);
-                progress.SetCostText();
+                progress.SetHideColor();
+                progress.SetCostState(false);
             }
         }
     }
@@ -95,7 +103,6 @@ public class BuffUpgrade : MonoBehaviour
             var progress = progressList[i];
             if (i == progressIndex)
             {
-                progress.IsUnlock = true;
                 progress.SetCurrentProgressState(true);
                 SetCostProgressTextWithType(progress);
             }
@@ -103,9 +110,7 @@ public class BuffUpgrade : MonoBehaviour
             {
                 if (progress.IsUnlock)
                 {
-                    progress.SetCostText();
-                    progress.SetColorProgressImage(
-                        UIManager.Instance.UICanvas.UpgradePanel.UnlockColor);
+                    progress.SetCurrentProgressState(false);
                 }
             }
         }
@@ -117,19 +122,19 @@ public class BuffUpgrade : MonoBehaviour
         switch (buffUpgradeConfig.buffType)
         {
             case BuffType.Speed:
-                progress.SetCostText(buffManager.SpeedBuffTime);
+                progress.SetCostText(buffManager.SpeedBuffTime + 1);
                 break;
             case BuffType.Point:
-                progress.SetCostText(buffManager.PointBuffTime);
+                progress.SetCostText(buffManager.PointBuffTime + 1);
                 break;
             case BuffType.Shield:
-                progress.SetCostText(buffManager.ShieldBuffTime);
+                progress.SetCostText(buffManager.ShieldBuffTime + 1);
                 break;
             case BuffType.Time:
-                progress.SetCostText(buffManager.TimeBuffTime);
+                progress.SetCostText(buffManager.TimeBuffTime + 1);
                 break;
             case BuffType.Primogem:
-                progress.SetCostText(buffManager.PrimogemBuffTime);
+                progress.SetCostText(buffManager.PrimogemBuffTime + 1);
                 break;
         }
     }
@@ -142,23 +147,18 @@ public class BuffUpgrade : MonoBehaviour
         {
             case BuffType.Speed:
                 buffManager.SpeedBuffTime += 1;
-                progress.SetCostText(buffManager.SpeedBuffTime);
                 break;
             case BuffType.Point:
                 buffManager.PointBuffTime += 1;
-                progress.SetCostText(buffManager.PointBuffTime);
                 break;
             case BuffType.Shield:
                 buffManager.ShieldBuffTime += 1;
-                progress.SetCostText(buffManager.ShieldBuffTime);
                 break;
             case BuffType.Time:
                 buffManager.TimeBuffTime += 1;
-                progress.SetCostText(buffManager.TimeBuffTime);
                 break;
             case BuffType.Primogem:
                 buffManager.PrimogemBuffTime += 1;
-                progress.SetCostText(buffManager.PrimogemBuffTime);
                 break;
         }
     }

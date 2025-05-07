@@ -16,12 +16,12 @@ public class Progress : MonoBehaviour
         isCurrentProgress = state;
         if (isCurrentProgress)
         {
-            SetColorProgressImage(uiManager.UICanvas.UpgradePanel.CurrentProgressColor);
+            SetCurrentProgressColor();
             SetCostState(true);
         }
         else
         {
-            SetColorProgressImage(Color.black);
+            SetUnlockColor();
             SetCostState(false);
         }
     }
@@ -30,17 +30,32 @@ public class Progress : MonoBehaviour
         get { return isUnlock; }
         set { isUnlock = value; }
     }
-    public void SetColorProgressImage(Color color)
+    public bool IsCurrentProgress
     {
-        progressImage.color = color;
+        get { return isCurrentProgress; }
+        set { isCurrentProgress = value; }
     }
-    public void SetCostText(float cost = 0)
+    public void SetHideColor()
+    {
+        progressImage.color = Color.black;
+    }
+    public void SetUnlockColor()
+    {
+        progressImage.color = 
+            UIManager.Instance.UICanvas.UpgradePanel.UnlockColor;
+    }
+    public void SetCurrentProgressColor()
+    {
+        progressImage.color =
+            UIManager.Instance.UICanvas.UpgradePanel.CurrentProgressColor;
+    }
+    public void SetCostText(float cost)
     {
         if(cost == 0) costText.text = "";
         else costText.text = $"{cost}s";
     }
 
-    private void SetCostState(bool state)
+    public void SetCostState(bool state)
     {
         costText.gameObject.SetActive(state);
     }

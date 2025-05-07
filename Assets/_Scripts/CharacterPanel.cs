@@ -44,4 +44,8 @@ public class CharacterPanel : MonoBehaviour
         text.text = state ? "Đã chọn" : "Chọn" ;
         selectButton.interactable = state ? false : true;
     }
+    public void OnSelectClick()
+    {
+        CharacterManager.Instance.SetCurrentCharacter();
+    }
 }

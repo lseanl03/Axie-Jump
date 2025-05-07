@@ -126,6 +126,10 @@ public class GameManager : Singleton<GameManager>
 
     private void OnSceneChanged(SceneType sceneType)
     {
+        ResetData();
+    }
+    private void ResetData()
+    {
         gameGameOver = false;
         gameStarted = false;
         points = 0;
@@ -143,12 +147,12 @@ public class GameManager : Singleton<GameManager>
                 OnGetPoint(item.transform, normalItemPoint);
                 break;
             case Rate.Rare:
-                OnGetPoint(item.transform, rareItemPoint);
+                UpdatePoint(rareItemPoint);
                 playTime += GameConfig.rareItemTime;
                 OnGetPoint(item.transform, rareItemPoint);
                 break;
             case Rate.Special:
-                primogems += primogemPoint;
+                UpdatePrimogem(primogemPoint);
                 OnGetPrimogem(item.transform, primogemPoint);
                 break;
         }
@@ -182,6 +186,7 @@ public class GameManager : Singleton<GameManager>
     public void UpdatePrimogemOwn()
     {
         primogemOwn += primogems;
+        PlayFabManager.Instance.AddPrimogem(primogems);
     }
 
     private void ProcessPlayTime()

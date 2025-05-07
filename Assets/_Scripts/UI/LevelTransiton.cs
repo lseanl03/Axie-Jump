@@ -1,16 +1,44 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class LevelTransiton : MonoBehaviour
 {
-    private Animator animator;
+    [SerializeField] private CanvasGroup bgCanvas;
+    [SerializeField] private CanvasGroup primogemCanvas;
+    [SerializeField] private RectTransform right;
+    [SerializeField] private RectTransform left;
 
-    private void Awake()
+    public void Open()
     {
-        if(!animator) animator = GetComponent<Animator>();
-        animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        bgCanvas.alpha = 1;
+        bgCanvas.gameObject.SetActive(true);
+        right.gameObject.SetActive(true);
+        left.gameObject.SetActive(true);
+        Vector3 newRotate = new Vector3(0, 0, 180);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(bgCanvas.DOFade(0, 1).SetUpdate(true));
+        sequence.Join(primogemCanvas.DOFade(0, 1).SetUpdate(true));
+        sequence.Join(primogemCanvas.transform.DOLocalRotate(newRotate, 0.8f));
+        sequence.Join(right.DOAnchorPosX(1200, 1).SetUpdate(true));
+        sequence.Join(left.DOAnchorPosX(-1200, 1).SetUpdate(true));
+        sequence.OnComplete(() =>
+        {
+            right.gameObject.SetActive(false);
+            left.gameObject.SetActive(false);
+            bgCanvas.gameObject.SetActive(false);
+        });
     }
-    public void TransitionState(bool isOpen)
+    public void Close()
     {
-        animator.SetBool("isOpen", isOpen);
+        bgCanvas.alpha = 0;
+        bgCanvas.gameObject.SetActive(true);
+        right.gameObject.SetActive(true);
+        left.gameObject.SetActive(true);
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(bgCanvas.DOFade(1, 1).SetUpdate(true));
+        sequence.Join(primogemCanvas.DOFade(1, 1).SetUpdate(true));
+        sequence.Join(primogemCanvas.transform.DOLocalRotate(Vector3.zero, 0.8f));
+        sequence.Join(right.DOAnchorPosX(630, 1).SetUpdate(true));
+        sequence.Join(left.DOAnchorPosX(-630, 1).SetUpdate(true));
     }
 }

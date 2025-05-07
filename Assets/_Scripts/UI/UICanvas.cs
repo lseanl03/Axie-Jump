@@ -16,6 +16,8 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private Button upgradeButton;
     [SerializeField] private Button pauseButton;
     [SerializeField] private Button leaderBoardButton;
+    [SerializeField] private Button leftClickButton;
+    [SerializeField] private Button rightClickButton;
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private SettingPanel settingPanel;
     [SerializeField] private CharacterPanel characterPanel;
@@ -31,12 +33,12 @@ public class UICanvas : MonoBehaviour
     private void Awake()
     {
         restartButton.gameObject.SetActive(false);
-        levelTransiton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         settingButton.gameObject.SetActive(true);
         characterButton.gameObject.SetActive(true);
         upgradeButton.gameObject.SetActive(true);
         leaderBoardButton.gameObject.SetActive(true);
+        levelTransiton.gameObject.SetActive(true);
     }
 
     public LeaderboardPanel LeaderboardPanel
@@ -124,6 +126,28 @@ public class UICanvas : MonoBehaviour
     {
         leaderboardPanel.ShowLeaderboardPanel();
     }
+    public void OnLeftClick()
+    {
+        if (!GameManager.Instance.GameStarted)
+        {
+            EventManager.OnGameStartAction();
+        }
+        else
+        {
+            EventManager.ClickJumpAction(true);
+        }
+    }
+    public void OnRightClick()
+    {
+        if (!GameManager.Instance.GameStarted)
+        {
+            EventManager.OnGameStartAction();
+        }
+        else
+        {
+            EventManager.ClickJumpAction(false);
+        }
+    }
 
     private void OnSceneChanged(SceneType sceneType)
     {
@@ -132,5 +156,7 @@ public class UICanvas : MonoBehaviour
         upgradeButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
         leaderBoardButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        leftClickButton.gameObject.SetActive(sceneType == SceneType.Game);
+        rightClickButton.gameObject.SetActive(sceneType == SceneType.Game);
     }
 }

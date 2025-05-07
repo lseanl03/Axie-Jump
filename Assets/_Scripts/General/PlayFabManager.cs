@@ -1,26 +1,29 @@
-using PlayFab;
+﻿using PlayFab;
 using PlayFab.ClientModels;
+using PlayFab.MultiplayerModels;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class PlayFabManager : Singleton<PlayFabManager>
 {
     [SerializeField] private string userName;
-    [SerializeField] private string titleId = "B827D";
     [SerializeField] private string leaderboardName = "HighScore";
+    [SerializeField] private string characterIndexKey = "CharacterIndex";
+    [SerializeField] private string primogemKey = "PR";
+    private Coroutine loadedDataCoroutine;
+    
     private void Start()
     {
-        PlayFabClientAPI.ForgetAllCredentials();
         Login();
     }
-    private void OnError(PlayFabError error)
-    {
-        Debug.LogError(error.ErrorMessage);
-    }
+    #region Action
     private void Login()
     {
+        Debug.Log("Login");
         var request = new LoginWithCustomIDRequest
         {
             CustomId = SystemInfo.deviceUniqueIdentifier,
@@ -32,28 +35,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);
     }
-
-    private void OnLogin(LoginResult result)
-    {
-        Debug.Log($"Login successful with {result.PlayFabId}");
-
-        if(result.InfoResultPayload != null)
-        {
-            userName = result.InfoResultPayload.PlayerProfile.DisplayName;
-        }
-
-        if (String.IsNullOrEmpty(userName))
-        {
-            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowEnterUserNamePanel();
-        }
-        else
-        {
-            UIManager.Instance.UICanvas.EnterUserNamePanel.HideEnterUserNamePanel();
-        }
-    }
-
     public void SubmitUserNameName(string userName)
     {
+        Debug.Log("Submit UserName: " + userName);
         var request = new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = userName
@@ -61,14 +45,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
 
         PlayFabClientAPI.UpdateUserTitleDisplayName(request, OnSubmitUserName, OnError);
     }
-
-    private void OnSubmitUserName(UpdateUserTitleDisplayNameResult result)
-    {
-        Debug.Log("Create UserName:" + result.DisplayName);
-    }
-
     public void SubmitHighScore(int score)
     {
+        Debug.Log("Submit HighScore: " + score);
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
@@ -82,14 +61,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
         };
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSubmitHighScore, OnError);
     }
-
-    private void OnSubmitHighScore(UpdatePlayerStatisticsResult result)
+    public void LoginWithCustomID(string customId)
     {
-        Debug.Log("High score submitted successfully.");
-    }
-
-    private void LoginWithCustomID(string customId)
-    {
+        Debug.Log("Login with CustomID: " + customId);
         var request = new LoginWithCustomIDRequest
         {
             CustomId = customId,
@@ -97,19 +71,105 @@ public class PlayFabManager : Singleton<PlayFabManager>
         };
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);
     }
-
     public void GetLeaderboard()
     {
+        Debug.Log("Get Leaderboard");
         var request = new GetLeaderboardRequest
         {
             StatisticName = leaderboardName,
             StartPosition = 0,
             MaxResultsCount = 10
         };
-
         PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboard, OnError);
     }
+    private void GetHighScore()
+    {
+        Debug.Log("Get HighScore");
+        var request = new GetPlayerStatisticsRequest
+        {
+            StatisticNames = new List<string> { leaderboardName }
+        };
+        PlayFabClientAPI.GetPlayerStatistics(request, OnGetHighScore, OnError);
+    }
+    public void SetCharacterIndex(int index)
+    {
+        Debug.Log("Set Character Index: " + index);
+        var request = new UpdateUserDataRequest
+        {
+            Data = new Dictionary<string, string>
+            {
+                { characterIndexKey, index.ToString() }
+            }
+        };
+        PlayFabClientAPI.UpdateUserData(request, OnSaveCharacterIndex, OnError);
+    }
+    public void AddPrimogem(int amount)
+    {
+        Debug.Log("Add Primogem: " + amount);
+        var request = new AddUserVirtualCurrencyRequest
+        {
+            VirtualCurrency = primogemKey,
+            Amount = amount
+        };
+        PlayFabClientAPI.AddUserVirtualCurrency(request, OnAddPrimogem, OnError);
+    }
+    public void SubPrimogem(int amount)
+    {
+        Debug.Log("Sub Primogem: " + amount);
+        var request = new SubtractUserVirtualCurrencyRequest
+        {
+            VirtualCurrency = primogemKey,
+            Amount = amount
+        };
+        PlayFabClientAPI.SubtractUserVirtualCurrency(request, OnSubPrimogem, OnError);
+    }
+    public void GetPrimogem()
+    {
+        Debug.Log("Get Primogem");
+        var request = new GetUserInventoryRequest();
+        PlayFabClientAPI.GetUserInventory(request, OnGetPrimogem, OnError);
+    }
+    public void GetCharacterIndex()
+    {
+        Debug.Log("Get Character Index");
+        PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnGetCharacterIndex, OnError);
+    }
+    #endregion
 
+
+
+
+    #region CallBack
+    private void OnError(PlayFabError error)
+    {
+        Debug.LogError(error.ErrorMessage);
+    }
+    private void OnLogin(LoginResult result)
+    {
+        Debug.Log($"Login: {result.InfoResultPayload.PlayerProfile.DisplayName}");
+        if(result.InfoResultPayload != null)
+        {
+            userName = result.InfoResultPayload.PlayerProfile.DisplayName;
+        }
+        if (String.IsNullOrEmpty(userName))
+        {
+            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowEnterUserNamePanel();
+        }
+        else
+        {
+            UIManager.Instance.UICanvas.EnterUserNamePanel.HideEnterUserNamePanel();
+        }
+        if(loadedDataCoroutine != null) StopCoroutine(loadedDataCoroutine);
+        loadedDataCoroutine = StartCoroutine(LoadedDataCoroutine());
+    }
+    private void OnSubmitUserName(UpdateUserTitleDisplayNameResult result)
+    {
+        Debug.Log("Create UserName:" + result.DisplayName);
+    }
+    private void OnSubmitHighScore(UpdatePlayerStatisticsResult result)
+    {
+        Debug.Log("Submit Score:" + result);
+    }
     private void OnGetLeaderboard(GetLeaderboardResult result)
     {
         List<UserRank> userRankList = UIManager.Instance.UICanvas.LeaderboardPanel.UserRankList;
@@ -120,14 +180,72 @@ public class PlayFabManager : Singleton<PlayFabManager>
             if (userRank.DisplayName == userName)
             {
                 currentUserRank.SetUserRank(
-                    userRank.Position + 1, 
-                    userRank.DisplayName, 
+                    userRank.Position + 1,
+                    userRank.DisplayName,
                     userRank.StatValue.ToString());
             }
             userRankList[i].SetUserRank(
-                userRank.Position + 1, 
-                userRank.DisplayName, 
+                userRank.Position + 1,
+                userRank.DisplayName,
                 userRank.StatValue.ToString());
+        }
+    }
+    private void OnGetHighScore(GetPlayerStatisticsResult result)
+    {
+        foreach (var statistic in result.Statistics)
+        {
+            if (statistic.StatisticName == leaderboardName)
+            {
+                GameManager.Instance.HighScore = statistic.Value;
+                UIManager.Instance.UICanvas.MainMenuPanel.SetHighScore(statistic.Value);
+                Debug.Log("HighScore: " + statistic.Value);
+            }
+        }
+    }
+    private void OnSaveCharacterIndex(UpdateUserDataResult result)
+    {
+        Debug.Log("Lưu character index thành công!");
+    }
+    private void OnGetCharacterIndex(GetUserDataResult result)
+    {
+        int index = 0;
+        if (result.Data != null && result.Data.ContainsKey(characterIndexKey))
+        {
+            int.TryParse(result.Data[characterIndexKey].Value, out index);
+        }
+        CharacterManager.Instance.GetCurrentCharacter(index);
+    }
+    private void OnSubPrimogem(ModifyUserVirtualCurrencyResult result)
+    {
+        Debug.Log("Sub Primogem: " + result.VirtualCurrency);
+    }
+    private void OnAddPrimogem(ModifyUserVirtualCurrencyResult result)
+    {
+        Debug.Log("Add Primogem: " + result.VirtualCurrency);
+    }
+    private void OnGetPrimogem(GetUserInventoryResult result)
+    {
+        foreach (var currency in result.VirtualCurrency)
+        {
+            GameManager.Instance.PrimogemOwn = currency.Value;
+            UIManager.Instance.UICanvas.MainMenuPanel.SetPrimogem(currency.Value);
+            Debug.Log("Primogem: " + currency.Value);
+        }
+    }
+    #endregion
+
+    private IEnumerator LoadedDataCoroutine()
+    {
+        if (userName != null)
+        {
+            GetCharacterIndex();
+            yield return new WaitForSeconds(0.5f);
+            GetPrimogem();
+            yield return new WaitForSeconds(0.5f);
+            GetHighScore();
+            yield return new WaitForSeconds(0.5f);
+            GetLeaderboard();
+            UIManager.Instance.UICanvas.LevelTransiton.Open();
         }
     }
 }

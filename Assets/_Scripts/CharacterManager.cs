@@ -26,9 +26,20 @@ public class CharacterManager : Singleton<CharacterManager>
         characterInMainMenuObj.SetActive(true);
         GetCharacterInMainMenuInit();
         GetCharacterListInit();
-        currentCharacter = characterList[0];
+    }
+
+    public void GetCurrentCharacter(int index)
+    {
+        selectedIndex = currentIndex = index;
+        currentCharacter = characterList[index];
         SetPlayer();
     }
+    public void SetCurrentCharacter()
+    {
+        PlayFabManager.Instance.SetCharacterIndex(selectedIndex);
+        SetPlayer();
+    }
+
     private void OnEnable()
     {
         EventManager.onSceneChanged += OnSceneChanged;

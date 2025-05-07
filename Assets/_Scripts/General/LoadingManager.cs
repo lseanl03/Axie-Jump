@@ -15,7 +15,7 @@ public class LoadingManager : Singleton<LoadingManager>
     private IEnumerator TransitionCoroutine(SceneType sceneType)
     {
         var uiCanvas = UIManager.Instance.UICanvas;
-        uiCanvas.LevelTransiton.gameObject.SetActive(true);
+        uiCanvas.LevelTransiton.Close();
 
         yield return new WaitForSeconds(GameConfig.closeOverlay);
 
@@ -34,15 +34,9 @@ public class LoadingManager : Singleton<LoadingManager>
             }
             yield return null;
         }
-
         yield return new WaitForSeconds(0.1f);
         
-        uiCanvas.LevelTransiton.TransitionState(true);
+        uiCanvas.LevelTransiton.Open();
         EventManager.SceneChangedAction(sceneType);
-        
-        yield return new WaitForSeconds(GameConfig.openOverlay);
-
-        uiCanvas.LevelTransiton.TransitionState(false);
-        uiCanvas.LevelTransiton.gameObject.SetActive(false);
     }
 }
