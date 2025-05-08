@@ -23,7 +23,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     #region Action
     private void Login()
     {
-        Debug.Log("Login");
         var request = new LoginWithCustomIDRequest
         {
             CustomId = SystemInfo.deviceUniqueIdentifier,
@@ -37,7 +36,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SubmitUserNameName(string userName)
     {
-        Debug.Log("Submit UserName: " + userName);
         var request = new UpdateUserTitleDisplayNameRequest
         {
             DisplayName = userName
@@ -47,7 +45,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SubmitHighScore(int score)
     {
-        Debug.Log("Submit HighScore: " + score);
         var request = new UpdatePlayerStatisticsRequest
         {
             Statistics = new List<StatisticUpdate>
@@ -63,7 +60,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void LoginWithCustomID(string customId)
     {
-        Debug.Log("Login with CustomID: " + customId);
         var request = new LoginWithCustomIDRequest
         {
             CustomId = customId,
@@ -73,7 +69,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void GetLeaderboard()
     {
-        Debug.Log("Get Leaderboard");
         var request = new GetLeaderboardRequest
         {
             StatisticName = leaderboardName,
@@ -84,7 +79,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     private void GetHighScore()
     {
-        Debug.Log("Get HighScore");
         var request = new GetPlayerStatisticsRequest
         {
             StatisticNames = new List<string> { leaderboardName }
@@ -93,7 +87,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SetCharacterIndex(int index)
     {
-        Debug.Log("Set Character Index: " + index);
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
@@ -105,7 +98,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void AddPrimogem(int amount)
     {
-        Debug.Log("Add Primogem: " + amount);
         var request = new AddUserVirtualCurrencyRequest
         {
             VirtualCurrency = primogemKey,
@@ -115,7 +107,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SubPrimogem(int amount)
     {
-        Debug.Log("Sub Primogem: " + amount);
         var request = new SubtractUserVirtualCurrencyRequest
         {
             VirtualCurrency = primogemKey,
@@ -125,13 +116,11 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void GetPrimogem()
     {
-        Debug.Log("Get Primogem");
         var request = new GetUserInventoryRequest();
         PlayFabClientAPI.GetUserInventory(request, OnGetPrimogem, OnError);
     }
     public void GetCharacterIndex()
     {
-        Debug.Log("Get Character Index");
         PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnGetCharacterIndex, OnError);
     }
     #endregion
@@ -164,11 +153,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     private void OnSubmitUserName(UpdateUserTitleDisplayNameResult result)
     {
-        Debug.Log("Create UserName:" + result.DisplayName);
     }
     private void OnSubmitHighScore(UpdatePlayerStatisticsResult result)
     {
-        Debug.Log("Submit Score:" + result);
     }
     private void OnGetLeaderboard(GetLeaderboardResult result)
     {
@@ -198,13 +185,11 @@ public class PlayFabManager : Singleton<PlayFabManager>
             {
                 GameManager.Instance.HighScore = statistic.Value;
                 UIManager.Instance.UICanvas.MainMenuPanel.SetHighScore(statistic.Value);
-                Debug.Log("HighScore: " + statistic.Value);
             }
         }
     }
     private void OnSaveCharacterIndex(UpdateUserDataResult result)
     {
-        Debug.Log("Lưu character index thành công!");
     }
     private void OnGetCharacterIndex(GetUserDataResult result)
     {
@@ -217,11 +202,9 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     private void OnSubPrimogem(ModifyUserVirtualCurrencyResult result)
     {
-        Debug.Log("Sub Primogem: " + result.VirtualCurrency);
     }
     private void OnAddPrimogem(ModifyUserVirtualCurrencyResult result)
     {
-        Debug.Log("Add Primogem: " + result.VirtualCurrency);
     }
     private void OnGetPrimogem(GetUserInventoryResult result)
     {
@@ -229,7 +212,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
         {
             GameManager.Instance.PrimogemOwn = currency.Value;
             UIManager.Instance.UICanvas.MainMenuPanel.SetPrimogem(currency.Value);
-            Debug.Log("Primogem: " + currency.Value);
         }
     }
     #endregion

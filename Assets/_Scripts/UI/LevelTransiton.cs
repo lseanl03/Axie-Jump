@@ -17,8 +17,8 @@ public class LevelTransiton : MonoBehaviour
         Vector3 newRotate = new Vector3(0, 0, 180);
         Sequence sequence = DOTween.Sequence();
         sequence.Append(bgCanvas.DOFade(0, 1).SetUpdate(true));
-        sequence.Join(primogemCanvas.DOFade(0, 1).SetUpdate(true));
-        sequence.Join(primogemCanvas.transform.DOLocalRotate(newRotate, 0.8f));
+        sequence.Join(primogemCanvas.DOFade(0, 0.6f).SetUpdate(true));
+        sequence.Join(primogemCanvas.transform.DOLocalRotate(newRotate, 1f));
         sequence.Join(right.DOAnchorPosX(1200, 1).SetUpdate(true));
         sequence.Join(left.DOAnchorPosX(-1200, 1).SetUpdate(true));
         sequence.OnComplete(() =>
@@ -36,8 +36,8 @@ public class LevelTransiton : MonoBehaviour
         left.gameObject.SetActive(true);
         Sequence sequence = DOTween.Sequence();
         sequence.Append(bgCanvas.DOFade(1, 1).SetUpdate(true));
-        sequence.Join(primogemCanvas.DOFade(1, 1).SetUpdate(true));
-        sequence.Join(primogemCanvas.transform.DOLocalRotate(Vector3.zero, 0.8f));
+        sequence.Join(primogemCanvas.DOFade(1, 1f).SetUpdate(true));
+        sequence.Join(primogemCanvas.transform.DOLocalRotate(Vector3.zero, 1f));
         sequence.Join(right.DOAnchorPosX(630, 1).SetUpdate(true));
         sequence.Join(left.DOAnchorPosX(-630, 1).SetUpdate(true));
     }

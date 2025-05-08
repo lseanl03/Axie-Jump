@@ -15,23 +15,27 @@ public class PausePanel : MonoBehaviour
         bgCanvasGroup.gameObject.SetActive(false);
         pauseMenu.SetActive(false);
     }
-    public void ShowSettingPanel()
+    public void ShowPausePanel()
     {
         pauseMenu.SetActive(true);
         bgCanvasGroup.gameObject.SetActive(true);
         bgCanvasGroup.alpha = 0;
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
+
+        GameManager.Instance.PauseGame();
     }
-    public void HideSettingPanel()
+    public void HidePausePanel()
     {
         pauseMenu.SetActive(false);
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
+
+        GameManager.Instance.ContinueGame();
     }
 
     public void OnClickContinue()
     {
-        HideSettingPanel();
+        HidePausePanel();
         GameManager.Instance.ContinueGame();
     }
 
@@ -41,7 +45,7 @@ public class PausePanel : MonoBehaviour
 
     public void OnClickMainMenu()
     {
-        HideSettingPanel();
+        HidePausePanel();
         LoadingManager.Instance.TransitionLevel(SceneType.MainMenu);
     }
 }

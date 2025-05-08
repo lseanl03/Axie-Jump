@@ -68,7 +68,6 @@ public class UpgradePanel : MonoBehaviour
             buffUpgradeList[i].BuffUpgradeConfig = data;
             buffUpgradeList[i].SetBuffImage(data.buffImage);
             buffUpgradeList[i].SetBuffName(data.buffName);
-            buffUpgradeList[i].SetPriceText(data.startPrice);
         }
     }
 }

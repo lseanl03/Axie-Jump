@@ -15,3 +15,8 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 2598515015678325216, guid: da3aa5c2d4721544fa1aaa3c8e855b4a, type: 3}
   - {fileID: 3060619686727425217, guid: b6e66b68f423a8c4a8ea426bdb097458, type: 3}
+  - {fileID: 3861465155495542212, guid: 4e224ea1afc0cc54993c204b9c23a2ca, type: 3}
+  - {fileID: 6253253924011499933, guid: 9425dba6f7625264487dcd8ddac26413, type: 3}
+  - {fileID: 8247401192783482956, guid: 99279944f7600eb438bd7e4a630e6cef, type: 3}
+  - {fileID: 8333515939131102328, guid: e66162fa1c5aecd4191c30e115a100b3, type: 3}
+  - {fileID: 6505591552111120671, guid: c031681ef0bda2542a0cf665b924e25f, type: 3}

@@ -52,7 +52,8 @@ public class UsingBuff : MonoBehaviour
         transform.SetSiblingIndex(0);
         buffImage.gameObject.SetActive(true);
         durationText.gameObject.SetActive(true);
-        durationTime = buff.BuffData.buffs.duration;
+        durationTime = BuffManager.Instance
+            .GetBuffTimeWithType(buff.BuffData.buffs.buffType);
         SetBuffImage(buff.BuffData.buffs.sprite);
 
         while (durationTime > 0)

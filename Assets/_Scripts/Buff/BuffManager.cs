@@ -17,6 +17,8 @@ public class BuffManager : Singleton<BuffManager>
     private float shieldTimeBuff;
     private float timeTimeBuff;
 
+    private float valueTimeBuff;
+
     private BuffListData buffListData;
     private BuffUpgradeData buffUpgradeData;
 
@@ -25,11 +27,17 @@ public class BuffManager : Singleton<BuffManager>
         base.Awake();
         buffListData = Resources.Load<BuffListData>("SOData/Buff/BuffListData");
         buffUpgradeData = Resources.Load<BuffUpgradeData>("SOData/BuffUpgradeData");
-
+    }
+    private void Start()
+    {
         SetTimeBuffInit();
     }
-
     #region Get Set
+    public float ValueTimeBuff
+    {
+        get => valueTimeBuff;
+        set => valueTimeBuff = value;
+    }
     public float SpeedBuffTime
     {
         get => speedTimeBuff;
@@ -98,10 +106,32 @@ public class BuffManager : Singleton<BuffManager>
 
     public void SetTimeBuffInit()
     {
-        speedTimeBuff = pointTimeBuff 
-            = primogemTimeBuff 
-            = shieldTimeBuff 
-            = timeTimeBuff = 10f;
+        if (!PlayerPrefs.HasKey(BuffType.Speed.ToString()))
+        {
+            speedTimeBuff 
+                = pointTimeBuff 
+                = primogemTimeBuff 
+                = shieldTimeBuff
+                = valueTimeBuff
+                = 10;
+            timeTimeBuff = 0;
+
+            GameManager.SaveBuffData(BuffType.Speed.ToString(), speedTimeBuff);
+            GameManager.SaveBuffData(BuffType.Point.ToString(), pointTimeBuff);
+            GameManager.SaveBuffData(BuffType.Primogem.ToString(), primogemTimeBuff);
+            GameManager.SaveBuffData(BuffType.Shield.ToString(), shieldTimeBuff);
+            GameManager.SaveBuffData(BuffType.Time.ToString(), valueTimeBuff);
+        }
+        else
+        {
+            timeTimeBuff = 0;
+
+            speedTimeBuff = GameManager.LoadBuffData(BuffType.Speed.ToString());
+            pointTimeBuff = GameManager.LoadBuffData(BuffType.Point.ToString());
+            primogemTimeBuff = GameManager.LoadBuffData(BuffType.Primogem.ToString());
+            shieldTimeBuff = GameManager.LoadBuffData(BuffType.Shield.ToString());
+            valueTimeBuff = GameManager.LoadBuffData(BuffType.Time.ToString());
+        }
     }
     public void SpawnBuff(Transform transform)
     {
@@ -125,5 +155,34 @@ public class BuffManager : Singleton<BuffManager>
     {
         int randomIndex = Random.Range(0, buffListData.buffs.Length);
         return buffListData.buffs[randomIndex];
+    }
+    public float GetBuffTimeWithType(BuffType buffType)
+    {
+        switch (buffType)
+        {
+            case BuffType.Speed:
+                return speedTimeBuff;
+            case BuffType.Point:
+                return pointTimeBuff;
+            case BuffType.Primogem:
+                return primogemTimeBuff;
+            case BuffType.Shield:
+                return shieldTimeBuff;
+            case BuffType.Time:
+                return timeTimeBuff;
+            default:
+                return 0f;
+        }
+    }
+
+    public float GetBuffValueWithType(BuffType buffType)
+    {
+        switch (buffType)
+        {
+            case BuffType.Time:
+                return valueTimeBuff;
+            default:
+                return 0f;
+        }
     }
 }

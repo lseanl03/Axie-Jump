@@ -8,7 +8,7 @@ public class TimeBuff : Buff
         if (buffManager.IsUsingTimeBuff) return;
         else buffManager.IsUsingTimeBuff = true;
 
-        var timeBuff = buffData.buffs.valueEffect;
+        var timeBuff = BuffManager.Instance.GetBuffValueWithType(BuffType.Time) ;
         gameManager.PlayTime += timeBuff;
         UIManager.Instance.UICanvas.GamePanel.SetUpdateTimeText(timeBuff);
 

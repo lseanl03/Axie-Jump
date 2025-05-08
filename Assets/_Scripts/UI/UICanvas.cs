@@ -39,6 +39,8 @@ public class UICanvas : MonoBehaviour
         upgradeButton.gameObject.SetActive(true);
         leaderBoardButton.gameObject.SetActive(true);
         levelTransiton.gameObject.SetActive(true);
+        rightClickButton.gameObject.SetActive(false);
+        leftClickButton.gameObject.SetActive(false);
     }
 
     public LeaderboardPanel LeaderboardPanel

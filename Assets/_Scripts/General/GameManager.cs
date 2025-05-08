@@ -25,8 +25,10 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        if(!requestData)
-        requestData = Resources.Load<RequestData>("SOData/RequestData");
+        //PlayerPrefs.DeleteAll();
+
+        if (!requestData)
+            requestData = Resources.Load<RequestData>("SOData/RequestData");
     }
 
     #region Get Set
@@ -63,7 +65,7 @@ public class GameManager : Singleton<GameManager>
     public float PlayTime
     {
         get { return playTime; }
-        set { playTime = value; } 
+        set { playTime = value; }
     }
     public bool GameStarted
     {
@@ -161,7 +163,7 @@ public class GameManager : Singleton<GameManager>
     public void UpdatePoint(int newPoint)
     {
         points += newPoint;
-        if(points < 0)
+        if (points < 0)
         {
             points = 0;
         }
@@ -177,7 +179,7 @@ public class GameManager : Singleton<GameManager>
     }
     public void UpdateHighScore()
     {
-        if(points > highScrore)
+        if (points > highScrore)
         {
             highScrore = points;
             PlayFabManager.Instance.SubmitHighScore(highScrore);
@@ -194,7 +196,7 @@ public class GameManager : Singleton<GameManager>
         if (!gameGameOver && gameStarted)
         {
             playTime -= Time.deltaTime;
-            if(playTime <= 0)
+            if (playTime <= 0)
             {
                 playTime = 0;
                 EventManager.GameOverAction();
@@ -270,5 +272,40 @@ public class GameManager : Singleton<GameManager>
     {
         currentRequest = null;
         currentRequestEnemy.EndAction();
+    }
+
+    public static void SaveBuffData(string name, float value)
+    {
+        PlayerPrefs.SetFloat(name, value);
+        PlayerPrefs.Save();
+        Debug.Log($"Save {name} : {value}");
+    }
+    public static float LoadBuffData(string name)
+    {
+        if (PlayerPrefs.HasKey(name))
+        {
+            float value = PlayerPrefs.GetFloat(name);
+            Debug.Log($"Load {name} : {value}");
+            return value;
+        }
+        return 0;
+    }
+
+    public static void SaveIntData(string name, int value)
+    {
+        PlayerPrefs.SetInt(name, value);
+        PlayerPrefs.Save();
+        Debug.Log($"Save {name} : {value}");
+    }
+
+    public static int LoadIntData(string name)
+    {
+        if (PlayerPrefs.HasKey(name))
+        {
+            int value = PlayerPrefs.GetInt(name);
+            Debug.Log($"Load {name} : {value}");
+            return value;
+        }
+        return 0;
     }
 }
