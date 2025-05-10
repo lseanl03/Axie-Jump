@@ -72,5 +72,6 @@ public class UsingBuff : MonoBehaviour
         buffImage.gameObject.SetActive(false);
         durationText.gameObject.SetActive(false);
         buff.RemoveBuff();
+        transform.SetSiblingIndex(transform.parent.childCount -1);
     }
 }

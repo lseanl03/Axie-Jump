@@ -82,7 +82,21 @@ public class AudioManager : Singleton<AudioManager>
         if (state) isMutingSFX = false;
         else isMutingSFX = true;
     }
+    public void SetMusicVolume(float volume)
+    {
+        foreach (Sound sound in BGMSoundList)
+        {
+            sound.audioSource.volume = volume * sound.volume;
+        }
 
+    }
+    public void SetSFXVolume(float volume)
+    {
+        foreach (Sound sound in SFXSoundList)
+        {
+            sound.audioSource.volume = volume * sound.volume;
+        }
+    }
     public void PlayTransition()
     {
         PlaySFX("Transition");

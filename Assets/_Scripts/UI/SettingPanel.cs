@@ -6,6 +6,8 @@ public class SettingPanel : MonoBehaviour
 {
     [SerializeField] private CanvasGroup bgCanvasGroup;
     [SerializeField] private GameObject settingMenu;
+    [SerializeField] private Slider musicSlider;
+    [SerializeField] private Slider sfxSlider;
 
     private void Awake()
     {
@@ -29,5 +31,14 @@ public class SettingPanel : MonoBehaviour
 
         AudioManager.Instance.PlayCloseClick();
 
+    }
+    public void OnMusicVolumeChange()
+    {
+        AudioManager.Instance.SetMusicVolume(musicSlider.value);
+    }
+
+    public void OnSFXVolumeChange() 
+    {
+        AudioManager.Instance.SetSFXVolume(sfxSlider.value);
     }
 }
