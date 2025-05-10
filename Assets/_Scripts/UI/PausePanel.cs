@@ -23,6 +23,8 @@ public class PausePanel : MonoBehaviour
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
         GameManager.Instance.PauseGame();
+        AudioManager.Instance.PlayButtonClick();
+
     }
     public void HidePausePanel()
     {
@@ -31,6 +33,8 @@ public class PausePanel : MonoBehaviour
         bgCanvasGroup.gameObject.SetActive(false);
 
         GameManager.Instance.ContinueGame();
+        AudioManager.Instance.PlayCloseClick();
+
     }
 
     public void OnClickContinue()

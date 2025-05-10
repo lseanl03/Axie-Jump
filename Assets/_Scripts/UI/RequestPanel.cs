@@ -34,6 +34,7 @@ public class RequestPanel : MonoBehaviour
     {
         HideRequetPanel();
         GameManager.Instance.RejectRequest();
+        AudioManager.Instance.PlayArrowClick();
     }
 
     public void OnAgreeClick()
@@ -41,6 +42,7 @@ public class RequestPanel : MonoBehaviour
         if (GameManager.Instance.AgreeRequet())
         {
             HideRequetPanel();
+            GameManager.Instance.AgreeRequet();
         }
     }
 
@@ -60,6 +62,8 @@ public class RequestPanel : MonoBehaviour
         requestMenu.SetActive(true);
 
         GameManager.Instance.PauseGame();
+        AudioManager.Instance.PlayButtonClick();
+
     }
 
     public void HideRequetPanel()
@@ -67,7 +71,10 @@ public class RequestPanel : MonoBehaviour
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
         requestMenu.SetActive(false);
+
         GameManager.Instance.ContinueGame();
+        AudioManager.Instance.PlayCloseClick();
+
     }
 
     private void SetRequestText(string text)

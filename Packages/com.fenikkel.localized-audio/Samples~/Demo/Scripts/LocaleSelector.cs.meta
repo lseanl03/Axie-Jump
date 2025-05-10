@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 5cbee1eaf0bb4c240a97c397076fe42a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Samples~/Demo/Scripts/LocaleSelector.cs
+  uploadId: 659662

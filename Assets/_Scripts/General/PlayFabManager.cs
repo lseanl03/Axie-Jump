@@ -4,6 +4,7 @@ using PlayFab.MultiplayerModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SocialPlatforms.Impl;
@@ -16,6 +17,10 @@ public class PlayFabManager : Singleton<PlayFabManager>
     [SerializeField] private string primogemKey = "PR";
     private Coroutine loadedDataCoroutine;
     
+    protected override void Awake()
+    {
+        base.Awake();
+    }
     private void Start()
     {
         Login();
@@ -58,7 +63,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
         };
         PlayFabClientAPI.UpdatePlayerStatistics(request, OnSubmitHighScore, OnError);
     }
-    public void LoginWithCustomID(string customId)
+    private void LoginWithCustomID(string customId)
     {
         var request = new LoginWithCustomIDRequest
         {
@@ -87,6 +92,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SetCharacterIndex(int index)
     {
+        Debug.Log(index);
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>
@@ -135,7 +141,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     private void OnLogin(LoginResult result)
     {
-        Debug.Log($"Login: {result.InfoResultPayload.PlayerProfile.DisplayName}");
+        Debug.Log("OnLogin");
         if(result.InfoResultPayload != null)
         {
             userName = result.InfoResultPayload.PlayerProfile.DisplayName;
@@ -218,16 +224,14 @@ public class PlayFabManager : Singleton<PlayFabManager>
 
     private IEnumerator LoadedDataCoroutine()
     {
-        if (userName != null)
-        {
-            GetCharacterIndex();
-            yield return new WaitForSeconds(0.5f);
-            GetPrimogem();
-            yield return new WaitForSeconds(0.5f);
-            GetHighScore();
-            yield return new WaitForSeconds(0.5f);
-            GetLeaderboard();
-            UIManager.Instance.UICanvas.LevelTransiton.Open();
-        }
+        GetCharacterIndex();
+        yield return new WaitForSeconds(0.5f);
+        GetPrimogem();
+        yield return new WaitForSeconds(0.5f);
+        GetHighScore();
+        yield return new WaitForSeconds(0.5f);
+        GetLeaderboard();
+        UIManager.Instance.UICanvas.LevelTransiton.Open();
+        AudioManager.Instance.PlayBGM("MainMenu");
     }
 }

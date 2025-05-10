@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 77b1a50020d5c6742870152811e48927
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/CHANGELOG.md
+  uploadId: 659662

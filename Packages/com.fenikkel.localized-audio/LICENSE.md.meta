@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c3fc7c166f8d36a42850161c044c56b5
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/LICENSE.md
+  uploadId: 659662

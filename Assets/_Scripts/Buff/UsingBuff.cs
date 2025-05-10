@@ -20,17 +20,23 @@ public class UsingBuff : MonoBehaviour
     private void OnEnable()
     {
         EventManager.onApplyBuff += OnApplyBuff;
+        EventManager.onGameOver += OnGameOver;
     }
 
     private void OnDisable()
     {
         EventManager.onApplyBuff -= OnApplyBuff;
+        EventManager.onGameOver -= OnGameOver;
         if (applyBuffCoroutine != null) StopCoroutine(applyBuffCoroutine);
+    }
+    private void OnGameOver()
+    {
+        buffImage.gameObject.SetActive(false);
+        durationText.gameObject.SetActive(false);
     }
     private void OnApplyBuff(Buff buff)
     {
-        if (buff.BuffData.buffs.buffType == buffType && 
-            buffType != BuffType.Time)
+        if (buff.BuffData.buffs.buffType == buffType)
         {
             if (applyBuffCoroutine != null) StopCoroutine(applyBuffCoroutine);
             applyBuffCoroutine = StartCoroutine(ApplyBuffCoroutine(buff));
@@ -55,7 +61,6 @@ public class UsingBuff : MonoBehaviour
         durationTime = BuffManager.Instance
             .GetBuffTimeWithType(buff.BuffData.buffs.buffType);
         SetBuffImage(buff.BuffData.buffs.sprite);
-
         while (durationTime > 0)
         {
             durationTime -= Time.deltaTime;

@@ -41,12 +41,17 @@ public class UpgradePanel : MonoBehaviour
         bgCanvasGroup.gameObject.SetActive(true);
         bgCanvasGroup.alpha = 0;
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
+
+        AudioManager.Instance.PlayButtonClick();
     }
     public void HideUpgradePanel()
     {
         upgradeMenu.SetActive(false);
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
+
+        AudioManager.Instance.PlayCloseClick();
+
     }
 
     private void GetBuffUpgradeInit()

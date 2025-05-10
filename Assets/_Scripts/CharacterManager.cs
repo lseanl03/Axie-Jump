@@ -21,23 +21,20 @@ public class CharacterManager : Singleton<CharacterManager>
         base.Awake();
         charactersData = Resources.Load<CharacterData>("SOData/CharacterData");
     }
-    private void Start()
+    public void GetCurrentCharacter(int index)
     {
         characterInMainMenuObj.SetActive(true);
         GetCharacterInMainMenuInit();
         GetCharacterListInit();
-    }
 
-    public void GetCurrentCharacter(int index)
-    {
         selectedIndex = currentIndex = index;
         currentCharacter = characterList[index];
         SetPlayer();
     }
     public void SetCurrentCharacter()
     {
-        PlayFabManager.Instance.SetCharacterIndex(selectedIndex);
         SetPlayer();
+        PlayFabManager.Instance.SetCharacterIndex(selectedIndex);
     }
 
     private void OnEnable()
@@ -88,12 +85,17 @@ public class CharacterManager : Singleton<CharacterManager>
         currentIndex--;
         if (currentIndex < 0) currentIndex = characterList.Count -1;
         CharacterViewChange();
+
+        AudioManager.Instance.PlayArrowClick();
+
     }
     public void OnAfterArrowClick()
     {
         currentIndex++;
         if (currentIndex >= characterList.Count) currentIndex = 0;
         CharacterViewChange();
+
+        AudioManager.Instance.PlayArrowClick();
     }
 
     public void CharacterViewChange()

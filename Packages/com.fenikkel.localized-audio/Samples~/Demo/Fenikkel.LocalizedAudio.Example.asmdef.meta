@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 016b9974fee313147a27685f69c55192
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Samples~/Demo/Fenikkel.LocalizedAudio.Example.asmdef
+  uploadId: 659662

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 893dbcfe2c0dbf24780383b513f5d6f4
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/README.md
+  uploadId: 659662

@@ -10,6 +10,8 @@ public class LevelTransiton : MonoBehaviour
 
     public void Open()
     {
+        AudioManager.Instance.PlaySFX("Transition");
+
         bgCanvas.alpha = 1;
         bgCanvas.gameObject.SetActive(true);
         right.gameObject.SetActive(true);
@@ -30,6 +32,8 @@ public class LevelTransiton : MonoBehaviour
     }
     public void Close()
     {
+        AudioManager.Instance.PlaySFX("Transition");
+
         bgCanvas.alpha = 0;
         bgCanvas.gameObject.SetActive(true);
         right.gameObject.SetActive(true);

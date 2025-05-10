@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +67,8 @@ public class BuffUpgrade : MonoBehaviour
     {
         if (progressList[progressList.Count - 1].IsUnlock ||
             progressIndex == -1) return;
+
+        AudioManager.Instance.PlayUpgradeClick();
         if (GameManager.Instance.PrimogemOwn >= currentPrice)
         {
             GameManager.Instance.PrimogemOwn -= currentPrice;

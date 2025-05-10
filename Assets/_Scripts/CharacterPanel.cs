@@ -25,6 +25,8 @@ public class CharacterPanel : MonoBehaviour
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
         CharacterManager.Instance.CharacterSelectedChange();
+        AudioManager.Instance.PlayButtonClick();
+
     }
     public void HideCharacterPanel()
     {
@@ -33,6 +35,8 @@ public class CharacterPanel : MonoBehaviour
         bgCanvasGroup.gameObject.SetActive(false);
 
         CharacterManager.Instance.CharacterDisable();
+        AudioManager.Instance.PlayCloseClick();
+
     }
     public void SetName(Character character)
     {
@@ -47,5 +51,6 @@ public class CharacterPanel : MonoBehaviour
     public void OnSelectClick()
     {
         CharacterManager.Instance.SetCurrentCharacter();
+        AudioManager.Instance.PlaySelectClick();
     }
 }

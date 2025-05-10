@@ -41,6 +41,8 @@ public class LeaderboardPanel : MonoBehaviour
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
         PlayFabManager.Instance.GetLeaderboard();
+        AudioManager.Instance.PlayButtonClick();
+
 
     }
     public void HideCharacterPanel()
@@ -48,5 +50,8 @@ public class LeaderboardPanel : MonoBehaviour
         leaderboardMenu.SetActive(false);
         bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
         bgCanvasGroup.gameObject.SetActive(false);
+
+        AudioManager.Instance.PlayCloseClick();
+
     }
 }

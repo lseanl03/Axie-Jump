@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f5cc869a567f42e42a46b12d1bdb5594
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Runtime/LocalizedAudioController.cs
+  uploadId: 659662

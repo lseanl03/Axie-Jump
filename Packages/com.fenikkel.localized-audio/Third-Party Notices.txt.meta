@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 73ebef53aecc3584db6dbec28e8b23c3
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Third-Party Notices.txt
+  uploadId: 659662

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d130bf043bd46a5468cef131225a128d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Runtime/Prefabs/Localized Audio
+    Controller.prefab
+  uploadId: 659662

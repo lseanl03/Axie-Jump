@@ -18,6 +18,8 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private Button leaderBoardButton;
     [SerializeField] private Button leftClickButton;
     [SerializeField] private Button rightClickButton;
+    [SerializeField] private Button tutorialButton;
+    [SerializeField] private TextMeshProUGUI clickAnyToJumpText;
     [SerializeField] private LevelTransiton levelTransiton;
     [SerializeField] private SettingPanel settingPanel;
     [SerializeField] private CharacterPanel characterPanel;
@@ -29,6 +31,7 @@ public class UICanvas : MonoBehaviour
     [SerializeField] private GameOverPanel gameOverPanel;
     [SerializeField] private LeaderboardPanel leaderboardPanel;
     [SerializeField] private EnterUserNamePanel enterUserNamePanel;
+    [SerializeField] private TutorialPanel tutorialPanel;
 
     private void Awake()
     {
@@ -39,10 +42,16 @@ public class UICanvas : MonoBehaviour
         upgradeButton.gameObject.SetActive(true);
         leaderBoardButton.gameObject.SetActive(true);
         levelTransiton.gameObject.SetActive(true);
+        tutorialButton.gameObject.SetActive(true);
         rightClickButton.gameObject.SetActive(false);
         leftClickButton.gameObject.SetActive(false);
+        clickAnyToJumpText.gameObject.SetActive(false);
     }
 
+    public TutorialPanel TutorialPanel
+    {
+        get { return tutorialPanel; }
+    }
     public LeaderboardPanel LeaderboardPanel
     {
         get { return leaderboardPanel; }
@@ -98,17 +107,23 @@ public class UICanvas : MonoBehaviour
     {
         EventManager.onSceneChanged += OnSceneChanged;
         EventManager.onGameOver += OnGameOver;
+        EventManager.onGameStart += OnGameStart;
+
     }
     private void OnDisable()
     {
         EventManager.onSceneChanged -= OnSceneChanged;
         EventManager.onGameOver -= OnGameOver;
+        EventManager.onGameStart -= OnGameStart;
     }
     private void OnGameOver()
     {
         restartButton.gameObject.SetActive(true);
     }
-
+    private void OnGameStart()
+    {
+        clickAnyToJumpText.gameObject.SetActive(false);
+    }
     public void OnSettingClick()
     {
         settingPanel.ShowSettingPanel();
@@ -156,9 +171,12 @@ public class UICanvas : MonoBehaviour
         settingButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         characterButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         upgradeButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
-        pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
+        tutorialButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         leaderBoardButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        tutorialPanel.gameObject.SetActive(sceneType == SceneType.MainMenu);
+        pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
         leftClickButton.gameObject.SetActive(sceneType == SceneType.Game);
         rightClickButton.gameObject.SetActive(sceneType == SceneType.Game);
+        clickAnyToJumpText.gameObject.SetActive(sceneType == SceneType.Game);
     }
 }

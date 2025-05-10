@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] private bool warning = false;
     [SerializeField] private bool gameGameOver = false;
     [SerializeField] private bool gameStarted = false;
     [SerializeField] private int points;
@@ -65,7 +66,11 @@ public class GameManager : Singleton<GameManager>
     public float PlayTime
     {
         get { return playTime; }
-        set { playTime = value; }
+        set { playTime = value; 
+        if(playTime >= 10){
+                AudioManager.Instance.StopSFX("Time");
+            };
+        }
     }
     public bool GameStarted
     {
@@ -129,9 +134,12 @@ public class GameManager : Singleton<GameManager>
     private void OnSceneChanged(SceneType sceneType)
     {
         ResetData();
+        AudioManager.Instance.PlayBGM(
+            sceneType == SceneType.MainMenu ? "MainMenu" : "Game");
     }
     private void ResetData()
     {
+        warning = false;
         gameGameOver = false;
         gameStarted = false;
         points = 0;
@@ -147,15 +155,21 @@ public class GameManager : Singleton<GameManager>
                 UpdatePoint(normalItemPoint);
                 playTime += GameConfig.normalItemTime;
                 OnGetPoint(item.transform, normalItemPoint);
+
+                AudioManager.Instance.PlayCollectItem();
                 break;
             case Rate.Rare:
                 UpdatePoint(rareItemPoint);
                 playTime += GameConfig.rareItemTime;
                 OnGetPoint(item.transform, rareItemPoint);
+
+                AudioManager.Instance.PlayCollectItem();
                 break;
             case Rate.Special:
                 UpdatePrimogem(primogemPoint);
                 OnGetPrimogem(item.transform, primogemPoint);
+
+                AudioManager.Instance.PlayCollectPrimogem();
                 break;
         }
     }
@@ -201,7 +215,19 @@ public class GameManager : Singleton<GameManager>
                 playTime = 0;
                 EventManager.GameOverAction();
             }
+            else if(!warning && playTime <= 5)
+            {
+                warning = true;
+                TimeWarning();
+            }
             UIManager.Instance.UICanvas.GamePanel.SetPlayTime(playTime);
+        }
+    }
+    public void TimeWarning()
+    {
+        if (warning)
+        {
+            AudioManager.Instance.PlayTime();
         }
     }
     public void OnGameOver()
@@ -214,6 +240,8 @@ public class GameManager : Singleton<GameManager>
 
             UpdatePrimogemOwn();
             UpdateHighScore();
+
+            AudioManager.Instance.StopSFX("Time");
         }
     }
 
@@ -278,14 +306,12 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerPrefs.SetFloat(name, value);
         PlayerPrefs.Save();
-        Debug.Log($"Save {name} : {value}");
     }
     public static float LoadBuffData(string name)
     {
         if (PlayerPrefs.HasKey(name))
         {
             float value = PlayerPrefs.GetFloat(name);
-            Debug.Log($"Load {name} : {value}");
             return value;
         }
         return 0;
@@ -295,7 +321,6 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerPrefs.SetInt(name, value);
         PlayerPrefs.Save();
-        Debug.Log($"Save {name} : {value}");
     }
 
     public static int LoadIntData(string name)
@@ -303,7 +328,6 @@ public class GameManager : Singleton<GameManager>
         if (PlayerPrefs.HasKey(name))
         {
             int value = PlayerPrefs.GetInt(name);
-            Debug.Log($"Load {name} : {value}");
             return value;
         }
         return 0;

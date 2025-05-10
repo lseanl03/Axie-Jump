@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3059bb373602c064b9bdd073d9f05f7f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/Samples~/Demo/Fonts/SpaceGrotesk-Medium
+    SDF.asset
+  uploadId: 659662

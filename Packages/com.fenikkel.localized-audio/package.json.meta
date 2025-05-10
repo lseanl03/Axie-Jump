@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 402efed476c4a8d49ae40336609a4059
+PackageManifestImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271789
+  packageName: Localized Audio
+  packageVersion: 1.0
+  assetPath: Packages/com.fenikkel.localized-audio/package.json
+  uploadId: 659662

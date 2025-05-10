@@ -114,7 +114,7 @@ public class BuffManager : Singleton<BuffManager>
                 = shieldTimeBuff
                 = valueTimeBuff
                 = 10;
-            timeTimeBuff = 0;
+            timeTimeBuff = 0.5f;
 
             GameManager.SaveBuffData(BuffType.Speed.ToString(), speedTimeBuff);
             GameManager.SaveBuffData(BuffType.Point.ToString(), pointTimeBuff);
@@ -124,7 +124,7 @@ public class BuffManager : Singleton<BuffManager>
         }
         else
         {
-            timeTimeBuff = 0;
+            timeTimeBuff = 0.5f;
 
             speedTimeBuff = GameManager.LoadBuffData(BuffType.Speed.ToString());
             pointTimeBuff = GameManager.LoadBuffData(BuffType.Point.ToString());

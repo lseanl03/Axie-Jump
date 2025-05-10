@@ -2,6 +2,7 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -79,6 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!canJump || !GameManager.Instance.GameStarted) return;
 
+        AudioManager.Instance.PlayJump();
         isJumping = true;
         canJump = false;
 
@@ -116,15 +118,17 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        var keyboard = Keyboard.current;
+
+        if (keyboard.aKey.wasPressedThisFrame || keyboard.leftArrowKey.wasPressedThisFrame)
         {
             EventManager.ClickJumpAction(true);
         }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (keyboard.dKey.wasPressedThisFrame || keyboard.rightArrowKey.wasPressedThisFrame)
         {
             EventManager.ClickJumpAction(false);
         }
-        else if (Input.GetKeyDown(KeyCode.Space) && !GameManager.Instance.GameStarted)
+        else if (keyboard.spaceKey.wasPressedThisFrame && !GameManager.Instance.GameStarted)
         {
             EventManager.OnGameStartAction();
         }
@@ -290,6 +294,7 @@ public class PlayerController : MonoBehaviour
     #region Coroutine
     private IEnumerator DiedCoroutine()
     {
+        AudioManager.Instance.PlayDie();
         isDied = true;
         boxCollider2D.enabled = false;
         jumpTween.Kill();
