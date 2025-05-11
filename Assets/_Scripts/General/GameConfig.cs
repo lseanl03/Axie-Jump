@@ -36,7 +36,7 @@ public class GameConfig
     public static int itemSpawnRate = 30;
 
     [Header("Enemy")]
-    public static int enemySpawnRate = 50;
+    public static int enemySpawnRate = 40;
 
     [Header("Buff")]
     public static int buffSpawnRate = 5;

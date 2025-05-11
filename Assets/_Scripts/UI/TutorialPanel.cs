@@ -21,6 +21,7 @@ public class TutorialPanel : MonoBehaviour
 
         GetTutorialListInit();
     }
+
     public void ShowTutorialPanel()
     {
         tutorialMenu.SetActive(true);

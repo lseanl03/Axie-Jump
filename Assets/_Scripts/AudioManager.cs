@@ -49,17 +49,29 @@ public class AudioManager : Singleton<AudioManager>
                 bgmSound.audioSource.Stop();
         }
     }
-    public void PlaySFX(string soundName)
+    public void PlaySFX(string soundName, bool loop = false)
     {
         Sound sfx = Array.Find(SFXSoundList, s => s.name == soundName);
-        if (sfx != null) sfx.audioSource.PlayOneShot(sfx.audioClip);
+        if (sfx != null)
+        {
+            if (!loop)
+            {
+                sfx.audioSource.PlayOneShot(sfx.audioClip);
+            }
+            else
+            {
+                sfx.audioSource.Play();
+            }
+        }
     }
     public void StopSFX(string soundName)
     {
-        foreach (Sound bgmSound in BGMSoundList)
+        foreach (Sound bgmSound in SFXSoundList)
         {
             if (bgmSound.audioSource.isPlaying && bgmSound.name == soundName)
+            {
                 bgmSound.audioSource.Stop();
+            }
         }
     }
     public void ToggleBGMState(bool state)
@@ -135,7 +147,7 @@ public class AudioManager : Singleton<AudioManager>
     }
     public void PlayTime()
     {
-        PlaySFX("Time");
+        PlaySFX("Time", true);
     }
     public void PlayDie()
     {
@@ -144,6 +156,10 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayJump()
     {
         PlaySFX("Jump");
+    }
+    public void PlayFirstJump()
+    {
+        PlaySFX("FirstJump");
     }
 }
 

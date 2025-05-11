@@ -15,7 +15,7 @@ MonoBehaviour:
   bearMomRequests:
   - requestText: "G\u1EA5u m\u1EB9 c\u1EA7n \u0111\u1ED5i l\u1EA5y m\u1ED9t \xEDt
       tr\xE1i c\xE2y cho gia \u0111\xECnh. \u0110\u1ED5i <color=#FFFF00>200 nguy\xEAn
-      th\u1EA1ch l\u1EA5y x10 t\xE1o v\xE0 x10 chu\u1ED1i (200 \u0111i\u1EC3m)<color>"
+      th\u1EA1ch l\u1EA5y x10 t\xE1o v\xE0 x10 chu\u1ED1i (200 \u0111i\u1EC3m)</color>"
     requestType: 1
     getValue: 200
     lostValue: 200
@@ -40,17 +40,17 @@ MonoBehaviour:
     lostValue: 100
   bearDadRequests:
   - requestText: "G\u1EA5u b\u1ED1 mu\u1ED1n ch\u01A1i gacha. G\u1EA5u b\u1ED1 mu\u1ED1n
-      \u0111\u1ED5i <color=#FFFF00>x10 cam, x10 \u0111\xE0o, x10 d\xE2u, x10 d\u01B0a
-      h\u1EA5u (400 \u0111i\u1EC3m) l\u1EA5y 100 nguy\xEAn th\u1EA1ch</color>"
+      \u0111\u1ED5i <color=#FFFF00>x10 cam, x10 \u0111\xE0o (200 \u0111i\u1EC3m)
+      l\u1EA5y 100 nguy\xEAn th\u1EA1ch</color>"
     requestType: 2
-    getValue: 400
+    getValue: 200
     lostValue: 100
   - requestText: "G\u1EA5u m\u1EB9 \u0111ang thi\u1EBFu m\u1ED9t \xEDt nguy\xEAn
       li\u1EC7u. G\u1EA5u b\u1ED1 mu\u1ED1n \u0111\u1ED5i <color=#FFFF00>1 thu\u1ED1c
-      t\u1ED1c \u0111\u1ED9 l\u1EA5y x2 b\u01A1 (40 \u0111i\u1EC3m)</color>"
+      t\u1ED1c \u0111\u1ED9 l\u1EA5y x3 b\u01A1 (60 \u0111i\u1EC3m)</color>"
     requestType: 3
     getValue: 1
-    lostValue: 40
+    lostValue: 60
   - requestText: "G\u1EA5u m\u1EB9 v\u1EEBa l\u1EC7ch gacha. c\u1EA7n l\xE0m g\xEC
       \u0111\xF3. G\u1EA5u b\u1ED1 mu\u1ED1n \u0111\u1ED5i <color=#FFFF00>1 thu\u1ED1c
       t\u0103ng \u0111i\u1EC3m l\u1EA5y 100 nguy\xEAn th\u1EA1ch</color>"
@@ -59,10 +59,10 @@ MonoBehaviour:
     lostValue: 100
   - requestText: "Gia \u0111\xECnh g\u1EA5u \u0111ang \u0111\xF3i. G\u1EA5u b\u1ED1
       mu\u1ED1n \u0111\u1ED5i <color=#FFFF00>1 thu\u1ED1c t\u0103ng nguy\xEAn th\u1EA1ch
-      l\u1EA5y x5 Ramen (100 \u0111i\u1EC3m)</color>"
+      l\u1EA5y x3 Ramen (60 \u0111i\u1EC3m)</color>"
     requestType: 5
     getValue: 1
-    lostValue: 100
+    lostValue: 60
   - requestText: "G\u1EA5u b\u1ED1 v\u1EEBa l\u1EC7ch gacha, trong nh\xE0 v\u1EABn
       c\xF2n m\u1ED9t \xEDt b\xE1nh. G\u1EA5u b\u1ED1 mu\u1ED1n \u0111\u1ED5i <color=#FFFF00>x10
       b\xE1nh Donut g\u1EA5u m\u1EB9 l\xE0m (200 \u0111i\u1EC3m) l\u1EA5y 100 nguy\xEAn

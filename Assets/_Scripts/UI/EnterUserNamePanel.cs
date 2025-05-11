@@ -32,6 +32,8 @@ public class EnterUserNamePanel : MonoBehaviour
         {
             PlayFabManager.Instance.SubmitUserNameName(userNameInput.text);
             HideEnterUserNamePanel();
+
+            UIManager.Instance.UICanvas.TutorialPanel.ShowTutorialPanel();
         }
     }
 }

@@ -92,7 +92,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
     }
     public void SetCharacterIndex(int index)
     {
-        Debug.Log(index);
         var request = new UpdateUserDataRequest
         {
             Data = new Dictionary<string, string>

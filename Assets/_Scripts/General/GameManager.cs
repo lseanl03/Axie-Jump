@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         //PlayerPrefs.DeleteAll();
-
+        Application.targetFrameRate = 60;
         if (!requestData)
             requestData = Resources.Load<RequestData>("SOData/RequestData");
     }
@@ -67,7 +67,8 @@ public class GameManager : Singleton<GameManager>
     {
         get { return playTime; }
         set { playTime = value; 
-        if(playTime >= 10){
+        if(playTime > 5){
+                warning = false;
                 AudioManager.Instance.StopSFX("Time");
             };
         }
@@ -227,6 +228,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (warning)
         {
+            Debug.Log("Time Warning");
             AudioManager.Instance.PlayTime();
         }
     }

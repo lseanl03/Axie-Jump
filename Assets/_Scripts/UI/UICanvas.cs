@@ -173,7 +173,6 @@ public class UICanvas : MonoBehaviour
         upgradeButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         tutorialButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
         leaderBoardButton.gameObject.SetActive(sceneType == SceneType.MainMenu);
-        tutorialPanel.gameObject.SetActive(sceneType == SceneType.MainMenu);
         pauseButton.gameObject.SetActive(sceneType == SceneType.Game);
         leftClickButton.gameObject.SetActive(sceneType == SceneType.Game);
         rightClickButton.gameObject.SetActive(sceneType == SceneType.Game);

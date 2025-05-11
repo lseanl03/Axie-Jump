@@ -41,8 +41,6 @@ public class GameOverPanel : MonoBehaviour
         bgCanvasGroup.alpha = 0;
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
-        AudioManager.Instance.PlayButtonClick();
-
     }
     public void HideGameOverPanel()
     {
@@ -66,10 +64,14 @@ public class GameOverPanel : MonoBehaviour
     public void OnRestartClick()
     {
         LoadingManager.Instance.TransitionLevel(SceneType.Game);
+        restartButton.gameObject.SetActive(false);
+        mainMenuButton.gameObject.SetActive(false);
     }
     public void OnMainMenuClick()
     {
         LoadingManager.Instance.TransitionLevel(SceneType.MainMenu);
+        restartButton.gameObject.SetActive(false);
+        mainMenuButton.gameObject.SetActive(false);
     }
     public void OnGameOver()
     {
@@ -92,7 +94,7 @@ public class GameOverPanel : MonoBehaviour
         {
             pointsCount = value;
             scoreText.text = ((int)pointsCount).ToString();
-            scoreText.rectTransform.localScale = Vector2.one * 1.1f;
+            scoreText.rectTransform.localScale = Vector2.one * 1.2f;
         }, GameManager.Instance.Points, 1f).SetEase(Ease.Linear)
         .OnComplete(() =>
         {
@@ -107,7 +109,7 @@ public class GameOverPanel : MonoBehaviour
         {
             primogemCount = value;
             primogemText.text = ((int)primogemCount).ToString();
-            primogemText.rectTransform.localScale = Vector2.one * 1.1f;
+            primogemText.rectTransform.localScale = Vector2.one * 1.2f;
         }, GameManager.Instance.Primogems, 1f).SetEase(Ease.Linear)
         .OnComplete(() =>
         {

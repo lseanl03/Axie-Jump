@@ -180,6 +180,8 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
+            AudioManager.Instance.PlayFirstJump();
+
             canJump = isJumping = false;
             playerAnim.Idle();
             transform.DOMoveY(GameConfig.jumpPosStartGame, jumpTime)

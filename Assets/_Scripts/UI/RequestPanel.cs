@@ -62,8 +62,6 @@ public class RequestPanel : MonoBehaviour
         requestMenu.SetActive(true);
 
         GameManager.Instance.PauseGame();
-        AudioManager.Instance.PlayButtonClick();
-
     }
 
     public void HideRequetPanel()
