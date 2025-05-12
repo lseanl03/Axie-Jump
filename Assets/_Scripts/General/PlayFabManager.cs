@@ -28,17 +28,38 @@ public class PlayFabManager : Singleton<PlayFabManager>
     #region Action
     private void Login()
     {
+        string customId;
+
+#if UNITY_WEBGL
+    // Với WebGL, tạo và lưu ID ngẫu nhiên trong PlayerPrefs
+    if (PlayerPrefs.HasKey("PlayFabCustomId"))
+    {
+        customId = PlayerPrefs.GetString("PlayFabCustomId");
+    }
+    else
+    {
+        customId = Guid.NewGuid().ToString();
+        PlayerPrefs.SetString("PlayFabCustomId", customId);
+        PlayerPrefs.Save();
+    }
+#else
+        // Trên các nền tảng khác, vẫn dùng deviceUniqueIdentifier
+        customId = SystemInfo.deviceUniqueIdentifier;
+#endif
+
         var request = new LoginWithCustomIDRequest
         {
-            CustomId = SystemInfo.deviceUniqueIdentifier,
+            CustomId = customId,
             CreateAccount = true,
             InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
             {
                 GetPlayerProfile = true,
             }
         };
+
         PlayFabClientAPI.LoginWithCustomID(request, OnLogin, OnError);
     }
+
     public void SubmitUserNameName(string userName)
     {
         var request = new UpdateUserTitleDisplayNameRequest
@@ -82,6 +103,17 @@ public class PlayFabManager : Singleton<PlayFabManager>
         };
         PlayFabClientAPI.GetLeaderboard(request, OnGetLeaderboard, OnError);
     }
+
+    public void GetCurrentUserRank()
+    {
+        var request = new GetLeaderboardAroundPlayerRequest
+        {
+            StatisticName = leaderboardName,
+            MaxResultsCount = 1
+        };
+        PlayFabClientAPI.GetLeaderboardAroundPlayer(request, OnGetCurrentUserRank, OnError);
+    }
+
     private void GetHighScore()
     {
         var request = new GetPlayerStatisticsRequest
@@ -165,23 +197,29 @@ public class PlayFabManager : Singleton<PlayFabManager>
     private void OnGetLeaderboard(GetLeaderboardResult result)
     {
         List<UserRank> userRankList = UIManager.Instance.UICanvas.LeaderboardPanel.UserRankList;
-        var currentUserRank = UIManager.Instance.UICanvas.LeaderboardPanel.CurrentUserRank;
         for (int i = 0; i < result.Leaderboard.Count; i++)
         {
             var userRank = result.Leaderboard[i];
-            if (userRank.DisplayName == userName)
-            {
-                currentUserRank.SetUserRank(
-                    userRank.Position + 1,
-                    userRank.DisplayName,
-                    userRank.StatValue.ToString());
-            }
             userRankList[i].SetUserRank(
                 userRank.Position + 1,
                 userRank.DisplayName,
                 userRank.StatValue.ToString());
         }
     }
+
+    private void OnGetCurrentUserRank(GetLeaderboardAroundPlayerResult result)
+    {
+        var currentUserRank = UIManager.Instance.UICanvas.LeaderboardPanel.CurrentUserRank;
+        if (result.Leaderboard != null && result.Leaderboard.Count > 0)
+        {
+            var userRank = result.Leaderboard[0];
+            currentUserRank.SetUserRank(
+                userRank.Position + 1,
+                userRank.DisplayName,
+                userRank.StatValue.ToString());
+        }
+    }
+
     private void OnGetHighScore(GetPlayerStatisticsResult result)
     {
         foreach (var statistic in result.Statistics)
@@ -230,6 +268,8 @@ public class PlayFabManager : Singleton<PlayFabManager>
         GetHighScore();
         yield return new WaitForSeconds(0.5f);
         GetLeaderboard();
+        yield return new WaitForSeconds(0.5f);
+        GetCurrentUserRank();
         UIManager.Instance.UICanvas.LevelTransiton.Open();
         AudioManager.Instance.PlayBGM("MainMenu");
     }

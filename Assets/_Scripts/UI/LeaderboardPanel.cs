@@ -41,6 +41,7 @@ public class LeaderboardPanel : MonoBehaviour
         bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
         PlayFabManager.Instance.GetLeaderboard();
+        PlayFabManager.Instance.GetCurrentUserRank();
         AudioManager.Instance.PlayButtonClick();
 
 
