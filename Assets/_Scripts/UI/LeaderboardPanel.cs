@@ -2,17 +2,21 @@ using DG.Tweening;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LeaderboardPanel : PanelBase
 {
     [SerializeField] private UserRank currentUserRank;
     [SerializeField] private GameObject userRankHolder;
+    [SerializeField] private Button closeButton;
 
     private List<UserRank> userRankList = new List<UserRank>();
 
     protected override void Awake()
     {
+        base.Awake();
         OnGetUserRankListInit();
+        closeButton.onClick.AddListener(HidePanel);
     }
     public UserRank CurrentUserRank
     {

@@ -2902,19 +2902,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 156305180}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 180995700}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: OnLeaderboardClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &156305180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4813,19 +4801,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 219193010}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 180995700}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: OnCharacterClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &219193010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5518,6 +5494,7 @@ MonoBehaviour:
   menu: {fileID: 1557638535}
   musicSlider: {fileID: 1151795296}
   sfxSlider: {fileID: 1170066184}
+  closeButton: {fileID: 1153822468}
 --- !u!1 &288422456
 GameObject:
   m_ObjectHideFlags: 0
@@ -11121,19 +11098,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 540303195}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 447793284}
-        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: ShowPausePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &540303195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20426,19 +20391,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823004382}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 180995700}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: OnRightClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &823004382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22046,6 +21999,7 @@ MonoBehaviour:
   menu: {fileID: 1824015325}
   currentUserRank: {fileID: 349910930}
   userRankHolder: {fileID: 1573240442}
+  closeButton: {fileID: 1414800184}
 --- !u!1 &933888170
 GameObject:
   m_ObjectHideFlags: 0
@@ -26049,19 +26003,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1137733413}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1118457007}
-        m_TargetAssemblyTypeName: TutorialPanel, Assembly-CSharp
-        m_MethodName: ShowTutorialPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1137733413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27561,19 +27503,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1196344365}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 284624976}
-        m_TargetAssemblyTypeName: SettingPanel, Assembly-CSharp
-        m_MethodName: ShowSettingPanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1196344365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28418,19 +28348,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1214585515}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 180995700}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: OnLeftClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1214585515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32342,7 +32260,7 @@ GameObject:
   - component: {fileID: 1414800184}
   - component: {fileID: 1414800186}
   m_Layer: 5
-  m_Name: ClickToQuitButton
+  m_Name: CloseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39407,19 +39325,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1832085523}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 180995700}
-        m_TargetAssemblyTypeName: UICanvas, Assembly-CSharp
-        m_MethodName: OnUpgradeClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1832085523
 MonoBehaviour:
   m_ObjectHideFlags: 0

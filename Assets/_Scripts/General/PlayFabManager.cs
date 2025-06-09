@@ -183,7 +183,7 @@ public class PlayFabManager : Singleton<PlayFabManager>
         }
         else
         {
-            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowPanel();
+            UIManager.Instance.UICanvas.EnterUserNamePanel.HidePanel();
         }
         if(loadedDataCoroutine != null) StopCoroutine(loadedDataCoroutine);
         loadedDataCoroutine = StartCoroutine(LoadedDataCoroutine());

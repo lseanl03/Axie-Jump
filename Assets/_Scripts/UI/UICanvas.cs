@@ -39,11 +39,21 @@ public class UICanvas : MonoBehaviour
         characterButton.gameObject.SetActive(true);
         upgradeButton.gameObject.SetActive(true);
         leaderBoardButton.gameObject.SetActive(true);
-        levelTransiton.gameObject.SetActive(true);
         tutorialButton.gameObject.SetActive(true);
         rightClickButton.gameObject.SetActive(false);
         leftClickButton.gameObject.SetActive(false);
+
+        levelTransiton.gameObject.SetActive(true);
         clickAnyToJumpText.gameObject.SetActive(false);
+
+        pauseButton.onClick.AddListener(pausePanel.ShowPanel);
+        settingButton.onClick.AddListener(settingPanel.ShowPanel);
+        characterButton.onClick.AddListener(OnCharacterClick);
+        upgradeButton.onClick.AddListener(OnUpgradeClick);
+        leaderBoardButton.onClick.AddListener(OnLeaderboardClick);
+        tutorialButton.onClick.AddListener(tutorialPanel.ShowPanel);
+        leftClickButton.onClick.AddListener(OnLeftClick);
+        rightClickButton.onClick.AddListener(OnRightClick);
     }
 
     public TutorialPanel TutorialPanel
