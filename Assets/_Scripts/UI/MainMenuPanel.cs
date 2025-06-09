@@ -12,6 +12,7 @@ public class MainMenuPanel : MonoBehaviour
     private void Awake()
     {
         mainMenuMenu.SetActive(true);
+        clickToStartButton.onClick.AddListener(OnClickToStartClick);
     }
 
     private void Start()

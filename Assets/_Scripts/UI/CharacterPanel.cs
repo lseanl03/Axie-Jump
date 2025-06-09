@@ -3,40 +3,40 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterPanel : MonoBehaviour
+public class CharacterPanel : PanelBase
 {
     [SerializeField] private TextMeshProUGUI characterNameText;
     [SerializeField] private Button beforeArrow;
     [SerializeField] private Button afterArrow;
     [SerializeField] private Button closeButton;
     [SerializeField] private Button selectButton;
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject characterMenu;
-    private void Awake()
-    {
-        bgCanvasGroup.gameObject.SetActive(false);
-        characterMenu.SetActive(false);
-    }
-    public void ShowCharacterPanel()
-    {
-        characterMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
 
+    protected override void Awake()
+    {
+        base.Awake();
+        closeButton.onClick.AddListener(HidePanel);
+        selectButton.onClick.AddListener(OnSelectClick);
+        beforeArrow.onClick.AddListener(BeforeArrowClick);
+        afterArrow.onClick.AddListener(AfterArrowClick);
+    }
+
+    public override void ShowPanel()
+    {
+        base.ShowPanel();
         CharacterManager.Instance.CharacterSelectedChange();
-        AudioManager.Instance.PlayButtonClick();
-
     }
-    public void HideCharacterPanel()
+    public override void HidePanel()
     {
-        characterMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
+        base.HidePanel();
         CharacterManager.Instance.CharacterDisable();
-        AudioManager.Instance.PlayCloseClick();
-
+    }
+    private void BeforeArrowClick()
+    {
+        CharacterManager.Instance.OnBeforeArrowClick();
+    }
+    private void AfterArrowClick()
+    {
+        CharacterManager.Instance.OnAfterArrowClick();
     }
     public void SetName(Character character)
     {
@@ -51,6 +51,6 @@ public class CharacterPanel : MonoBehaviour
     public void OnSelectClick()
     {
         CharacterManager.Instance.SetCurrentCharacter();
-        AudioManager.Instance.PlaySelectClick();
+        AudioManager.Instance.PlaySFX(AudioType.SelectClick);
     }
 }

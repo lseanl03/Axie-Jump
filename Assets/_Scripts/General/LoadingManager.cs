@@ -19,8 +19,6 @@ public class LoadingManager : Singleton<LoadingManager>
 
         yield return new WaitForSeconds(GameConfig.closeOverlay);
 
-        uiCanvas.RestartButton.gameObject.SetActive(false);
-
         DOTween.KillAll();
 
         var loadScene = SceneManager.LoadSceneAsync(sceneType.ToString());

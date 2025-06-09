@@ -38,40 +38,32 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void PlayBGM(string soundName)
+    public void PlayBGM(AudioType type)
     {
-        Sound bgm = Array.Find(BGMSoundList, s => s.name == soundName);
+        Sound bgm = Array.Find(BGMSoundList, s => s.audioType == type);
         if (bgm != null && !bgm.audioSource.isPlaying) bgm.audioSource.Play();
 
         foreach (Sound bgmSound in BGMSoundList)
         {
-            if (bgmSound.audioSource.isPlaying && bgmSound.name != soundName)
+            if (bgmSound.audioSource.isPlaying && bgmSound.audioType != type)
                 bgmSound.audioSource.Stop();
         }
     }
-    public void PlaySFX(string soundName, bool loop = false)
+    public void PlaySFX(AudioType type, bool loop = false)
     {
-        Sound sfx = Array.Find(SFXSoundList, s => s.name == soundName);
+        Sound sfx = Array.Find(SFXSoundList, s => s.audioType == type);
         if (sfx != null)
         {
-            if (!loop)
-            {
-                sfx.audioSource.PlayOneShot(sfx.audioClip);
-            }
-            else
-            {
-                sfx.audioSource.Play();
-            }
+            if (!loop) sfx.audioSource.PlayOneShot(sfx.audioClip);
+            else sfx.audioSource.Play();
         }
     }
-    public void StopSFX(string soundName)
+    public void StopSFX(AudioType type)
     {
         foreach (Sound bgmSound in SFXSoundList)
         {
-            if (bgmSound.audioSource.isPlaying && bgmSound.name == soundName)
-            {
+            if (bgmSound.audioSource.isPlaying && bgmSound.audioType == type)
                 bgmSound.audioSource.Stop();
-            }
         }
     }
     public void ToggleBGMState(bool state)
@@ -109,75 +101,18 @@ public class AudioManager : Singleton<AudioManager>
             sound.audioSource.volume = volume * sound.volume;
         }
     }
-    public void PlayTransition()
-    {
-        PlaySFX("Transition");
-    }
-    public void PlayButtonClick()
-    {
-        PlaySFX("ButtonClick");
-    }
-    public void PlayArrowClick()
-    {
-        PlaySFX("ArrowClick");
-    }
-    public void PlaySelectClick()
-    {
-        PlaySFX("SelectClick");
-    }
-    public void PlayCollectItem()
-    {
-        PlaySFX("CollectItem");
-    }
-    public void PlayCollectPrimogem()
-    {
-        PlaySFX("CollectPrimogem");
-    }
-    public void PlayCollectBuff()
-    {
-        PlaySFX("CollectBuff");
-    }
-    public void PlayCloseClick()
-    {
-        PlaySFX("CloseClick");
-    }
-    public void PlayUpgradeClick()
-    {
-        PlaySFX("UpgradeClick");
-    }
-    public void PlayTime()
-    {
-        PlaySFX("Time", true);
-    }
-    public void PlayDie()
-    {
-        PlaySFX("Die");
-    }
-    public void PlayJump()
-    {
-        PlaySFX("Jump");
-    }
-    public void PlayFirstJump()
-    {
-        PlaySFX("FirstJump");
-    }
 }
 
 [System.Serializable]
 public class Sound
 {
-    public string name;
+    public AudioType audioType;
     public AudioClip audioClip;
-
     public AudioSource audioSource;
-
     [Range(0f, 1f)]
     public float volume = 1f;
-
-    [Range(0, 1f)]
+    [Range(0f, 1f)]
     public float pitch = 1f;
-
     public bool loop;
-
     public bool mute;
 }

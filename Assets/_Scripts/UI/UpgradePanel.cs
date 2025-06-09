@@ -5,22 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UpgradePanel : MonoBehaviour
+public class UpgradePanel : PanelBase
 {
     [SerializeField] private Button closeButton;
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject buffUpgradeHolder;
 
     [SerializeField] private Color currentProgressColor;
     [SerializeField] private Color unlockColor;
 
     private List<BuffUpgrade> buffUpgradeList = new List<BuffUpgrade>();
-    private void Awake()
+
+    protected override void Awake()
     {
-        bgCanvasGroup.gameObject.SetActive(false);
-        upgradeMenu.SetActive(false);
+        base.Awake();
+        closeButton.onClick.AddListener(HidePanel);
     }
+
     private void Start()
     {
         GetBuffUpgradeInit();
@@ -35,25 +35,6 @@ public class UpgradePanel : MonoBehaviour
     {
         get { return unlockColor; }
     }
-    public void ShowUpgradePanel()
-    {
-        upgradeMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
-
-        AudioManager.Instance.PlayButtonClick();
-    }
-    public void HideUpgradePanel()
-    {
-        upgradeMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
-        AudioManager.Instance.PlayCloseClick();
-
-    }
-
     private void GetBuffUpgradeInit()
     {
         for (int i = 0; i < buffUpgradeHolder.transform.childCount; i++)

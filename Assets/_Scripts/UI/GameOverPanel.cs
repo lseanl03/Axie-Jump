@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOverPanel : MonoBehaviour
+public class GameOverPanel : PanelBase
 {
     private float pointsCount;
     private float primogemCount;
@@ -12,16 +12,16 @@ public class GameOverPanel : MonoBehaviour
     [SerializeField] private Button mainMenuButton;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI primogemText;
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject gameOverMenu;
 
     private Coroutine onGameOverCoroutine;
-    private void Awake()
+
+    protected override void Awake()
     {
-        bgCanvasGroup.gameObject.SetActive(false);
-        gameOverMenu.SetActive(false);
+        base.Awake();
         restartButton.gameObject.SetActive(false);
         mainMenuButton.gameObject.SetActive(false);
+        restartButton.onClick.AddListener(OnRestartClick);
+        mainMenuButton.onClick.AddListener(OnMainMenuClick);
     }
 
     private void OnEnable()
@@ -34,23 +34,6 @@ public class GameOverPanel : MonoBehaviour
         EventManager.onGameOver -= OnGameOver;
         EventManager.onSceneChanged -= OnSceneChanged;
     }
-    public void ShowGameOverPanel()
-    {
-        gameOverMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
-
-    }
-    public void HideGameOverPanel()
-    {
-        gameOverMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
-        AudioManager.Instance.PlayCloseClick();
-    }
-
     public void SetScore(int score)
     {
         scoreText.text = score.ToString();
@@ -87,7 +70,7 @@ public class GameOverPanel : MonoBehaviour
         primogemText.text = ((int)primogemCount).ToString();
 
         yield return new WaitForSeconds(1f);
-        ShowGameOverPanel();
+        ShowPanel();
         yield return new WaitForSeconds(0.5f);
 
         DOTween.To(() => pointsCount, value =>
@@ -121,6 +104,6 @@ public class GameOverPanel : MonoBehaviour
 
     private void OnSceneChanged(SceneType sceneType)
     {
-        HideGameOverPanel();
+        HidePanel();
     }
 }

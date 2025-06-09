@@ -3,15 +3,14 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeaderboardPanel : MonoBehaviour
+public class LeaderboardPanel : PanelBase
 {
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject leaderboardMenu;
     [SerializeField] private UserRank currentUserRank;
     [SerializeField] private GameObject userRankHolder;
 
     private List<UserRank> userRankList = new List<UserRank>();
-    private void Awake()
+
+    protected override void Awake()
     {
         OnGetUserRankListInit();
     }
@@ -33,26 +32,10 @@ public class LeaderboardPanel : MonoBehaviour
                 .GetComponent<UserRank>());
         }
     }
-    public void ShowLeaderboardPanel()
+    public override void ShowPanel()
     {
-        leaderboardMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
-
+        base.ShowPanel();
         PlayFabManager.Instance.GetLeaderboard();
         PlayFabManager.Instance.GetCurrentUserRank();
-        AudioManager.Instance.PlayButtonClick();
-
-
-    }
-    public void HideCharacterPanel()
-    {
-        leaderboardMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
-        AudioManager.Instance.PlayCloseClick();
-
     }
 }

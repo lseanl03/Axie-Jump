@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!canJump || !GameManager.Instance.GameStarted) return;
 
-        AudioManager.Instance.PlayJump();
+        AudioManager.Instance.PlaySFX(AudioType.Jump);
         isJumping = true;
         canJump = false;
 
@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canJump)
         {
-            AudioManager.Instance.PlayFirstJump();
+            AudioManager.Instance.PlaySFX(AudioType.FirstJump);
 
             canJump = isJumping = false;
             playerAnim.Idle();
@@ -296,7 +296,7 @@ public class PlayerController : MonoBehaviour
     #region Coroutine
     private IEnumerator DiedCoroutine()
     {
-        AudioManager.Instance.PlayDie();
+        AudioManager.Instance.PlaySFX(AudioType.Die);
         isDied = true;
         boxCollider2D.enabled = false;
         jumpTween.Kill();

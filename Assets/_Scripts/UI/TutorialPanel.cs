@@ -4,52 +4,35 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
-public class TutorialPanel : MonoBehaviour
+public class TutorialPanel : PanelBase
 {
     [SerializeField] private int currentIndex = 0;
     [SerializeField] private Button leftButton;
     [SerializeField] private Button rightButton;
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject tutorialMenu;
+    [SerializeField] private Button closeButton;
     [SerializeField] private GameObject tutorialListObj;
     private List<GameObject> tutorialList = new List<GameObject>();
 
-    private void Awake()
+    protected override void Awake()
     {
-        bgCanvasGroup.gameObject.SetActive(false);
-        tutorialMenu.SetActive(false);
-
+        base.Awake();
         GetTutorialListInit();
+        leftButton.onClick.AddListener(OnBeforeArrowClick);
+        rightButton.onClick.AddListener(OnAfterArrowClick);
+        closeButton.onClick.AddListener(HidePanel);
     }
 
-    public void ShowTutorialPanel()
+    public override void ShowPanel()
     {
-        tutorialMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
-
+        base.ShowPanel();
         TutorialViewChange();
-
-        AudioManager.Instance.PlayButtonClick();
-
     }
-    public void HideTutorialPanel()
-    {
-        tutorialMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
-        AudioManager.Instance.PlayCloseClick();
-
-    }
-
     public void OnBeforeArrowClick()
     {
         currentIndex--;
         if (currentIndex < 0) currentIndex = tutorialList.Count - 1;
         TutorialViewChange();
-        AudioManager.Instance.PlayArrowClick();
+        AudioManager.Instance.PlaySFX(AudioType.ArrowClick);
 
 
     }
@@ -59,8 +42,7 @@ public class TutorialPanel : MonoBehaviour
         if (currentIndex >= tutorialList.Count) currentIndex = 0;
         TutorialViewChange();
 
-        AudioManager.Instance.PlayArrowClick();
-
+        AudioManager.Instance.PlaySFX(AudioType.ArrowClick);
     }
 
     void GetTutorialListInit()

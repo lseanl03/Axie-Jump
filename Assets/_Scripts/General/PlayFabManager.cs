@@ -179,11 +179,11 @@ public class PlayFabManager : Singleton<PlayFabManager>
         }
         if (String.IsNullOrEmpty(userName))
         {
-            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowEnterUserNamePanel();
+            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowPanel();
         }
         else
         {
-            UIManager.Instance.UICanvas.EnterUserNamePanel.HideEnterUserNamePanel();
+            UIManager.Instance.UICanvas.EnterUserNamePanel.ShowPanel();
         }
         if(loadedDataCoroutine != null) StopCoroutine(loadedDataCoroutine);
         loadedDataCoroutine = StartCoroutine(LoadedDataCoroutine());
@@ -271,6 +271,6 @@ public class PlayFabManager : Singleton<PlayFabManager>
         yield return new WaitForSeconds(0.5f);
         GetCurrentUserRank();
         UIManager.Instance.UICanvas.LevelTransiton.Open();
-        AudioManager.Instance.PlayBGM("MainMenu");
+        AudioManager.Instance.PlayBGM(AudioType.MainMenu);
     }
 }

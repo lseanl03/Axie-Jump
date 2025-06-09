@@ -123,3 +123,24 @@ public enum SceneType
     MainMenu,
     Game,
 }
+
+public enum AudioType
+{
+    None,
+    MainMenu,
+    Game,
+    Transition,
+    ButtonClick,
+    ArrowClick,
+    SelectClick,
+    CollectItem,
+    CollectPrimogem,
+    CollectBuff,
+    CloseClick,
+    UpgradeClick,
+    Time,
+    Die,
+    Jump,
+    FirstJump,
+
+}

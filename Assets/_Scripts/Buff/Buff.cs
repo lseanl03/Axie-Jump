@@ -77,7 +77,7 @@ public class Buff : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            AudioManager.Instance.PlayCollectBuff();
+            AudioManager.Instance.PlaySFX(AudioType.CollectBuff);
 
             collider2d = collision;
             var player = collision.GetComponent<PlayerController>();

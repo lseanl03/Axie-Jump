@@ -2,54 +2,36 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PausePanel : MonoBehaviour
+public class PausePanel : PanelBase
 {
     [SerializeField] private Button continueButton;
-    [SerializeField] private Button soundButton;
     [SerializeField] private Button mainMenuButton;
-    [SerializeField] private CanvasGroup bgCanvasGroup;
-    [SerializeField] private GameObject pauseMenu;
 
-    private void Awake()
+    protected override void Awake()
     {
-        bgCanvasGroup.gameObject.SetActive(false);
-        pauseMenu.SetActive(false);
+        base.Awake();
+        continueButton.onClick.AddListener(OnClickContinue);
+        mainMenuButton.onClick.AddListener(OnClickMainMenu);
     }
-    public void ShowPausePanel()
+    public override void ShowPanel()
     {
-        pauseMenu.SetActive(true);
-        bgCanvasGroup.gameObject.SetActive(true);
-        bgCanvasGroup.alpha = 0;
-        bgCanvasGroup.DOFade(1, 0.5f).SetUpdate(true);
-
+        base.ShowPanel();
         GameManager.Instance.PauseGame();
-        AudioManager.Instance.PlayButtonClick();
-
     }
-    public void HidePausePanel()
+    public override void HidePanel()
     {
-        pauseMenu.SetActive(false);
-        bgCanvasGroup.DOFade(0, 0.5f).SetUpdate(true);
-        bgCanvasGroup.gameObject.SetActive(false);
-
+        base.HidePanel();
         GameManager.Instance.ContinueGame();
-        AudioManager.Instance.PlayCloseClick();
-
     }
 
     public void OnClickContinue()
     {
-        HidePausePanel();
+        HidePanel();
         GameManager.Instance.ContinueGame();
     }
-
-    public void OnClickSound()
-    {
-    }
-
     public void OnClickMainMenu()
     {
-        HidePausePanel();
+        HidePanel();
         LoadingManager.Instance.TransitionLevel(SceneType.MainMenu);
     }
 }

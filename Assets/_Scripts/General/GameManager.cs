@@ -69,7 +69,7 @@ public class GameManager : Singleton<GameManager>
         set { playTime = value; 
         if(playTime > 5){
                 warning = false;
-                AudioManager.Instance.StopSFX("Time");
+                AudioManager.Instance.StopSFX(AudioType.Time);
             };
         }
     }
@@ -136,7 +136,7 @@ public class GameManager : Singleton<GameManager>
     {
         ResetData();
         AudioManager.Instance.PlayBGM(
-            sceneType == SceneType.MainMenu ? "MainMenu" : "Game");
+            sceneType == SceneType.MainMenu ? AudioType.MainMenu : AudioType.MainMenu);
     }
     private void ResetData()
     {
@@ -157,20 +157,20 @@ public class GameManager : Singleton<GameManager>
                 playTime += GameConfig.normalItemTime;
                 OnGetPoint(item.transform, normalItemPoint);
 
-                AudioManager.Instance.PlayCollectItem();
+                AudioManager.Instance.PlaySFX(AudioType.CollectItem);
                 break;
             case Rate.Rare:
                 UpdatePoint(rareItemPoint);
                 playTime += GameConfig.rareItemTime;
                 OnGetPoint(item.transform, rareItemPoint);
 
-                AudioManager.Instance.PlayCollectItem();
+                AudioManager.Instance.PlaySFX(AudioType.CollectItem);
                 break;
             case Rate.Special:
                 UpdatePrimogem(primogemPoint);
                 OnGetPrimogem(item.transform, primogemPoint);
 
-                AudioManager.Instance.PlayCollectPrimogem();
+                AudioManager.Instance.PlaySFX(AudioType.CollectPrimogem);
                 break;
         }
     }
@@ -229,7 +229,7 @@ public class GameManager : Singleton<GameManager>
         if (warning)
         {
             Debug.Log("Time Warning");
-            AudioManager.Instance.PlayTime();
+            AudioManager.Instance.PlaySFX(AudioType.Time, true);
         }
     }
     public void OnGameOver()
@@ -243,7 +243,7 @@ public class GameManager : Singleton<GameManager>
             UpdatePrimogemOwn();
             UpdateHighScore();
 
-            AudioManager.Instance.StopSFX("Time");
+            AudioManager.Instance.StopSFX(AudioType.Time);
         }
     }
 

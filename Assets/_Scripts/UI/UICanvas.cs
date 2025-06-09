@@ -10,7 +10,6 @@ using static EventManager;
 
 public class UICanvas : MonoBehaviour
 {
-    [SerializeField] private Button restartButton;
     [SerializeField] private Button settingButton;
     [SerializeField] private Button characterButton;
     [SerializeField] private Button upgradeButton;
@@ -35,7 +34,6 @@ public class UICanvas : MonoBehaviour
 
     private void Awake()
     {
-        restartButton.gameObject.SetActive(false);
         pauseButton.gameObject.SetActive(false);
         settingButton.gameObject.SetActive(true);
         characterButton.gameObject.SetActive(true);
@@ -80,10 +78,6 @@ public class UICanvas : MonoBehaviour
     {
         get { return pausePanel; }
     }
-    public Button RestartButton
-    {
-        get { return restartButton; }
-    }
     public LevelTransiton LevelTransiton
     {
         get { return levelTransiton; }
@@ -106,42 +100,37 @@ public class UICanvas : MonoBehaviour
     private void OnEnable()
     {
         EventManager.onSceneChanged += OnSceneChanged;
-        EventManager.onGameOver += OnGameOver;
         EventManager.onGameStart += OnGameStart;
 
     }
     private void OnDisable()
     {
         EventManager.onSceneChanged -= OnSceneChanged;
-        EventManager.onGameOver -= OnGameOver;
         EventManager.onGameStart -= OnGameStart;
     }
-    private void OnGameOver()
-    {
-        restartButton.gameObject.SetActive(true);
-    }
+
     private void OnGameStart()
     {
         clickAnyToJumpText.gameObject.SetActive(false);
     }
     public void OnSettingClick()
     {
-        settingPanel.ShowSettingPanel();
+        settingPanel.ShowPanel();
     }
 
     public void OnCharacterClick()
     {
-        characterPanel.ShowCharacterPanel();
+        characterPanel.ShowPanel();
     }
 
     public void OnUpgradeClick()
     {
-        upgradePanel.ShowUpgradePanel();
+        upgradePanel.ShowPanel();
     }
 
     public void OnLeaderboardClick()
     {
-        leaderboardPanel.ShowLeaderboardPanel();
+        leaderboardPanel.ShowPanel();
     }
     public void OnLeftClick()
     {

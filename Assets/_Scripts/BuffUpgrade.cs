@@ -68,7 +68,7 @@ public class BuffUpgrade : MonoBehaviour
         if (progressList[progressList.Count - 1].IsUnlock ||
             progressIndex == -1) return;
 
-        AudioManager.Instance.PlayUpgradeClick();
+        AudioManager.Instance.PlaySFX(AudioType.UpgradeClick);
         if (GameManager.Instance.PrimogemOwn >= currentPrice)
         {
             GameManager.Instance.PrimogemOwn -= currentPrice;

@@ -86,7 +86,7 @@ public class CharacterManager : Singleton<CharacterManager>
         if (currentIndex < 0) currentIndex = characterList.Count -1;
         CharacterViewChange();
 
-        AudioManager.Instance.PlayArrowClick();
+        AudioManager.Instance.PlaySFX(AudioType.ArrowClick);
 
     }
     public void OnAfterArrowClick()
@@ -95,7 +95,7 @@ public class CharacterManager : Singleton<CharacterManager>
         if (currentIndex >= characterList.Count) currentIndex = 0;
         CharacterViewChange();
 
-        AudioManager.Instance.PlayArrowClick();
+        AudioManager.Instance.PlaySFX(AudioType.ArrowClick);
     }
 
     public void CharacterViewChange()
